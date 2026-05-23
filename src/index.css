@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Lora', Georgia, serif;
+
+    /* Color tokens (HSL) */
+    --background: 36 30% 97%;
+    --foreground: 220 15% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 16%;
+    --primary: 220 15% 16%;
+    --primary-foreground: 36 30% 97%;
+    --secondary: 36 20% 93%;
+    --secondary-foreground: 220 15% 30%;
+    --muted: 36 15% 92%;
+    --muted-foreground: 220 8% 52%;
+    --accent: 25 80% 60%;
+    --border: 36 15% 88%;
+    --input: 36 15% 88%;
+    --ring: 220 15% 16%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: hsl(var(--foreground));
+    background: linear-gradient(
+      135deg,
+      hsl(36, 30%, 97%) 0%,
+      hsl(30, 40%, 95%) 35%,
+      hsl(200, 30%, 95%) 70%,
+      hsl(36, 30%, 97%) 100%
+    );
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  h1 {
+    line-height: 1.15;
+  }
+
+  h2, h3 {
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent), 0.15);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .section-gradient-hero {
+    background: linear-gradient(135deg, hsl(36,30%,97%) 0%, hsl(30,40%,95%) 35%, hsl(200,30%,95%) 70%, hsl(36,30%,97%) 100%);
+  }
+
+  .section-gradient-about {
+    background: linear-gradient(180deg, hsl(36,30%,97%) 0%, hsl(30,35%,95%) 50%, hsl(36,30%,97%) 100%);
+  }
+
+  .section-gradient-behind {
+    background: linear-gradient(180deg, hsl(200,25%,96%) 0%, hsl(36,30%,97%) 100%);
+  }
+
+  .section-gradient-contact {
+    background: linear-gradient(180deg, hsl(36,30%,97%) 0%, hsl(30,40%,94%) 100%);
+  }
+}

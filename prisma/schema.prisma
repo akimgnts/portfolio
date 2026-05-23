@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== MODELS ====================
+
+model Project {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  description     String
+  fullDescription String?
+  role            String?
+  outcome         String?
+  results         String[] // JSON array
+  technologies    String[] // JSON array
+  accentColor     String?  // hsl(...)
+  accentHover     String?  // hsla(...)
+  year            Int?
+  featured        Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+
+  @@map("projects")
+}
+
+model Lead {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  projectType      String?  // "Data Pipeline" | "AI Workflow" | ...
+  message          String
+  status           String   @default("new") // "new" | "contacted" | "qualified" | "converted" | "lost"
+  notes            String?
+  assignedTo       String?
+  automationStatus String   @default("pending") // "pending" | "contacted" | "scheduled" | "completed"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("leads")
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  eventType String   // "page_view" | "click" | "form_submit" | "project_view"
+  timestamp DateTime @default(now())
+  path      String?
+  userAgent String?
+  referer   String?
+  sessionId String?
+  data      Json?    // Event-specific data
+
+  @@map("events")
+}
+
+model AdminUser {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String?
+  role          String   @default("editor") // "owner" | "editor" | "viewer"
+  createdAt     DateTime @default(now())
+  lastLoginAt   DateTime?
+
+  @@map("admin_users")
+}

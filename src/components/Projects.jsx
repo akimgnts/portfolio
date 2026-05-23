@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { projects } from "../data/projects";
+import { projects as defaultProjects } from "../data/projects";
 import { siteContent } from "../data/content";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Tag } from "./ui/Tag";
+import { fetchProjects } from "../services/projectService";
 
 function ProjectCard({ project, index: cardIndex }) {
   return (
@@ -66,6 +68,18 @@ function ProjectCard({ project, index: cardIndex }) {
 }
 
 export default function Projects() {
+  const [projects, setProjects] = useState(defaultProjects);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await fetchProjects(0, 4); // Show 4 projects on homepage
+      setProjects(data);
+      setLoading(false);
+    };
+    load();
+  }, []);
+
   return (
     <section id="work" className="py-40 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
@@ -78,9 +92,19 @@ export default function Projects() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, idx) => (
+          {!loading && projects.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}
+        </div>
+
+        {/* View All CTA */}
+        <div className="mt-12 text-center">
+          <a
+            href="/projects"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5 transition-all"
+          >
+            View all projects →
+          </a>
         </div>
       </div>
     </section>

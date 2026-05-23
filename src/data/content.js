@@ -18,7 +18,7 @@ export const siteContent = {
       { label: "Based in France", type: "map" },
     ],
     ctas: [
-      { label: "View my work", href: "#work", variant: "primary" },
+      { label: "View my work", href: "/projects", variant: "primary" },
       { label: "Book a call", href: "#contact", variant: "outline" },
     ],
     orbCards: [

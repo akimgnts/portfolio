@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { automationSteps, techStack } from "../data/projects";
 import { siteContent } from "../data/content";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Tag } from "./ui/Tag";
@@ -24,26 +23,34 @@ function FlowCard({ step, index }) {
 
 export default function BehindSite() {
   return (
-    <section
-      id="behind"
-      className="py-40 px-6 md:px-8 section-gradient-behind"
-    >
+    <section id="behind" className="py-40 px-6 md:px-8 section-gradient-behind">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <SectionHeader
           eyebrow={siteContent.sections.behind.eyebrow}
           heading={siteContent.sections.behind.heading}
-          className="mb-20"
+          className="mb-12"
         />
 
-        {/* Automation flow */}
+        {siteContent.behind.intro && (
+          <motion.p
+            className="text-[15px] text-muted-foreground leading-relaxed mb-20 max-w-3xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            {siteContent.behind.intro}
+          </motion.p>
+        )}
+
         <div className="mb-20">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">{siteContent.sections.behind.automationLabel}</p>
+          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">
+            {siteContent.sections.behind.automationLabel}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-            {automationSteps.map((step, idx) => (
+            {siteContent.behind.automation.map((step, idx) => (
               <div key={idx} className="flex items-center gap-3">
                 <FlowCard step={step} index={idx} />
-                {idx < automationSteps.length - 1 && (
+                {idx < siteContent.behind.automation.length - 1 && (
                   <ArrowRight className="hidden md:block w-4 h-4 text-muted-foreground/50 flex-shrink-0" />
                 )}
               </div>
@@ -51,11 +58,12 @@ export default function BehindSite() {
           </div>
         </div>
 
-        {/* Tech stack */}
         <div>
-          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">{siteContent.sections.behind.stackLabel}</p>
+          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">
+            {siteContent.sections.behind.stackLabel}
+          </p>
           <Card className="flex flex-wrap gap-2 p-7">
-            {techStack.map((tech) => (
+            {siteContent.behind.techStack.map((tech) => (
               <Tag key={tech}>{tech}</Tag>
             ))}
           </Card>

@@ -124,7 +124,7 @@ export default function Contact() {
                   {siteContent.sections.contact.projectTypeLabel}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {siteContent.sections.contact.projectTypes.map((type) => (
+                  {siteContent.contact.projectTypes.map((type) => (
                     <Tag
                       key={type}
                       active={formData.projectType === type}
@@ -149,7 +149,7 @@ export default function Contact() {
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg bg-white/40 border border-border/15 text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-white/70 resize-none transition-all"
-                  placeholder="Tell me about your project..."
+                  placeholder="What are you currently trying to structure, simplify or build?"
                 />
               </div>
 

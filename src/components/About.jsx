@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { capabilities } from "../data/projects";
 import { siteContent } from "../data/content";
-import { SectionHeader } from "./ui/SectionHeader";
 import { Card } from "./ui/Card";
 
 function CapabilityCard({ capability, index }) {
@@ -21,13 +19,9 @@ function CapabilityCard({ capability, index }) {
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="py-40 px-6 md:px-8 section-gradient-about"
-    >
+    <section id="about" className="py-40 px-6 md:px-8 section-gradient-about">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          {/* Left */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +31,6 @@ export default function About() {
             <h2 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-foreground mb-6">
               {siteContent.about.heading}
             </h2>
-
             <div className="space-y-4">
               {siteContent.about.bio.map((paragraph, idx) => (
                 <p key={idx} className="text-[15px] text-muted-foreground leading-relaxed">
@@ -47,9 +40,8 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right - Capabilities */}
           <div className="space-y-3">
-            {capabilities.map((capability, idx) => (
+            {siteContent.about.capabilities.map((capability, idx) => (
               <CapabilityCard key={idx} capability={capability} index={idx} />
             ))}
           </div>

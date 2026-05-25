@@ -1,6 +1,6 @@
 export const siteContent = {
   nav: {
-    brand: "Akim",
+    brand: "Akim Guentas",
     links: [
       { label: "Systems", href: "#work" },
       { label: "Approach", href: "#approach" },

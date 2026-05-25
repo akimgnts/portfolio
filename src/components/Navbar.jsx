@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "./ui/Button";
 import { siteContent } from "../data/content";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomepage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +17,14 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (href) => {
+    if (isHomepage) {
+      window.location.hash = href.slice(1);
+    } else {
+      navigate(`/${href}`);
+    }
+  };
 
   return (
     <nav
@@ -28,8 +40,8 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
         {/* Logo / Name */}
         <a
-          href="#"
-          className="font-serif text-foreground font-medium tracking-tight hover:text-muted-foreground transition-colors"
+          href="/"
+          className="text-foreground font-medium tracking-tight hover:text-muted-foreground transition-colors"
         >
           {siteContent.nav.brand}
         </a>
@@ -37,19 +49,23 @@ export default function Navbar() {
         {/* Center nav items */}
         <div className="hidden md:flex items-center gap-8">
           {siteContent.nav.links.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
+              onClick={() => handleNavClick(link.href)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </div>
 
         {/* CTA Button */}
-        <Button variant="nav" size="sm" asChild>
-          <a href={siteContent.nav.cta.href}>{siteContent.nav.cta.label}</a>
+        <Button
+          variant="nav"
+          size="sm"
+          onClick={() => handleNavClick(siteContent.nav.cta.href)}
+        >
+          {siteContent.nav.cta.label}
         </Button>
       </div>
     </nav>

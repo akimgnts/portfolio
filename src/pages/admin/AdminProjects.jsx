@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Plus, Edit2, Trash2 } from "lucide-react";
+import { Plus, Edit2, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { fetchProjects, deleteProject } from "../../services/projectService";
 
@@ -39,6 +39,13 @@ export default function AdminProjects() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
+          <Link
+            to="/admin"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Admin
+          </Link>
           <h1 className="font-serif text-4xl font-medium mb-4">Projects</h1>
           <p className="text-muted-foreground mb-6">
             Manage your portfolio projects

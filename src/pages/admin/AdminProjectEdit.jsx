@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 import ProjectForm from "../../components/admin/ProjectForm";
 import { fetchProjectBySlug, updateProject } from "../../services/projectService";
 
@@ -64,6 +65,13 @@ export default function AdminProjectEdit() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
+          <Link
+            to="/admin/projects"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Projects
+          </Link>
           <h1 className="font-serif text-4xl font-medium mb-4">Edit Project</h1>
           <p className="text-muted-foreground">
             Update <span className="font-mono text-foreground">{project.title}</span>

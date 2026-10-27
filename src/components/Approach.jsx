@@ -11,7 +11,7 @@ function ApproachRow({ approach, index }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
     >
-      <p className="text-xs font-mono text-muted-foreground/50">{approach.number}</p>
+      <p className="text-xs font-mono text-muted-foreground">{approach.number}</p>
       <h3 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground">{approach.title}</h3>
       <p className="text-[15px] text-muted-foreground leading-relaxed">{approach.body}</p>
     </motion.div>
@@ -20,7 +20,7 @@ function ApproachRow({ approach, index }) {
 
 export default function Approach() {
   return (
-    <section id="approach" className="py-40 px-6 md:px-8">
+    <section id="approach" className="py-20 md:py-28 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           eyebrow={siteContent.sections.approach.eyebrow}

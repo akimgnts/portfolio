@@ -1,286 +1,157 @@
+const common = {
+  current_limits: "Présentation limitée aux éléments documentés dans le CV source.",
+  accentHover: "hsla(25,70%,58%,0.12)",
+};
+
 export const projects = [
   {
-    id: 1,
-    slug: "elevia",
+    ...common,
+    id: "sidel-commercial-reporting",
+    slug: "sidel-reporting-commercial",
     index: "01",
-    title: "Elevia",
-    description: "AI-powered platform for automating complex business processes and data workflows.",
-    fullDescription: "Elevia is an end-to-end automation platform that orchestrates data pipelines, AI workflows, and human-in-the-loop processes. Built for enterprises managing heterogeneous data sources and complex approval chains.",
-
-    // Friction: What was the problem?
-    observed_problem: "Teams were drowning in manual data work. Every day: copying data between systems, checking rules, waiting for approvals, fixing errors. Process took 2-3 weeks, error rate was 8%, and it consumed 40 FTE across finance and operations.",
-    impact: "Business growth was bottlenecked. New contracts couldn't be onboarded. Decisions were delayed. Manual work cost $2M/year in labor alone.",
-    affected_users: "Finance team (12 people), Operations (18 people), Compliance (4 people), Sales enablement (6 people)",
-
-    // Signal: What did we observe?
-    key_observation: "90% of the manual work was deterministic—checking rules, transforming data, triggering approvals. The same decisions happened the same way every time. Only 10% needed human judgment.",
-    hypothesis: "If we could automate the deterministic 90%, humans could focus on the judgment calls. We'd cut processing time from weeks to hours, drop errors to near-zero, and free up the team for strategic work.",
-
-    // System: What did we build?
-    architecture: "Distributed workflow orchestration. Agents for each data source (SAP, Salesforce, custom DBs). Rules engine for approval logic. Human-in-the-loop for escalations and exceptions.",
-    workflows: "Data ingestion → Validation → Transformation → Rule evaluation → Approval routing → Execution → Audit log",
-    automation_logic: "If revenue > $500K and new market, route to Director approval. If within budget params and existing customer, auto-approve. If conflicting rules, escalate to Compliance with context.",
-    pipelines: "Real-time: contract data → enrichment → scoring. Batch: weekly reconciliation → anomaly detection → remediation.",
-
-    // Reduction: What changed?
-    friction_reduction: "Processing time dropped from 14 days to 2 hours. Manual work reduced from 40 FTE to 6 FTE (data quality monitoring, exception handling, strategic analysis). Error rate fell from 8% to 0.3%.",
-    simplification: "Removed 12 manual touchpoints. Eliminated 3 spreadsheet handoffs. Single source of truth for all contract data. Self-service workflow dashboard for stakeholders to track status.",
-
-    // Technical
-    stack: ["Python", "PostgreSQL", "FastAPI", "React", "n8n"],
-    infra: "Kubernetes cluster, 3 availability zones. Event-driven with Kafka for real-time data flow.",
-    APIs: "REST for external integrations. GraphQL for internal queries. Webhooks for third-party triggers.",
-    data_sources: "SAP ECC, Salesforce, custom PostgreSQL DB, DocuSign, email systems",
-
-    // Outcome
-    role: "Data & AI Engineer",
-    outcome: "Reduced manual data processing by 85%, improved team efficiency",
-    results: [
-      "Reduced manual workload from 40 FTE to 6 FTE",
-      "85% automation rate on routine tasks",
-      "24-hour SLA for all automated processes",
-      "ROI: 4.2x within 18 months"
-    ],
-    learnings: ["Building trust in automation requires transparency—audit logs matter more than efficiency metrics. Started with shadow mode (showing recommendations, not executing). Teams were convinced after 2 weeks of 100% match rate.", "Human exceptions are data. Every escalation we tracked revealed patterns. After 6 months of data, we automated 15 more cases that initial rules missed.", "API brittleness kills automation. One Salesforce API change broke the pipeline. Now we monitor API health as a critical metric."],
-
-    // Limits
-    current_limits: "Still needs human approval for contracts over $2M or in new markets. Some legacy systems don't have APIs—manual data entry required for ~5% of contracts.",
-    tradeoffs: "Initial investment: 6 months of engineering + $200K infrastructure. But ROI hit 2x breakeven in month 9. Tradeoff: upfront cost for ongoing leverage.",
-
-    // Future
-    next_steps: "Extend to procurement workflows (same pattern: rules + exceptions). Build predictive approval routing based on past decisions. Connect to revenue forecasting.",
-    future_vision: "Self-healing workflows. When errors occur, system learns and adapts rules automatically. Humans only intervene when genuinely novel situations arise.",
-
-    accentColor: "hsl(25, 70%, 55%)",
-    accentHover: "hsla(25,80%,65%,0.12)",
-    year: 2023,
-  },
-  {
-    id: 2,
-    slug: "vision-renata",
-    index: "02",
-    title: "Vision Renata",
-    description: "Computer vision system for real-time content moderation and quality control.",
-    fullDescription: "A distributed computer vision system processing image streams in real-time for content moderation, fraud detection, and quality assurance. Deployed across 8 data centers with sub-200ms latency.",
-
-    // Friction
-    observed_problem: "Platform was receiving 2M+ images/month from users. Moderation team could only review ~50K/month manually. 95 days of backlog. Policy violations were slipping through. Quality issues went undetected for weeks.",
-    impact: "Brand risk. Policy violations created reputational damage ($500K+ in incidents). Fraud losses were uncontrolled. User trust eroding.",
-    affected_users: "Trust & Safety team (8 people), fraud analysts (4), product team (had no visibility into quality issues)",
-
-    // Signal
-    key_observation: "Most violations followed patterns: known imagery, color/text combinations, specific object placements. High-volume stuff was repetitive. Rare violations required nuance.",
-    hypothesis: "CV models trained on violation patterns could catch 95%+ of volume. With human review only for edge cases, we'd add capacity without growing headcount.",
-
-    // System
-    architecture: "Multi-tier inference. Fast-path (banned imagery hashing, text OCR): 5ms. Medium-path (CNN on resized images): 40ms. Slow-path (full resolution + ensembles): 150ms. Route based on confidence.",
-    workflows: "Image ingestion → hash check → fast path → if uncertain, medium path → if still uncertain, slow path → if flagged, queue for review → human decision → model retraining feedback loop",
-    automation_logic: "If confidence > 0.98 on violation, auto-suppress with notification. If 0.85-0.98, queue for human review (SLA: 4 hours). If < 0.85, allow and log for analysis.",
-    pipelines: "Real-time: streaming images from CDN. Batch: daily retraining on new violations. Weekly: model performance audits.",
-
-    // Reduction
-    friction_reduction: "Moderation latency dropped from 95 days backlog to < 4 hours median. Manual review volume reduced from 2M/month to 80K/month (only uncertain cases). Team productivity increased 15x.",
-    simplification: "Single policy decision point (the auto-flag threshold). Consistent decisions across 8 data centers. Audit trail for all decisions.",
-
-    // Technical
-    stack: ["Python", "TensorFlow", "FastAPI", "Redis", "Docker"],
-    infra: "Kubernetes across 8 global data centers. Model serving with TensorFlow Lite for edge inference. Redis for model caching and rate limiting.",
-    APIs: "gRPC for low-latency inference. REST for review queue management. Webhooks for policy updates.",
-    data_sources: "User-uploaded images, historical violation data, policy rules DB",
-
-    // Outcome
-    role: "ML Systems Engineer",
-    outcome: "Processed 2M+ images monthly with 99.2% accuracy",
-    results: [
-      "99.2% accuracy on policy violation detection",
-      "2M+ images processed monthly at scale",
-      "Sub-200ms P99 latency globally",
-      "98.5% uptime across all regions"
-    ],
-    learnings: ["Model confidence ≠ correctness. A model confident about edge cases was often wrong. Built a secondary 'uncertainty' classifier to flag genuinely ambiguous cases for human review.", "Global latency is hard. Shipping models to 8 regions meant managing model staleness. Started using adaptive serving: new models in primary DC first, rollout after 24h validation.", "False positives in moderation create user backlash. Spending 10% compute on reducing false positives from 0.5% to 0.1% was worth it—prevented PR damage worth 50x the infra cost."],
-
-    // Limits
-    current_limits: "Model struggles with context (same image OK in art gallery, not OK in other contexts). Demographic bias in training data for some categories. Adversarial examples still fool the system.",
-    tradeoffs: "Accuracy vs latency: invested in inference optimization to stay under 200ms P99. For 5% of cases, we sacrifice latency for accuracy (run slow path even if medium-path confident).",
-
-    // Future
-    next_steps: "Add context understanding (post metadata, captions). Build user appeal workflow (currently no way to challenge auto-flags). Implement continuous model monitoring.",
-    future_vision: "Self-improving moderation. When humans override auto-decisions, capture that as training data. System learns from every interaction.",
-
-    technologies: ["Python", "TensorFlow", "FastAPI", "Redis", "Docker"],
-    accentColor: "hsl(200, 55%, 45%)",
-    accentHover: "hsla(200,60%,65%,0.12)",
-    year: 2022,
-  },
-  {
-    id: 3,
-    slug: "vie-market-radar",
-    index: "03",
-    title: "VIE Market Radar",
-    description: "Real-time market intelligence platform tracking emerging opportunities across sectors.",
-    fullDescription: "Market Radar aggregates signals from 500+ data sources, applies NLP+ML to identify emerging trends, and surfaces actionable intelligence to deal teams. Early-stage detection of market shifts with 72-hour lead time.",
-
-    // Friction
-    observed_problem: "Deal teams were reactive. They'd hear about market shifts 6+ months after they happened. Lost deals because they weren't aware of emerging categories. No systematic way to scan for white spaces.",
-    impact: "$50M+ in missed opportunities annually. Sales team blind to market evolution. Strategy decisions made on outdated intelligence.",
-    affected_users: "Deal team (15 people), strategy team (8 people), sales leadership (6)",
-
-    // Signal
-    key_observation: "Market signals were everywhere—news, hiring, API changes, product announcements, patent filings—but scattered. No one had a unified view. Early signals appeared 2-3 months before mainstream coverage.",
-    hypothesis: "Aggregate 500+ signals + apply NLP to detect emerging patterns = 72-hour early warning system. Surface only high-conviction signals with business context.",
-
-    // System
-    architecture: "Signal ingestion layer (APIs + web scrapers). NLP pipeline (classification + trend detection). ML ranking (which signals matter for your business). Real-time alerts + searchable archive.",
-    workflows: "Ingest signals → normalize → enrich with metadata → apply ML scoring → rank by business relevance → alert if pattern detected → analyst review → context layer → send to deal team",
-    automation_logic: "If signal occurs in target vertical + 3+ similar signals in 7 days, rank as trend. If affects revenue-critical segment, high priority alert. Low-context signals (e.g. small funding rounds) → archive only.",
-    pipelines: "Real-time: news APIs, RSS, SEC filings. Daily: hiring trends, domain registrations. Weekly: competitive analysis, patent filings.",
-
-    // Reduction
-    friction_reduction: "Deal team now gets early signals 72+ hours before market mainstream. Can plan responses instead of reacting. Identified 8 emerging categories the team hadn't noticed.",
-    simplification: "Single searchable archive instead of 500+ bookmarks. One alert queue instead of noise from 12 tools. Structured signal format (when, where, what, impact score).",
-
-    // Technical
-    stack: ["Node.js", "PostgreSQL", "React", "D3.js", "Elasticsearch"],
-    infra: "Serverless ingestion (AWS Lambda). PostgreSQL for signals store. Elasticsearch for semantic search. React dashboard for exploration.",
-    APIs: "Webhooks from 50+ data providers. GraphQL for custom analytics. RSS feeds for distribution.",
-    data_sources: "Crunchbase, news APIs, GitHub trending, Product Hunt, domain registrations, SEC EDGAR, job postings (LinkedIn, AngelList)",
-
-    // Outcome
-    role: "Full-stack Engineer",
-    outcome: "Identified $12M+ in new business opportunities",
-    results: [
-      "$12M+ attributed revenue from identified opportunities",
-      "72-hour early warning on market shifts",
-      "Coverage across 8 verticals and 15 geographies",
-      "75% accuracy on revenue predictions"
-    ],
-    learnings: ["Not all signals matter equally. Spent 3 months on perfect signal ingestion before realizing ranking was more important. Once we focused on ranking, signal volume didn't matter—quality did.", "False positives destroy trust. Early version flagged every startup trend. After filtering for revenue-relevant categories, alerts became actionable.", "Human + ML wins. ML ranking is good, but adding a 'deal team feedback' loop where they marked true vs false signals made the system 5x more useful in 3 months."],
-
-    // Limits
-    current_limits: "Early signals are often ambiguous. Hard to distinguish signal from noise at day 1. Sometimes trends die quickly. Geographic coverage is strong in US/EU, weak in APAC.",
-    tradeoffs: "Signal freshness vs accuracy. We could ship signals in 30 minutes, but accuracy was 60%. Now it's 75% at 4-6 hour latency. Worth it.",
-
-    // Future
-    next_steps: "Add predictive revenue impact modeling. Build competitive threat alerts (when competitors enter new categories). Create team-specific signal feeds.",
-    future_vision: "Prescriptive intelligence: not just 'trend detected' but 'here's how to capture this market before competitors do.'",
-
-    technologies: ["Node.js", "PostgreSQL", "React", "D3.js", "Elasticsearch"],
-    accentColor: "hsl(150, 45%, 38%)",
-    accentHover: "hsla(150,45%,60%,0.12)",
-    year: 2023,
-  },
-  {
-    id: 4,
-    slug: "ai-workflow-systems",
-    index: "04",
-    title: "AI Workflow Systems",
-    description: "Modular automation framework for building and scaling AI-powered business processes.",
-    fullDescription: "A composable framework for orchestrating AI models, data transformations, and human workflows. Enables non-technical teams to build and iterate on automation workflows without engineering overhead.",
-
-    // Friction
-    observed_problem: "ML models were trained but stuck in notebooks. Deploying a model meant 2-3 weeks of engineering. Business teams couldn't iterate. Every change required code review + redeployment. Talent bottleneck: 2 engineers, 50 model ideas.",
-    impact: "Models weren't shipping. $3M/year in ML infrastructure but only 5 workflows in production. Other departments waiting weeks for simple automation.",
-    affected_users: "Data science team (12 people), finance, HR, marketing (all wanted to automate workflows but couldn't code)",
-
-    // Signal
-    key_observation: "Most ML workflows followed same pattern: ingest → transform → model → action. Code was 80% boilerplate, 20% logic. Business teams understood workflow logic; they just couldn't write Python.",
-    hypothesis: "Visual workflow builder + modular components = non-technical teams could build & deploy in days. Engineers focus on complex models, not plumbing.",
-
-    // System
-    architecture: "Visual DAG builder. Modular components (data loaders, transformers, model servers, actions). State machine for workflow execution. Versioning + rollback built-in.",
-    workflows: "Workflow definition (visual) → compile to DAG → optimize execution order → run on Kubernetes → emit metrics + logs → human approval gates where needed",
-    automation_logic: "Parallelizable steps run concurrently. Model inference cached. Failures retry with exponential backoff. Human approval nodes block until reviewed.",
-    pipelines: "Real-time execution (API-triggered). Scheduled workflows (cron). Event-driven (webhook triggers).",
-
-    // Reduction
-    friction_reduction: "Deployment cycle dropped from 14 days to 2 days. Business teams can now self-serve simple workflows (50% of requests). Engineers freed from plumbing to focus on novel models.",
-    simplification: "Removed requirement to know Python. Single source of truth for workflow state. Versioning means easy rollbacks. Monitoring built-in (not bolted on).",
-
-    // Technical
-    stack: ["Python", "Kubernetes", "FastAPI", "n8n", "PostgreSQL"],
-    infra: "Kubernetes for scalable execution. PostgreSQL for workflow state. Redis for caching model outputs.",
-    APIs: "REST for triggering workflows. GraphQL for querying state. Webhooks for integrations.",
-    data_sources: "Internal: various databases, APIs. External: third-party SaaS (Salesforce, HubSpot, etc.)",
-
-    // Outcome
-    role: "Systems Architect",
-    outcome: "Enabled 10x faster deployment of ML models into production",
-    results: [
-      "10x faster iteration cycle (2 weeks to 2 days)",
-      "80% reduction in deployment errors",
-      "Self-service workflow builder for business teams",
-      "45+ workflows in production across 12 departments"
-    ],
-    learnings: ["Abstracting complexity requires deep understanding of what varies. Spent 2 weeks observing engineers build workflows before designing components. That work saved months of bad abstractions.", "Approval gates are critical for trust. Early version auto-executed everything. Added human review for high-impact decisions (changes affecting revenue, compliance). Adoption jumped 3x.", "Monitoring is non-negotiable when non-technical people deploy. Built sophisticated alerting + dashboards. Found that clear failure messages matter more than pretty UIs."],
-
-    // Limits
-    current_limits: "Complex branching logic is still hard to express visually. Custom components require Python (can't be fully no-code). Model inference latency not optimized for <100ms requirements.",
-    tradeoffs: "Flexibility vs usability. More expressive → harder to use. We chose 80% usability for 90% of workflows, kept Python escape hatch for edge cases.",
-
-    // Future
-    next_steps: "Build marketplace of pre-built workflows. Add A/B testing framework. Implement automatic workflow optimization (re-order steps for speed).",
-    future_vision: "AI that learns from execution. System suggests optimizations based on actual performance data. 'Running model B 30% faster than model A for this use case.'",
-
-    technologies: ["Python", "Kubernetes", "FastAPI", "n8n", "PostgreSQL"],
-    accentColor: "hsl(270, 40%, 50%)",
-    accentHover: "hsla(270,40%,65%,0.12)",
+    title: "Reporting commercial & CRM",
+    description: "Un dashboard Power BI pour donner aux responsables une lecture rapide de l'activité commerciale.",
+    fullDescription: "Chez Sidel, groupe Tetra Laval, j'ai conçu un dashboard de pilotage commercial utilisé par les équipes Marketing, Sales et Management.",
+    observed_problem: "Les données CRM et commerciales devaient devenir des priorités directement exploitables par les équipes Sales.",
+    impact: "Les responsables disposent d'une vue structurée de l'activité et peuvent prioriser les relances selon le dernier contact et le contexte business.",
+    affected_users: "Équipes Sales, Marketing et Management.",
+    key_observation: "La valeur d'un dashboard vient de sa capacité à orienter une action métier.",
+    hypothesis: "Une restitution claire des interactions et opportunités permet de mieux prioriser les relances.",
+    architecture: "Consolidation de données CRM et Installed Base, modèle Power BI, mesures DAX et restitution décisionnelle.",
+    workflows: "Sources CRM → contrôle de cohérence → modèle Power BI → KPI → lecture par les responsables.",
+    automation_logic: "Automatisation du reporting récurrent avec Power Query et Power BI.",
+    pipelines: "Données clients et commerciales transformées en indicateurs de suivi.",
+    friction_reduction: "Les équipes passent d'une donnée dispersée à une lecture directement actionnable.",
+    simplification: "Performance par commercial, rendez-vous, opportunités et historique de contact réunis dans une même vue.",
+    stack: ["Power BI", "Power Query", "DAX", "Excel", "SQL"],
+    data_sources: "Données CRM, commerciales, clients et Installed Base.",
+    role: "Data & Business Analyst",
+    outcome: "Un outil de pilotage commercial utilisé chaque semaine.",
+    results: ["6+ dashboards Power BI conçus et déployés chez Sidel", "Utilisés chaque semaine par des dizaines de collaborateurs et managers", "Analyse d'un portefeuille Wines & Spirits de 61 comptes"],
+    learnings: ["Un bon indicateur doit être relié à une décision métier.", "La qualité des sources est indispensable avant la restitution.", "La compréhension du contexte commercial compte autant que le dashboard."],
+    technologies: ["Power BI", "Power Query", "DAX", "Excel", "SQL"],
+    accentColor: "hsl(355, 75%, 38%)",
     year: 2024,
+    period: "2023 – 2025 · Sidel — Groupe Tetra Laval",
   },
   {
-    id: 5,
-    slug: "data-observatory",
+    ...common,
+    id: "sidel-event-analytics",
+    slug: "event-analytics-europe",
+    index: "02",
+    title: "Event Analytics Europe",
+    description: "Un reporting Power BI pour suivre la performance des salons européens, des contacts jusqu'aux opportunités.",
+    fullDescription: "Chez Sidel, j'ai conçu un dashboard de pilotage des salons européens pour les équipes Communication.",
+    observed_problem: "Les données de présence, de contact et de satisfaction étaient séparées.",
+    impact: "Les équipes peuvent suivre un funnel événementiel allant des visites et contacts jusqu'aux rendez-vous et à la progression commerciale.",
+    affected_users: "Équipes Communication et Marketing à l'échelle Europe.",
+    key_observation: "La performance d'un événement se lit dans la continuité entre participation, satisfaction et suite commerciale.",
+    hypothesis: "Rassembler les sources dans une même vue permet de mieux comprendre la valeur des salons.",
+    architecture: "Rapprochement de plusieurs sources, modèle Power BI et restitution sous forme de funnel événementiel.",
+    workflows: "Présence et contacts → questionnaires de satisfaction → consolidation → KPI → suivi du funnel.",
+    automation_logic: "Centralisation des KPI de performance événementielle et de satisfaction.",
+    pipelines: "Sources événementielles et réponses aux questionnaires consolidées pour l'analyse Europe.",
+    friction_reduction: "Un suivi réparti entre plusieurs sources devient lisible dans un reporting unique.",
+    simplification: "Visites, contacts, prises de contact, rendez-vous et progression commerciale suivis ensemble.",
+    stack: ["Power BI", "Power Query", "Excel"],
+    data_sources: "Données de présence et contacts sur les salons, questionnaires de satisfaction.",
+    role: "Data & Business Analyst",
+    outcome: "Un outil de lecture de la performance événementielle pour les équipes Communication.",
+    results: ["Dashboard Power BI de pilotage des salons européens", "Rapprochement de plusieurs sources auparavant séparées", "Funnel événementiel et commercial construit de bout en bout"],
+    learnings: ["Un funnel utile suit la progression après l'événement, pas seulement la fréquentation.", "Le rapprochement des sources est une étape de produit.", "La restitution doit rester compréhensible pour ses utilisateurs."],
+    technologies: ["Power BI", "Power Query", "Excel"],
+    accentColor: "hsl(210, 55%, 42%)",
+    year: 2024,
+    period: "2023 – 2025 · Sidel — Groupe Tetra Laval",
+  },
+  {
+    ...common,
+    id: "elevia",
+    slug: "elevia",
+    index: "03",
+    title: "Elevia",
+    description: "Un moteur Data/IA combinant extraction, matching sémantique, classification et scoring explicable.",
+    fullDescription: "Elevia est un produit MadeByAkim conçu pour structurer et évaluer des profils et des opportunités avec une chaîne Data/IA testable et auditable.",
+    observed_problem: "Le besoin était de transformer des informations non structurées en un matching compréhensible et évaluable.",
+    impact: "La solution permet de comparer la pertinence métier des résultats avec des cycles d'évaluation reproductibles.",
+    affected_users: "Projet produit développé dans le cadre de MadeByAkim.",
+    key_observation: "Un système de scoring utile doit pouvoir être évalué, rejoué et expliqué.",
+    hypothesis: "La normalisation des compétences et un scoring explicable peuvent améliorer la pertinence du matching.",
+    architecture: "Extraction structurée, matching sémantique, classification et scoring avec Python, FastAPI, PostgreSQL, OpenAI, LangChain et ESCO.",
+    workflows: "Données → extraction → normalisation des compétences → matching → scoring → évaluation.",
+    automation_logic: "Workflows de replay et scoring gelé pour garantir la reproductibilité.",
+    pipelines: "Profils et opportunités transformés en données structurées puis évalués par cycles.",
+    friction_reduction: "Le traitement devient mesurable et rejouable au lieu de reposer sur une appréciation opaque.",
+    simplification: "ESCO et la normalisation structurent les compétences et rendent les résultats comparables.",
+    stack: ["Python", "FastAPI", "PostgreSQL", "OpenAI", "LangChain", "ESCO"],
+    data_sources: "Profils et offres/opportunités traités dans le produit.",
+    role: "AI Transformation Consultant & Product Builder",
+    outcome: "Un moteur de matching évalué sur des cas documentés.",
+    results: ["10+ cycles d'évaluation", "30 profils évalués", "1 000+ offres/opportunités évaluées", "Scoring gelé pour garantir la reproductibilité"],
+    learnings: ["La qualité d'un système IA se mesure sur des cas réels.", "Le replay et la traçabilité permettent de comparer les évolutions.", "Les compétences doivent être normalisées avant d'être comparées."],
+    technologies: ["Python", "FastAPI", "PostgreSQL", "OpenAI", "LangChain", "ESCO"],
+    accentColor: "hsl(25, 70%, 44%)",
+    year: 2025,
+    period: "2025 – aujourd'hui · MadeByAkim",
+  },
+  {
+    ...common,
+    id: "job-apply-assistant",
+    slug: "job-apply-assistant",
+    index: "04",
+    title: "Job Apply Assistant",
+    description: "Un pipeline Data/IA multi-agent qui réduit un processus manuel d'environ 45 minutes à environ 5 minutes.",
+    fullDescription: "Job Apply Assistant est un produit MadeByAkim qui orchestre le parsing, l'analyse d'offre, le matching, le positionnement, la génération documentaire et le suivi.",
+    observed_problem: "Le processus de préparation d'une candidature demandait environ 45 minutes de tâches manuelles.",
+    impact: "Le workflow automatisé ramène ce traitement à environ 5 minutes, avec persistance et traçabilité.",
+    affected_users: "Projet produit développé dans le cadre de MadeByAkim.",
+    key_observation: "Le processus est une succession d'étapes structurées qui peuvent être orchestrées.",
+    hypothesis: "Un pipeline multi-agent et des schémas persistés peuvent réduire le temps sans perdre la traçabilité.",
+    architecture: "Architecture multi-agent couvrant parsing, analyse, matching, positionnement, génération documentaire et suivi.",
+    workflows: "Document → parsing → analyse de l'offre → matching → positionnement → génération → suivi.",
+    automation_logic: "Orchestration des agents avec persistance PostgreSQL et schémas structurés.",
+    pipelines: "Données d'entrée transformées en livrables documentaires et éléments de suivi.",
+    friction_reduction: "Environ 45 minutes de traitement manuel ramenées à environ 5 minutes.",
+    simplification: "Les étapes sont réunies dans un workflow documenté.",
+    stack: ["Python", "PostgreSQL", "Alembic", "Docker", "Coolify", "Telegram"],
+    data_sources: "Documents et offres traités dans le pipeline.",
+    role: "AI Transformation Consultant & Product Builder",
+    outcome: "Un workflow multi-agent déployable et traçable.",
+    results: ["Processus manuel d'environ 45 minutes → workflow d'environ 5 minutes", "Architecture multi-agent", "Persistance PostgreSQL et migrations Alembic", "Déploiement Docker / Coolify et notifications Telegram"],
+    learnings: ["Chaque étape automatisée doit rester observable.", "La persistance structurée permet de rejouer et suivre le traitement.", "Le produit doit conserver la logique métier derrière l'orchestration."],
+    technologies: ["Python", "PostgreSQL", "Alembic", "Docker", "Coolify", "Telegram"],
+    accentColor: "hsl(150, 42%, 34%)",
+    year: 2025,
+    period: "2025 – aujourd'hui · MadeByAkim",
+  },
+  {
+    ...common,
+    id: "nuit-blanche",
+    slug: "nuit-blanche",
     index: "05",
-    title: "Data Observatory",
-    description: "Real-time data quality monitoring and anomaly detection platform.",
-    fullDescription: "Observatory monitors data pipelines across 150+ sources, detects schema drift and quality issues, and triggers automated remediation. Built to handle streaming data at 100K events/second.",
-
-    // Friction
-    observed_problem: "Data pipelines were breaking constantly. An API changed format = 50 downstream queries broke. Missing data went unnoticed for days. Queries returning wrong results. Analytics team found bugs manually (lag: 24-48 hours).",
-    impact: "Bad data in reports. Decisions based on incorrect numbers. Data incidents cost $40K/day in lost productivity + remediation. Trust in analytics eroded.",
-    affected_users: "Data engineering team (8 people), analytics (15), business stakeholders (100+)",
-
-    // Signal
-    key_observation: "Most failures were predictable: schema changes, missing values, duplicates, out-of-order records, distribution shifts. The same types of errors happened repeatedly. No automated detection existed.",
-    hypothesis: "Continuous monitoring + anomaly detection = catch issues before they propagate. Profile normal data patterns, alert when deviations occur.",
-
-    // System
-    architecture: "Stream profiler (Kafka consumers → real-time stats). Schema registry monitor. Quality checks (missing, duplicates, bounds). Anomaly detector (statistical + ML-based). Alert routing.",
-    workflows: "Data flows in → profile schema/values/patterns → check against baselines → if anomaly detected, alert + log → trigger remediation (if configured) → incident record",
-    automation_logic: "If NULL% > threshold, escalate immediately (usually means upstream broke). If value distribution shifts 3σ, investigate. If schema changes without registry update, reject incoming data.",
-    pipelines: "Real-time: Kafka streams monitoring 150 sources. Hourly: quality score computation. Daily: baseline recomputation.",
-
-    // Reduction
-    friction_reduction: "Detection latency dropped from 24 hours to < 1 minute. 85% of incidents now auto-remediated. Data team spends time on analysis, not firefighting.",
-    simplification: "Single monitoring platform (replaced 7 different tools). Unified alerting. Incident post-mortems now data-driven (here's exactly when it broke and why).",
-
-    // Technical
-    stack: ["Scala", "Apache Kafka", "Spark", "PostgreSQL", "Grafana"],
-    infra: "Kafka cluster for real-time streaming. Spark for batch quality computations. PostgreSQL for incident + metric storage.",
-    APIs: "Kafka consumer API for streaming. REST API for quality scores. Webhooks for incident notifications.",
-    data_sources: "150+ databases, APIs, data warehouses, file uploads monitored in real-time",
-
-    // Outcome
-    role: "Data Platform Engineer",
-    outcome: "Prevented 340+ data quality incidents, 99.8% pipeline uptime",
-    results: [
-      "99.8% overall pipeline uptime",
-      "340+ incidents prevented or auto-remediated",
-      "Sub-minute incident detection",
-      "85% reduction in manual data validation time"
-    ],
-    learnings: ["Baselines are critical. Using global thresholds was useless (each source has different patterns). Per-source baselines + seasonal adjustment made detection accurate.", "False positives destroy adoption. Early version flagged too many things. Refined alerts to only high-severity issues. Engagement jumped from 20% of alerts to 80% actionable.", "Remediation is hard. Auto-fixes for simple cases (nulls) work well. For complex issues (schema changes), manual review still needed. Mix of automation + escalation works."],
-
-    // Limits
-    current_limits: "Can't predict completely novel failure modes. Distribution shift detection misses slow drifts. No automated fixes for schema-breaking changes (requires code review).",
-    tradeoffs: "Sensitivity vs specificity. More alerts catch more issues but burn out on-call. Tuned for 99% recall, 95% precision (better to false-alert than miss real issue).",
-
-    // Future
-    next_steps: "Add data lineage tracking (trace issue to source). Build self-healing (auto-rollback bad data). Implement predictive quality alerts.",
-    future_vision: "Systems that heal themselves. Detect drift, understand root cause, apply fix, learn from incident. Minimal human intervention for routine problems.",
-
-    technologies: ["Scala", "Apache Kafka", "Spark", "PostgreSQL", "Grafana"],
-    accentColor: "hsl(35, 60%, 50%)",
-    accentHover: "hsla(35,60%,65%,0.12)",
-    year: 2022,
+    title: "Nuit Blanche",
+    description: "Un workflow d'automatisation qui transforme des données événementielles en livrables visuels.",
+    fullDescription: "Nuit Blanche est un projet ponctuel MadeByAkim construit avec Google Sheets et Apps Script pour valider, filtrer, prioriser et générer automatiquement des livrables.",
+    observed_problem: "Les données événementielles devaient être transformées en livrables cohérents avec validation et priorisation.",
+    impact: "Le workflow automatise la production des livrables visuels à partir de données structurées.",
+    affected_users: "Projet ponctuel développé dans le cadre de MadeByAkim.",
+    key_observation: "Les étapes de validation, filtres et priorisation peuvent être intégrées au flux de production.",
+    hypothesis: "Un workflow structuré réduit les manipulations répétitives entre donnée et production de contenu.",
+    architecture: "Google Sheets comme source structurée et Apps Script pour validation, filtres, priorisation et génération.",
+    workflows: "Données événementielles → validation → filtres → priorisation → génération automatisée.",
+    automation_logic: "Règles de contrôle et de priorisation intégrées avant la génération.",
+    pipelines: "Données événementielles transformées en supports visuels.",
+    friction_reduction: "Les manipulations répétitives sont regroupées dans un workflow automatisé.",
+    simplification: "Un même flux relie données, contrôle, tri et production.",
+    stack: ["Google Sheets", "Google Apps Script"],
+    data_sources: "Données événementielles structurées dans Google Sheets.",
+    role: "AI Transformation Consultant & Product Builder",
+    outcome: "Une chaîne automatisée de production de contenus événementiels.",
+    results: ["Validation, filtres et priorisation intégrés", "Génération automatisée de livrables visuels", "Projet ponctuel réalisé en 2024"],
+    learnings: ["Les automatisations simples peuvent supprimer beaucoup de manipulations.", "Les règles de validation doivent précéder la génération.", "Un outil accessible facilite l'adoption par les équipes."],
+    technologies: ["Google Sheets", "Google Apps Script"],
+    accentColor: "hsl(270, 38%, 46%)",
+    year: 2024,
+    period: "2024 · MadeByAkim",
   },
 ];

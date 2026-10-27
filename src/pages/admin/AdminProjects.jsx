@@ -10,6 +10,7 @@ export default function AdminProjects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const load = async () => {
@@ -22,16 +23,19 @@ export default function AdminProjects() {
 
   const handleDelete = async (slug) => {
     if (!window.confirm("Delete this project?")) return;
+    setError("");
     setDeleting(slug);
     const success = await deleteProject(slug);
     if (success) {
       setProjects(projects.filter((p) => p.slug !== slug));
+    } else {
+      setError("Could not delete this project. Check your connection or browser storage and try again.");
     }
     setDeleting(null);
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-6 md:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -57,6 +61,8 @@ export default function AdminProjects() {
             </Link>
           </Button>
         </motion.div>
+
+        {error && <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-red-800">{error}</p>}
 
         {/* Projects Table */}
         <motion.div
@@ -84,25 +90,25 @@ export default function AdminProjects() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground/70 font-medium">
+                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       Title
                     </th>
-                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground/70 font-medium">
+                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       Slug
                     </th>
-                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground/70 font-medium">
+                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       Year
                     </th>
-                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground/70 font-medium">
+                    <th className="text-left p-4 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       Status
                     </th>
-                    <th className="text-right p-4 text-xs uppercase tracking-widest text-muted-foreground/70 font-medium">
+                    <th className="text-right p-4 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {projects.map((project, idx) => (
+                  {projects.map((project) => (
                     <tr
                       key={project.id || project.slug}
                       className="border-b border-border/50 hover:bg-white/30 transition-colors"
@@ -156,6 +162,6 @@ export default function AdminProjects() {
           )}
         </motion.div>
       </div>
-    </div>
+    </main>
   );
 }

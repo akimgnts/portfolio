@@ -1,5 +1,5 @@
 export interface Project {
-  id: string;
+  id: string | number;
   slug: string;
   title: string;
   description: string; // short, for cards

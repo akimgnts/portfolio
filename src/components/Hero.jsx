@@ -1,9 +1,11 @@
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDownRight, MapPin, Dot } from "lucide-react";
 import { Button } from "./ui/Button";
 import { siteContent } from "../data/content";
 
 function AtmosphericOrb() {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Outer glow */}
@@ -20,7 +22,7 @@ function AtmosphericOrb() {
         style={{
           background: "radial-gradient(circle at 35% 35%, hsla(36,80%,85%,0.85) 0%, hsla(25,70%,72%,0.55) 45%, hsla(200,50%,75%,0.25) 80%, transparent 100%)",
         }}
-        animate={{ scale: [1, 1.04, 1], opacity: [0.7, 0.9, 0.7] }}
+        animate={reduceMotion ? {} : { scale: [1, 1.04, 1], opacity: [0.7, 0.9, 0.7] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -32,7 +34,7 @@ function AtmosphericOrb() {
           <motion.div
             key={idx}
             className={`bg-white/90 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-sm absolute ${card.position}`}
-            animate={{ y: yAnimations[idx] }}
+            animate={reduceMotion ? {} : { y: yAnimations[idx] }}
             transition={{ duration: durations[idx], repeat: Infinity, ease: "easeInOut", delay: idx }}
           >
             <p className="text-sm">{card.text}</p>
@@ -64,7 +66,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-40 pb-32 px-6 md:px-8 section-gradient-hero">
+    <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-8 section-gradient-hero">
       {/* Ambient overlay */}
       <div
         className="fixed inset-0 pointer-events-none opacity-30"
@@ -75,13 +77,14 @@ export default function Hero() {
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center min-h-screen"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center md:min-h-[520px]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Text */}
           <motion.div variants={itemVariants}>
+            <p className="text-xs uppercase tracking-[0.18em] text-accent font-medium mb-6">Business · Data · Automatisation / IA</p>
             <h1 className="font-serif text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight text-foreground mb-6">
               {siteContent.hero.headline}{" "}
               <em className="not-italic text-accent">
@@ -114,18 +117,26 @@ export default function Hero() {
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
               {siteContent.hero.ctas.map((cta, idx) => (
                 <Button key={idx} variant={cta.variant} size="default" asChild>
-                  <a href={cta.href}>
+                  <Link to={cta.href.startsWith("#") ? `/${cta.href}` : cta.href}>
                     {cta.label}
                     {idx === 0 && <ArrowDownRight className="w-4 h-4" />}
-                  </a>
+                  </Link>
                 </Button>
+              ))}
+            </motion.div>
+            <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 pt-6 border-t border-border" variants={itemVariants}>
+              {siteContent.hero.proof.map((item) => (
+                <div key={item.value}>
+                  <p className="font-serif text-2xl text-foreground">{item.value}</p>
+                  <p className="text-xs leading-relaxed text-muted-foreground mt-1">{item.label}</p>
+                </div>
               ))}
             </motion.div>
           </motion.div>
 
           {/* Atmospheric visual */}
           <motion.div
-            className="h-96 md:h-full hidden md:flex"
+            className="h-96 hidden md:flex"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}

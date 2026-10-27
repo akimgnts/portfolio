@@ -35,7 +35,7 @@ export default function AdminProjectEdit() {
     if (result) {
       navigate("/admin/projects");
     } else {
-      setError("Failed to update project. Check backend connection.");
+      setError("Failed to update project. Check your connection or browser storage and try again.");
     }
 
     setSubmitting(false);
@@ -58,7 +58,7 @@ export default function AdminProjectEdit() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-6 md:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -90,6 +90,6 @@ export default function AdminProjectEdit() {
 
         <ProjectForm initialData={project} onSubmit={handleSubmit} loading={submitting} />
       </div>
-    </div>
+    </main>
   );
 }

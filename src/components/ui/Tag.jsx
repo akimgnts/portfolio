@@ -4,6 +4,7 @@ export function Tag({ children, active = false, onClick, className = "" }) {
     return (
       <button
         type="button"
+        aria-pressed={active}
         onClick={onClick}
         className={`text-xs px-4 py-2 rounded-lg border transition-all duration-300 ${
           active

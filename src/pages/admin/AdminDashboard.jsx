@@ -17,8 +17,8 @@ export default function AdminDashboard() {
       const projects = await fetchProjects(0, 100);
       setStats({
         total: projects.length,
-        published: projects.filter((p) => p.published).length,
-        draft: projects.filter((p) => !p.published).length,
+        published: projects.filter((p) => p.published !== false).length,
+        draft: projects.filter((p) => p.published === false).length,
       });
       setLoading(false);
     };
@@ -26,7 +26,7 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-6 md:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
             transition={{ delay: 0 }}
             className="rounded-lg border border-border bg-white/50 p-6"
           >
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 font-medium mb-3">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">
               Total Projects
             </p>
             <p className="font-serif text-3xl font-medium text-foreground">
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
             transition={{ delay: 0.1 }}
             className="rounded-lg border border-border bg-white/50 p-6"
           >
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 font-medium mb-3">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">
               Published
             </p>
             <p className="font-serif text-3xl font-medium text-foreground">
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
             transition={{ delay: 0.2 }}
             className="rounded-lg border border-border bg-white/50 p-6"
           >
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 font-medium mb-3">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">
               Drafts
             </p>
             <p className="font-serif text-3xl font-medium text-foreground">
@@ -112,11 +112,12 @@ export default function AdminDashboard() {
           className="mt-8 p-4 rounded-lg bg-yellow-100/20 border border-yellow-200/40 text-yellow-800"
         >
           <p className="text-sm">
-            <strong>Note:</strong> This admin panel uses mock data. Connect to backend
-            by setting <code className="text-xs font-mono">VITE_API_URL</code> in .env.
+            {import.meta.env.VITE_API_URL?.trim()
+              ? "Connected mode: project changes are saved through your configured service."
+              : "Local studio: changes are saved in this browser only. They are not published to your live website."}
           </p>
         </motion.div>
       </div>
-    </div>
+    </main>
   );
 }

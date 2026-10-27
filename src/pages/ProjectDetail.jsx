@@ -1,3 +1,4 @@
+import NotFound from "./NotFound";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -8,7 +9,7 @@ import { Tag } from "../components/ui/Tag";
 import { fetchProjectBySlug } from "../services/projectService";
 
 const SectionLabel = ({ children }) => (
-  <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 font-medium block mb-3">
+  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-3">
     {children}
   </p>
 );
@@ -30,45 +31,23 @@ const BodyText = ({ children }) => (
 export default function ProjectDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [result, setResult] = useState(null);
+  const loading = result?.slug !== slug;
+  const project = result?.project;
 
   useEffect(() => {
-    const load = async () => {
-      const data = await fetchProjectBySlug(slug);
-      if (!data) {
-        navigate("/projects");
-        return;
-      }
-      setProject(data);
-      setLoading(false);
-    };
-    load();
-  }, [slug, navigate]);
+    let active = true;
+    fetchProjectBySlug(slug).then((data) => {
+      if (active) setResult({ slug, project: data?.published === false ? null : data });
+    });
+    return () => { active = false; };
+  }, [slug]);
 
   if (loading) {
-    return (
-      <>
-        <Navbar />
-        <div className="min-h-screen flex items-center justify-center">
-          <p>Loading project...</p>
-        </div>
-        <Footer />
-      </>
-    );
+    return <><Navbar /><main id="main-content" tabIndex={-1} className="min-h-screen grid place-items-center"><p role="status">Loading project…</p></main><Footer /></>;
   }
 
-  if (!project) {
-    return (
-      <>
-        <Navbar />
-        <div className="min-h-screen flex items-center justify-center">
-          <p>Project not found</p>
-        </div>
-        <Footer />
-      </>
-    );
-  }
+  if (!project) return <NotFound />;
 
   const hasFriction = project.observed_problem || project.impact || project.affected_users;
   const hasSignal = project.key_observation || project.hypothesis;
@@ -82,9 +61,9 @@ export default function ProjectDetail() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero Section */}
-        <section className="py-40 px-6 md:px-8 section-gradient-hero">
+        <section className="pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-8 section-gradient-hero">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -96,13 +75,13 @@ export default function ProjectDetail() {
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to work
+                Retour aux projets
               </button>
 
               <p className="text-accent text-sm font-medium mb-4">
-                {project.year || new Date().getFullYear()}
+                {project.period || project.year || new Date().getFullYear()}
               </p>
-              <h1 className="font-serif text-6xl font-medium mb-6 text-foreground">
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl break-words font-medium mb-6 text-foreground">
                 {project.title}
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
@@ -113,7 +92,7 @@ export default function ProjectDetail() {
         </section>
 
         {/* Content Section */}
-        <section className="py-40 px-6 md:px-8">
+        <section className="py-16 md:py-24 px-6 md:px-8">
           <div className="max-w-3xl mx-auto space-y-24">
             {/* Overview */}
             {project.fullDescription && (
@@ -133,12 +112,12 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>The Friction</SectionLabel>
-                <SectionTitle>What was the problem?</SectionTitle>
+                <SectionLabel>Le problème</SectionLabel>
+                <SectionTitle>Quel était le besoin ?</SectionTitle>
 
                 {project.observed_problem && (
                   <div className="mb-8">
-                    <SubsectionTitle>Problem</SubsectionTitle>
+                    <SubsectionTitle>Contexte</SubsectionTitle>
                     <BodyText>{project.observed_problem}</BodyText>
                   </div>
                 )}
@@ -152,7 +131,7 @@ export default function ProjectDetail() {
 
                 {project.affected_users && (
                   <div>
-                    <SubsectionTitle>Affected Users</SubsectionTitle>
+                    <SubsectionTitle>Équipes concernées</SubsectionTitle>
                     <BodyText>{project.affected_users}</BodyText>
                   </div>
                 )}
@@ -170,19 +149,19 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>The Signal</SectionLabel>
-                <SectionTitle>What did we observe?</SectionTitle>
+                <SectionLabel>Le signal</SectionLabel>
+                <SectionTitle>Qu'avons-nous observé ?</SectionTitle>
 
                 {project.key_observation && (
                   <div className="mb-8">
-                    <SubsectionTitle>Key Observation</SubsectionTitle>
+                    <SubsectionTitle>Observation clé</SubsectionTitle>
                     <BodyText>{project.key_observation}</BodyText>
                   </div>
                 )}
 
                 {project.hypothesis && (
                   <div>
-                    <SubsectionTitle>Hypothesis</SubsectionTitle>
+                    <SubsectionTitle>Hypothèse</SubsectionTitle>
                     <BodyText>{project.hypothesis}</BodyText>
                   </div>
                 )}
@@ -200,8 +179,8 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>The System</SectionLabel>
-                <SectionTitle>What did we build?</SectionTitle>
+                <SectionLabel>La solution</SectionLabel>
+                <SectionTitle>Qu'avons-nous construit ?</SectionTitle>
 
                 {project.architecture && (
                   <div className="mb-8">
@@ -212,14 +191,14 @@ export default function ProjectDetail() {
 
                 {project.workflows && (
                   <div className="mb-8">
-                    <SubsectionTitle>Workflows</SubsectionTitle>
+                    <SubsectionTitle>Flux</SubsectionTitle>
                     <BodyText>{project.workflows}</BodyText>
                   </div>
                 )}
 
                 {project.automation_logic && (
                   <div className="mb-8">
-                    <SubsectionTitle>Automation Logic</SubsectionTitle>
+                    <SubsectionTitle>Logique d'automatisation</SubsectionTitle>
                     <BodyText>{project.automation_logic}</BodyText>
                   </div>
                 )}
@@ -244,12 +223,12 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>The Reduction</SectionLabel>
-                <SectionTitle>What changed?</SectionTitle>
+                <SectionLabel>Le résultat</SectionLabel>
+                <SectionTitle>Qu'est-ce qui a changé ?</SectionTitle>
 
                 {project.friction_reduction && (
                   <div className="mb-8">
-                    <SubsectionTitle>Friction Reduction</SubsectionTitle>
+                    <SubsectionTitle>Réduction du temps ou de la friction</SubsectionTitle>
                     <BodyText>{project.friction_reduction}</BodyText>
                   </div>
                 )}
@@ -274,8 +253,8 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>Technical</SectionLabel>
-                <SectionTitle>Stack & Infrastructure</SectionTitle>
+                <SectionLabel>Technique</SectionLabel>
+                <SectionTitle>Outils et architecture</SectionTitle>
 
                 {(project.stack || project.technologies) && (
                   <div className="mb-8">
@@ -304,7 +283,7 @@ export default function ProjectDetail() {
 
                 {project.data_sources && (
                   <div>
-                    <SubsectionTitle>Data Sources</SubsectionTitle>
+                    <SubsectionTitle>Sources de données</SubsectionTitle>
                     <BodyText>{project.data_sources}</BodyText>
                   </div>
                 )}
@@ -322,8 +301,8 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>Outcome</SectionLabel>
-                <SectionTitle>What happened?</SectionTitle>
+                <SectionLabel>Livrable</SectionLabel>
+                <SectionTitle>Qu'est-ce qui a été livré ?</SectionTitle>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-8 pb-8 border-b border-border/15">
                   {project.role && (
@@ -342,7 +321,7 @@ export default function ProjectDetail() {
 
                 {project.results && project.results.length > 0 && (
                   <div className="mb-8">
-                    <SubsectionTitle>Results</SubsectionTitle>
+                    <SubsectionTitle>Résultats</SubsectionTitle>
                     <ul className="space-y-3">
                       {project.results.map((result, idx) => (
                         <li key={idx} className="text-[15px] text-muted-foreground">
@@ -355,7 +334,7 @@ export default function ProjectDetail() {
 
                 {(project.learnings || project.lessons) && (project.learnings || project.lessons).length > 0 && (
                   <div>
-                    <SubsectionTitle>Learnings</SubsectionTitle>
+                    <SubsectionTitle>Ce que j'en retiens</SubsectionTitle>
                     <ul className="space-y-3">
                       {(project.learnings || project.lessons).map((learning, idx) => (
                         <li key={idx} className="text-[15px] text-muted-foreground">
@@ -379,19 +358,19 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>Limits & Tradeoffs</SectionLabel>
-                <SectionTitle>What we didn't solve</SectionTitle>
+                <SectionLabel>Limites</SectionLabel>
+                <SectionTitle>Ce qui reste à traiter</SectionTitle>
 
                 {project.current_limits && (
                   <div className="mb-8">
-                    <SubsectionTitle>Current Limits</SubsectionTitle>
+                    <SubsectionTitle>Limites actuelles</SubsectionTitle>
                     <BodyText>{project.current_limits}</BodyText>
                   </div>
                 )}
 
                 {project.tradeoffs && (
                   <div>
-                    <SubsectionTitle>Tradeoffs</SubsectionTitle>
+                    <SubsectionTitle>Arbitrages</SubsectionTitle>
                     <BodyText>{project.tradeoffs}</BodyText>
                   </div>
                 )}
@@ -409,12 +388,12 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>Future</SectionLabel>
-                <SectionTitle>What's next?</SectionTitle>
+                <SectionLabel>Suite possible</SectionLabel>
+                <SectionTitle>Et ensuite ?</SectionTitle>
 
                 {project.next_steps && (
                   <div className="mb-8">
-                    <SubsectionTitle>Next Steps</SubsectionTitle>
+                    <SubsectionTitle>Prochaines étapes</SubsectionTitle>
                     <BodyText>{project.next_steps}</BodyText>
                   </div>
                 )}
@@ -439,7 +418,7 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <SectionLabel>Resources</SectionLabel>
+                <SectionLabel>Ressources</SectionLabel>
                 <div className="flex flex-wrap gap-3">
                   {project.githubUrl && (
                     <a
@@ -448,7 +427,7 @@ export default function ProjectDetail() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-border/40 transition-all"
                     >
-                      View on GitHub →
+                      Voir sur GitHub →
                     </a>
                   )}
                   {project.demoUrl && (
@@ -458,7 +437,7 @@ export default function ProjectDetail() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-border/40 transition-all"
                     >
-                      Live Demo →
+                      Voir la démo →
                     </a>
                   )}
                 </div>
@@ -477,7 +456,7 @@ export default function ProjectDetail() {
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to all work
+                Retour à tous les projets
               </button>
             </motion.div>
           </div>

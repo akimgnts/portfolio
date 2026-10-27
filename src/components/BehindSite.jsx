@@ -14,7 +14,7 @@ function FlowCard({ step, index }) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
       <Card hover className="p-5 group">
-        <p className="text-xs font-mono text-muted-foreground/35 mb-2 group-hover:text-muted-foreground/55 transition-colors">{step.step}</p>
+        <p className="text-xs font-mono text-muted-foreground mb-2 group-hover:text-muted-foreground transition-colors">{step.step}</p>
         <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/65 transition-colors">{step.note}</p>
       </Card>
     </motion.div>
@@ -23,7 +23,7 @@ function FlowCard({ step, index }) {
 
 export default function BehindSite() {
   return (
-    <section id="behind" className="py-40 px-6 md:px-8 section-gradient-behind">
+    <section id="behind" className="py-20 md:py-28 px-6 md:px-8 section-gradient-behind">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           eyebrow={siteContent.sections.behind.eyebrow}
@@ -43,7 +43,7 @@ export default function BehindSite() {
         )}
 
         <div className="mb-20">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">
+          <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-8">
             {siteContent.sections.behind.automationLabel}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
@@ -51,7 +51,7 @@ export default function BehindSite() {
               <div key={idx} className="flex items-center gap-3">
                 <FlowCard step={step} index={idx} />
                 {idx < siteContent.behind.automation.length - 1 && (
-                  <ArrowRight className="hidden md:block w-4 h-4 text-muted-foreground/50 flex-shrink-0" />
+                  <ArrowRight className="hidden md:block w-4 h-4 text-muted-foreground flex-shrink-0" />
                 )}
               </div>
             ))}
@@ -59,7 +59,7 @@ export default function BehindSite() {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium mb-8">
+          <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-8">
             {siteContent.sections.behind.stackLabel}
           </p>
           <Card className="flex flex-wrap gap-2 p-7">

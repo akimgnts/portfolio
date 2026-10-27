@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
   :root {
@@ -16,8 +17,8 @@
     --secondary: 36 20% 93%;
     --secondary-foreground: 220 15% 30%;
     --muted: 36 15% 92%;
-    --muted-foreground: 220 8% 52%;
-    --accent: 25 80% 60%;
+    --muted-foreground: 220 8% 38%;
+    --accent: 22 66% 38%;
     --border: 36 15% 88%;
     --input: 36 15% 88%;
     --ring: 220 15% 16%;
@@ -67,6 +68,26 @@
   p {
     margin: 0;
     line-height: 1.7;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 4px;
+  }
+
+  main:focus, section[tabindex="-1"]:focus { outline: none; }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   ::selection {

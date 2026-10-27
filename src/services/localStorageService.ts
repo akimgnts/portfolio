@@ -1,89 +1,98 @@
-import { Project, ProjectFormData } from "../types/project";
+import type { Project, ProjectFormData } from "../types/project";
 import { projects as defaultProjects } from "../data/projects";
+import { isProject, isProjectList } from "./projectValidation";
 
 const STORAGE_KEY = "portfolio_projects";
+const defaults = (): Project[] => structuredClone(defaultProjects) as Project[];
 
-// Initialize with default projects on first load
-function initializeProjects(): Project[] {
-  if (typeof window === "undefined") return defaultProjects as Project[];
+function readProjects(): Project[] {
+  if (typeof window === "undefined") return defaults();
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  if (stored === null) return defaults();
+  const parsed: unknown = JSON.parse(stored);
+  if (!isProjectList(parsed)) throw new Error("Invalid saved projects");
+  return parsed;
+}
 
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (e) {
-      console.error("Failed to parse stored projects:", e);
-    }
-  }
-
-  // First time - store defaults
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProjects));
-  return defaultProjects as Project[];
+function saveProjects(projects: Project[]): void {
+  if (!isProjectList(projects)) throw new Error("Invalid project data");
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
 }
 
 export const localStorageService = {
-  // Read all projects
   getAllProjects(): Project[] {
-    if (typeof window === "undefined") return defaultProjects as Project[];
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : (defaultProjects as Project[]);
+    try {
+      return readProjects();
+    } catch {
+      // Keep the portfolio readable, without overwriting damaged or inaccessible data.
+      return defaults();
+    }
   },
 
-  // Get single project by slug
   getProjectBySlug(slug: string): Project | null {
-    const projects = this.getAllProjects();
-    return projects.find((p) => p.slug === slug) || null;
+    return this.getAllProjects().find((project) => project.slug === slug) ?? null;
   },
 
-  // Create project
-  createProject(data: ProjectFormData): Project {
-    const projects = this.getAllProjects();
-    const newProject: Project = {
-      ...data,
-      id: String(Date.now()),
-      slug: data.slug,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      published: data.published ?? true,
-    };
-    projects.push(newProject);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-    return newProject;
+  createProject(data: ProjectFormData): Project | null {
+    try {
+      const projects = readProjects();
+      if (projects.some((project) => project.slug === data.slug)) return null;
+      const now = new Date().toISOString();
+      const project: Project = {
+        ...data,
+        id: crypto.randomUUID(),
+        createdAt: now,
+        updatedAt: now,
+        published: data.published ?? true,
+      };
+      if (!isProject(project)) return null;
+      saveProjects([...projects, project]);
+      return project;
+    } catch {
+      return null;
+    }
   },
 
-  // Update project
   updateProject(slug: string, data: Partial<ProjectFormData>): Project | null {
-    const projects = this.getAllProjects();
-    const idx = projects.findIndex((p) => p.slug === slug);
-    if (idx === -1) return null;
-
-    const updated: Project = {
-      ...projects[idx],
-      ...data,
-      updatedAt: new Date().toISOString(),
-    };
-    projects[idx] = updated;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-    return updated;
+    try {
+      const projects = readProjects();
+      const index = projects.findIndex((project) => project.slug === slug);
+      if (index === -1 || projects.some((project) => project.slug === data.slug && project.slug !== slug)) return null;
+      const updated = { ...projects[index], ...data, updatedAt: new Date().toISOString() };
+      projects[index] = updated;
+      saveProjects(projects);
+      return updated;
+    } catch {
+      return null;
+    }
   },
 
-  // Delete project
   deleteProject(slug: string): boolean {
-    const projects = this.getAllProjects();
-    const filtered = projects.filter((p) => p.slug !== slug);
-    if (filtered.length === projects.length) return false;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
-    return true;
+    try {
+      const projects = readProjects();
+      const filtered = projects.filter((project) => project.slug !== slug);
+      if (filtered.length === projects.length) return false;
+      saveProjects(filtered);
+      return true;
+    } catch {
+      return false;
+    }
   },
 
-  // Check slug availability
   isSlugAvailable(slug: string, excludeSlug?: string): boolean {
-    const projects = this.getAllProjects();
-    return !projects.some((p) => p.slug === slug && p.slug !== excludeSlug);
+    try {
+      return slug.trim().length > 0 && !readProjects().some((project) => project.slug === slug && project.slug !== excludeSlug);
+    } catch {
+      return false;
+    }
   },
 
-  // Reset to defaults
-  resetToDefaults(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProjects));
+  resetToDefaults(): boolean {
+    try {
+      saveProjects(defaults());
+      return true;
+    } catch {
+      return false;
+    }
   },
 };

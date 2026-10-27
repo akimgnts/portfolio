@@ -19,7 +19,7 @@ function CapabilityCard({ capability, index }) {
 
 export default function About() {
   return (
-    <section id="about" className="py-40 px-6 md:px-8 section-gradient-about">
+    <section id="about" className="py-20 md:py-28 px-6 md:px-8 section-gradient-about">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           <motion.div
@@ -44,6 +44,30 @@ export default function About() {
             {siteContent.about.capabilities.map((capability, idx) => (
               <CapabilityCard key={idx} capability={capability} index={idx} />
             ))}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 pt-10 border-t border-border">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-5">Expérience</p>
+            <ul className="space-y-3">
+              {siteContent.about.experience.map((item) => <li key={item} className="text-sm text-muted-foreground leading-relaxed">{item}</li>)}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-5">Formation</p>
+            <ul className="space-y-3">
+              {siteContent.about.education.map((item) => <li key={item} className="text-sm text-muted-foreground leading-relaxed">{item}</li>)}
+            </ul>
+          </div>
+          <div className="space-y-6">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">Certifications</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{siteContent.about.certifications}</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">Langues</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{siteContent.about.languages}</p>
+            </div>
           </div>
         </div>
       </div>

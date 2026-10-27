@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Tag } from "./ui/Tag";
+
+const MotionLink = motion.create(Link);
 
 /**
  * Universal ProjectCard component
@@ -9,11 +12,11 @@ import { Tag } from "./ui/Tag";
  */
 export function ProjectCard({ project, index = 0, variant = "default" }) {
   const isLink = variant !== "admin";
-  const Component = isLink ? motion.a : motion.div;
+  const Component = isLink ? MotionLink : motion.div;
 
   const cardProps = isLink
     ? {
-        href: `/projects/${project.slug}`,
+        to: `/projects/${encodeURIComponent(project.slug)}`,
         className: "block",
       }
     : {
@@ -23,13 +26,13 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
   return (
     <Component
       {...cardProps}
-      className={`rounded-2xl border border-border/10 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-0.5 transition-all duration-500 ${
+      className={`relative h-full rounded-2xl border border-border/70 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-0.5 transition-all duration-500 ${
         cardProps.className || ""
       }`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.12 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay: Math.min(index * 0.06, 0.24) }}
     >
       {/* Accent band */}
       <div
@@ -50,10 +53,10 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
       />
 
       {/* Content */}
-      <div className="relative z-10 p-8">
+      <div className="relative z-10 p-6 md:p-8">
         {/* Meta */}
-        <p className="text-xs font-mono text-muted-foreground/50 mb-2">
-          {project.year || new Date().getFullYear()}
+        <p className="text-xs font-mono text-muted-foreground mb-2">
+          {project.period || project.year || new Date().getFullYear()}
         </p>
 
         {/* Title + Arrow */}
@@ -62,7 +65,7 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
             <h3 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground mb-2">
               {project.title}
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
               {project.description}
             </p>
           </div>
@@ -76,10 +79,10 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
           <div className="mb-6 pb-6 border-b border-border/15">
             {project.impact && (
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 font-medium block mb-1">
-                  Impact
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-1">
+                  Impact métier
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
                   {project.impact}
                 </p>
               </div>
@@ -88,11 +91,11 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
         )}
 
         {/* Role + Outcome (what changed) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10 border-t border-b border-border/15">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-5 border-t border-b border-border/15">
           {project.role && (
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 font-medium block mb-2">
-                Role
+              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-2">
+                Rôle
               </p>
               <p className="text-[15px] text-muted-foreground leading-relaxed">
                 {project.role}
@@ -101,8 +104,8 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
           )}
           {project.friction_reduction && (
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 font-medium block mb-2">
-                Friction Reduction
+              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-2">
+                Résultat
               </p>
               <p className="text-[15px] text-muted-foreground leading-relaxed">
                 {project.friction_reduction}
@@ -113,7 +116,7 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
 
         {/* Stack tags (minimal) */}
         {project.stack && project.stack.length > 0 && (
-          <div className="pt-8 flex flex-wrap gap-2">
+          <div className="pt-5 flex flex-wrap gap-2">
             {project.stack.slice(0, 3).map((tech) => (
               <Tag key={tech}>{tech}</Tag>
             ))}

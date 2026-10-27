@@ -9,18 +9,17 @@ export default function Footer() {
             © {siteContent.footer.year} {siteContent.footer.name}. All rights reserved.
           </p>
           {siteContent.footer.tagline && (
-            <p className="text-sm text-muted-foreground/70 leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {siteContent.footer.tagline}
             </p>
           )}
         </div>
         <div className="flex items-center gap-6 text-sm text-muted-foreground leading-relaxed">
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Privacy
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Terms
-          </a>
+          {siteContent.contact.social.map((link) => (
+            <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

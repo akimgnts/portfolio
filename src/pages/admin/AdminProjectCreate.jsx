@@ -19,14 +19,14 @@ export default function AdminProjectCreate() {
     if (result) {
       navigate("/admin/projects");
     } else {
-      setError("Failed to create project. Check backend connection.");
+      setError("Failed to create project. Check your connection or browser storage and try again.");
     }
 
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-6 md:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -56,6 +56,6 @@ export default function AdminProjectCreate() {
 
         <ProjectForm onSubmit={handleSubmit} loading={loading} />
       </div>
-    </div>
+    </main>
   );
 }

@@ -37,7 +37,7 @@ export const productTours = {
        processing:'Les services de matching et de génération relisent les éléments du profil et sélectionnent ceux utiles à l’offre. Le code comprend des contrôles sur les affirmations et une génération de secours.',
        insight:'Je peux distinguer une compétence non documentée d’une compétence réellement absente.',
        limit:'Un badge de source dans l’application n’est pas une certification indépendante des affirmations. Les contenus générés restent à relire.',
-       caption:'Le profil source et ses catégories, sans coordonnées personnelles.'},
+       caption:'Profil source filtré sur les compétences : trois blocs complets, sans coordonnées personnelles.'},
       {id:'pipeline',label:'Préparation',title:'Distinguer analysé, incomplet et prêt.',image:shot('job-pipeline'),
        action:'Je repère les dossiers à préparer, ceux à compléter et ceux dont les documents sont présents.',
        why:'Un statut général ne suffit pas : le nombre de documents permet de vérifier si le CV, la lettre et l’email existent réellement.',
@@ -76,9 +76,9 @@ export const productTours = {
        data:'Entreprises, contacts collectés, rôles, coordonnées, sources et offres associées.',
        processing:'Les modèles relationnels relient les offres et les contacts aux entreprises. L’interface restitue la source et un niveau de fiabilité, dont « À vérifier ».',
        insight:'Un contact présent en base n’est pas automatiquement un contact confirmé.',
-       limit:'Seul l’en-tête a été capturé pour exclure systématiquement les noms et adresses des tiers.',
-       caption:'En-tête réel de la page ; la liste de coordonnées est volontairement hors cadre.'},
-      {id:'tracking',label:'Suivi Gmail',title:'Montrer aussi une intégration indisponible.',image:shot('job-tracking'),
+       limit:'La vue Entreprises est filtrée sur ASTEK. Elle affiche des compteurs, sans noms de contacts ni coordonnées privées.',
+       caption:'Vue Entreprises réelle, filtrée sur ASTEK ; noms et coordonnées des contacts exclus.'},
+      {id:'tracking',label:'Suivi Gmail',noteOnly:true,title:'Montrer aussi une intégration indisponible.',image:shot('job-tracking'),
        action:'Cette page est prévue pour retrouver les messages et les rapprocher des candidatures.',
        why:'Les documents, les envois et les réponses doivent pouvoir être distingués.',
        data:'Messages importés via Gmail, statut de connexion et liens entre emails et dossiers.',
@@ -100,8 +100,8 @@ export const productTours = {
        data:'Lectures bornées des ressources du compte, filtrées par propriétaire pour les données personnelles concernées.',
        processing:'Le code prévoit un choix de ressources par modèle, une réponse fondée sur les résultats et un repli local. Les actions passent par un endpoint distinct et des contrôles d’accès.',
        insight:'La conversation et l’exécution d’une action sont séparées dans le code.',
-       limit:'L’ouverture de l’interface a été vérifiée. Aucune réponse de cet assistant ni action n’a été testée pendant cette visite.',
-       caption:'Interface réelle de l’assistant Job Apply ; capacité conversationnelle non validée ici.'}
+       limit:'Une réponse à une question sur les offres SQL a été obtenue. La pertinence et le classement restent à vérifier ; aucune action proposée n’a été exécutée.',
+       caption:'Assistant Job Apply : question réelle sur les offres SQL et réponse obtenue en consultation.'}
     ]
   },
   'event-signal': {
@@ -115,7 +115,7 @@ export const productTours = {
        processing:'Les vues SQL Gold agrègent les billets valides, excluent les annulations et distinguent invitations et billets payants. Les ratios ne sont calculés que si les montants et devises sont compatibles.',
        insight:'Je vois le poids de la publicité par billet et le solde partiel, sans les confondre avec un CAC attribué ou un bénéfice.',
        limit:'Les captures ont été prises à différents moments de la même session. Une dépense publicitaire peut évoluer entre deux relevés ; les captures ne sont pas des données en direct.',
-       caption:'Vue réelle du 18 novembre, avant la synchronisation suivante.'},
+       caption:'Vue réelle du 18 novembre, avec les données actualisées au moment de la capture.'},
       {id:'timeline',label:'Chronologie',title:'Replacer les ventes dans leur contexte.',image:shot('event-timeline'),
        action:'Je rapproche les jours de vente, les publications et les dépenses publicitaires.',
        why:'Une lecture chronologique aide à formuler une hypothèse sur ce qui a précédé une variation.',

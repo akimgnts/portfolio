@@ -41,3 +41,9 @@ Read-only exploration of authenticated Chrome sessions. No applications sent, ca
 - Production build, ESLint and 8 existing service regression tests pass.
 - Local browser QA: all 12 Job Apply steps and 10 Event Signal steps, disclosure content, zoom dialog, navigation and image assets.
 - Responsive production check and final deployment details are reported in the delivery message.
+
+## Capture review follow-up
+
+All 22 originals were visually reviewed. The 21 displayed product images were recaptured: complete main content for Event Signal; complete public Job Apply pages or deliberately bounded sections for private views. The Gmail failure image is no longer a primary tour visual; its observed state is explained in text. Company view uses an ASTEK filter with counts only. Profile shows complete skill blocks. Drawer captures use page coordinates including scroll offsets.
+
+A real Job Apply assistant query about SQL offers was made without executing proposed actions. Its relevance is not certified. Scrollable capture frames and native-size zoom avoid shrinking long pages and avoid stretching portrait crops. Intrinsic image dimensions are tracked explicitly.

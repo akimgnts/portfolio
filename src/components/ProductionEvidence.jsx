@@ -10,7 +10,7 @@ const evidence = {
    ['Qualité de la collecte','Échecs par source','Exécution du 18 novembre à 08:00 UTC marquée Success par Coolify, mais logs : timeout Business France, HTTP 403 APEC et aucune nouvelle offre. Le statut du processus ne suffit pas à valider la collecte.'],
    ['Persistance & contrôles','Vérifié dans le code','Modèles SQLAlchemy pour offres, dossiers, analyses, documents, profil et emails. Transactions, migrations, filtres par propriétaire et contrôles de complétude.'],
    ['Génération Data/IA','Code et livrables existants','Analyse par modèle si configurée, qualification par règles sinon ; génération documentaire avec repli déterministe. Documents existants consultables, aucune génération relancée pendant la visite.'],
-   ['Gmail & assistant','Validation partielle','Gmail déconnecté et page de suivi en erreur. Interface de l’assistant ouverte ; réponse non testée. Ordonnanceur Gmail présent dans le code, activation non vérifiée.']
+   ['Gmail & assistant','Validation partielle','Gmail déconnecté et page de suivi en erreur. Une réponse de l’assistant obtenue sur les offres SQL ; pertinence et actions non évaluées. Ordonnanceur Gmail présent dans le code, activation non vérifiée.']
   ],
   note:'Je distingue le code disponible, l’interface déployée et le fonctionnement observé. La collecte tourne réellement à heures fixes ; sa réussite métier reste à contrôler source par source.'
  },

@@ -14,14 +14,14 @@ export default function Projects() {
   useEffect(() => {
     const load = async () => {
       const data = await fetchProjects(0, 100);
-      const featured = ["sidel-reporting-commercial", "event-signal", "nuit-blanche", "job-apply-assistant", "elevia", "event-analytics-europe"];
+      const featured = ["sidel-reporting-commercial", "event-signal", "elevia"];
       const visible = data.filter((project) => project.published !== false);
       const ordered = [...visible].sort((a, b) => {
         const ai = featured.indexOf(a.slug);
         const bi = featured.indexOf(b.slug);
         return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
       });
-      setProjects(ordered.slice(0, 4));
+      setProjects(ordered.filter(project => featured.includes(project.slug)).slice(0, 3));
       setLoading(false);
     };
     load();
@@ -47,8 +47,8 @@ export default function Projects() {
           </motion.p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {loading && <p role="status" className="text-muted-foreground">Loading projects…</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {loading && <p role="status" className="text-muted-foreground">Chargement des projets…</p>}
           {!loading && projects.length === 0 && <p className="text-muted-foreground">Les projets arrivent bientôt. Parlons du tien ci-dessous.</p>}
           {!loading && projects.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />

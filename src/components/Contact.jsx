@@ -66,12 +66,12 @@ export default function Contact() {
     <>
       <section
         id="contact"
-        className="py-20 md:py-28 px-6 md:px-8 section-gradient-contact"
+        className="py-14 md:py-20 px-6 md:px-8 section-gradient-contact"
       >
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <motion.div
-            className="text-center mb-20 max-w-2xl mx-auto"
+            className="text-center mb-10 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -86,11 +86,12 @@ export default function Contact() {
             <p className="text-[15px] text-muted-foreground leading-relaxed">
               {siteContent.sections.contact.subheading}
             </p>
+            <a href="mailto:akimguentas13@gmail.com" className="inline-flex items-center gap-2 rounded-full mt-6 bg-[#2e4036] text-white px-5 py-3 text-sm font-medium hover:bg-[#4d6654] transition-colors"><Mail size={16}/> Écrire directement <ArrowUpRight size={15}/></a>
           </motion.div>
 
           {/* Form grid */}
           <motion.div
-            className="grid grid-cols-1 lg:grid-cols-5 gap-12"
+            className="grid grid-cols-1 lg:grid-cols-5 gap-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}

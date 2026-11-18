@@ -1,471 +1,148 @@
-import NotFound from "./NotFound";
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, GitBranch, Lightbulb, ShieldCheck } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Tag } from "../components/ui/Tag";
+import NotFound from "./NotFound";
 import ProjectVisual from "../components/ProjectVisual";
 import { fetchProjectBySlug } from "../services/projectService";
 
-const SectionLabel = ({ children }) => (
-  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-3">
+const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
+const copy = "text-[15px] leading-[1.8] text-[#536059]";
+
+function Panel({ title, eyebrow, children, className = "" }) {
+  return <section className={"rounded-[24px] border border-[#dedfd6] bg-white/75 p-6 md:p-8 " + className}>
+    <p className={label}>{eyebrow}</p>
+    <h2 className="font-serif text-[clamp(1.65rem,3vw,2.3rem)] leading-tight tracking-tight text-[#29382f] mt-3 mb-4">{title}</h2>
     {children}
-  </p>
-);
+  </section>;
+}
 
-const SectionTitle = ({ children }) => (
-  <h2 className="font-serif text-3xl font-medium mb-6 text-foreground">{children}</h2>
-);
+function Flow({ description }) {
+  const steps = (description || "").split(/\s*→\s*/).map(item => item.trim()).filter(Boolean);
+  if (steps.length < 2) return description ? <p className={copy}>{description}</p> : null;
+  return <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mt-5" aria-label="Étapes du système">
+    {steps.map((step, i) => <li key={i} className="relative min-w-0 rounded-xl border border-[#d9e1d9] bg-[#f3f7f1] px-4 py-4">
+      <span className="block text-[10px] uppercase tracking-wider text-[#7c947f] mb-2">{String(i+1).padStart(2,"0")}</span>
+      <span className="block text-sm leading-5 font-medium text-[#344c3d] break-words">{step}</span>
+    </li>)}
+  </ol>;
+}
 
-const SectionDivider = () => <div className="border-b border-border/15" />;
-
-const SubsectionTitle = ({ children }) => (
-  <h3 className="font-serif text-xl font-medium mb-3 text-foreground">{children}</h3>
-);
-
-const BodyText = ({ children }) => (
-  <p className="text-[15px] text-muted-foreground leading-relaxed">{children}</p>
-);
+function Bullets({ items }) {
+  if (!items?.length) return null;
+  return <ul className="space-y-3">{items.map((item, index) =>
+    <li key={index} className="flex items-start gap-3 text-[14px] md:text-[15px] leading-7 text-[#536059]">
+      <CheckCircle2 size={18} className="shrink-0 mt-1 text-[#648c72]" aria-hidden="true"/>
+      <span>{item}</span>
+    </li>)}</ul>;
+}
 
 export default function ProjectDetail() {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const [result, setResult] = useState(null);
-  const loading = result?.slug !== slug;
-  const project = result?.project;
 
   useEffect(() => {
     let active = true;
-    fetchProjectBySlug(slug).then((data) => {
+    setResult(null);
+    fetchProjectBySlug(slug).then(data => {
       if (active) setResult({ slug, project: data?.published === false ? null : data });
+    }).catch(() => {
+      if (active) setResult({ slug, project: null });
     });
     return () => { active = false; };
   }, [slug]);
 
-  if (loading) {
-    return <><Navbar /><main id="main-content" tabIndex={-1} className="min-h-screen grid place-items-center"><p role="status">Loading project…</p></main><Footer /></>;
-  }
+  const loading = result?.slug !== slug;
+  const project = result?.project;
+  if (loading) return <><Navbar/><main id="main-content" tabIndex={-1} className="min-h-screen grid place-items-center"><p role="status">Chargement du projet…</p></main><Footer/></>;
+  if (!project) return <NotFound/>;
 
-  if (!project) return <NotFound />;
+  const stack = project.stack || project.technologies || [];
+  const lessons = project.learnings || project.lessons || [];
+  const outcomes = project.results || [];
+  const hasVisual = ["event-signal", "nuit-blanche", "job-apply-assistant", "sidel-reporting-commercial", "event-analytics-europe", "elevia"].includes(project.slug);
 
-  const hasFriction = project.observed_problem || project.impact || project.affected_users;
-  const hasSignal = project.key_observation || project.hypothesis;
-  const hasSystem = project.architecture || project.workflows || project.automation_logic || project.pipelines;
-  const hasReduction = project.friction_reduction || project.simplification;
-  const hasTechnical = project.stack || project.infra || project.APIs || project.data_sources || project.technologies;
-  const hasOutcome = project.results || project.learnings || project.lessons;
-  const hasLimits = project.current_limits || project.tradeoffs;
-  const hasFuture = project.next_steps || project.future_vision;
-
-  return (
-    <>
-      <Navbar />
-      <main id="main-content" tabIndex={-1} className="flex-1">
-        {/* Hero Section */}
-        <section className="pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-8 section-gradient-hero">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <button
-                onClick={() => navigate("/projects")}
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Retour aux projets
-              </button>
-
-              <p className="text-accent text-sm font-medium mb-4">
-                {project.period || project.year || new Date().getFullYear()}
-              </p>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl break-words font-medium mb-6 text-foreground">
-                {project.title}
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                {project.description}
-              </p>
-            </motion.div>
+  return <>
+    <Navbar/>
+    <main id="main-content" tabIndex={-1} className="flex-1">
+      <header className="pt-32 md:pt-36 pb-8 px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-[#5d7062] hover:text-[#a1694b] transition-colors mb-9"><ArrowLeft size={16}/> Tous les projets</Link>
+          <div className="grid md:grid-cols-[1fr_auto] items-end gap-5">
+            <div>
+              <p className={label}>{project.period || project.year || "Projet"}</p>
+              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
+              <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
+            </div>
+            {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">Code & documentation <ArrowUpRight size={16}/></a>}
           </div>
-        </section>
+        </div>
+      </header>
 
-        <div className="max-w-5xl mx-auto px-6 md:px-8 -mt-6 relative z-10"><div className="rounded-2xl overflow-hidden shadow-[0_16px_50px_rgba(32,57,43,0.10)]"><ProjectVisual slug={project.slug} /></div></div>
+      {hasVisual && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8">
+        <div className="rounded-[24px] overflow-hidden border border-white/75 shadow-[0_18px_65px_rgba(38,56,46,.10)]"><ProjectVisual slug={project.slug}/></div>
+        <p className="text-xs text-[#81877f] mt-3">Représentation schématique du fonctionnement, pas une capture de données réelles.</p>
+      </div>}
 
-        {/* Content Section */}
-        <section className="py-16 md:py-24 px-6 md:px-8">
-          <div className="max-w-3xl mx-auto space-y-24">
-            {/* Overview */}
-            {project.fullDescription && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <BodyText>{project.fullDescription}</BodyText>
-              </motion.div>
-            )}
-
-            {/* Friction Section */}
-            {hasFriction && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Le problème</SectionLabel>
-                <SectionTitle>Quel était le besoin ?</SectionTitle>
-
-                {project.observed_problem && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Contexte</SubsectionTitle>
-                    <BodyText>{project.observed_problem}</BodyText>
-                  </div>
-                )}
-
-                {project.impact && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Impact</SubsectionTitle>
-                    <BodyText>{project.impact}</BodyText>
-                  </div>
-                )}
-
-                {project.affected_users && (
-                  <div>
-                    <SubsectionTitle>Équipes concernées</SubsectionTitle>
-                    <BodyText>{project.affected_users}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Signal Section */}
-            {hasSignal && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Le signal</SectionLabel>
-                <SectionTitle>Qu'avons-nous observé ?</SectionTitle>
-
-                {project.key_observation && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Observation clé</SubsectionTitle>
-                    <BodyText>{project.key_observation}</BodyText>
-                  </div>
-                )}
-
-                {project.hypothesis && (
-                  <div>
-                    <SubsectionTitle>Hypothèse</SubsectionTitle>
-                    <BodyText>{project.hypothesis}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* System Section */}
-            {hasSystem && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>La solution</SectionLabel>
-                <SectionTitle>Qu'avons-nous construit ?</SectionTitle>
-
-                {project.architecture && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Architecture</SubsectionTitle>
-                    <BodyText>{project.architecture}</BodyText>
-                  </div>
-                )}
-
-                {project.workflows && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Flux</SubsectionTitle>
-                    <BodyText>{project.workflows}</BodyText>
-                  </div>
-                )}
-
-                {project.automation_logic && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Logique d'automatisation</SubsectionTitle>
-                    <BodyText>{project.automation_logic}</BodyText>
-                  </div>
-                )}
-
-                {project.pipelines && (
-                  <div>
-                    <SubsectionTitle>Pipelines</SubsectionTitle>
-                    <BodyText>{project.pipelines}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Reduction Section */}
-            {hasReduction && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Le résultat</SectionLabel>
-                <SectionTitle>Qu'est-ce qui a changé ?</SectionTitle>
-
-                {project.friction_reduction && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Réduction du temps ou de la friction</SubsectionTitle>
-                    <BodyText>{project.friction_reduction}</BodyText>
-                  </div>
-                )}
-
-                {project.simplification && (
-                  <div>
-                    <SubsectionTitle>Simplification</SubsectionTitle>
-                    <BodyText>{project.simplification}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Technical Section */}
-            {hasTechnical && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Technique</SectionLabel>
-                <SectionTitle>Outils et architecture</SectionTitle>
-
-                {(project.stack || project.technologies) && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Stack</SubsectionTitle>
-                    <div className="flex flex-wrap gap-2">
-                      {(project.stack || project.technologies || []).map((tech) => (
-                        <Tag key={tech}>{tech}</Tag>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {project.infra && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Infrastructure</SubsectionTitle>
-                    <BodyText>{project.infra}</BodyText>
-                  </div>
-                )}
-
-                {project.APIs && (
-                  <div className="mb-8">
-                    <SubsectionTitle>APIs</SubsectionTitle>
-                    <BodyText>{project.APIs}</BodyText>
-                  </div>
-                )}
-
-                {project.data_sources && (
-                  <div>
-                    <SubsectionTitle>Sources de données</SubsectionTitle>
-                    <BodyText>{project.data_sources}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Outcome Section */}
-            {hasOutcome && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Livrable</SectionLabel>
-                <SectionTitle>Qu'est-ce qui a été livré ?</SectionTitle>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-8 pb-8 border-b border-border/15">
-                  {project.role && (
-                    <div>
-                      <SectionLabel>Role</SectionLabel>
-                      <BodyText>{project.role}</BodyText>
-                    </div>
-                  )}
-                  {project.outcome && (
-                    <div>
-                      <SectionLabel>Outcome</SectionLabel>
-                      <BodyText>{project.outcome}</BodyText>
-                    </div>
-                  )}
-                </div>
-
-                {project.results && project.results.length > 0 && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Résultats</SubsectionTitle>
-                    <ul className="space-y-3">
-                      {project.results.map((result, idx) => (
-                        <li key={idx} className="text-[15px] text-muted-foreground">
-                          ✓ {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {(project.learnings || project.lessons) && (project.learnings || project.lessons).length > 0 && (
-                  <div>
-                    <SubsectionTitle>Ce que j'en retiens</SubsectionTitle>
-                    <ul className="space-y-3">
-                      {(project.learnings || project.lessons).map((learning, idx) => (
-                        <li key={idx} className="text-[15px] text-muted-foreground">
-                          • {learning}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Limits Section */}
-            {hasLimits && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Limites</SectionLabel>
-                <SectionTitle>Ce qui reste à traiter</SectionTitle>
-
-                {project.current_limits && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Limites actuelles</SubsectionTitle>
-                    <BodyText>{project.current_limits}</BodyText>
-                  </div>
-                )}
-
-                {project.tradeoffs && (
-                  <div>
-                    <SubsectionTitle>Arbitrages</SubsectionTitle>
-                    <BodyText>{project.tradeoffs}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Future Section */}
-            {hasFuture && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Suite possible</SectionLabel>
-                <SectionTitle>Et ensuite ?</SectionTitle>
-
-                {project.next_steps && (
-                  <div className="mb-8">
-                    <SubsectionTitle>Prochaines étapes</SubsectionTitle>
-                    <BodyText>{project.next_steps}</BodyText>
-                  </div>
-                )}
-
-                {project.future_vision && (
-                  <div>
-                    <SubsectionTitle>Vision</SubsectionTitle>
-                    <BodyText>{project.future_vision}</BodyText>
-                  </div>
-                )}
-
-                <div className="mt-8 pt-8">
-                  <SectionDivider />
-                </div>
-              </motion.div>
-            )}
-
-            {/* External Links */}
-            {(project.githubUrl || project.demoUrl) && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <SectionLabel>Ressources</SectionLabel>
-                <div className="flex flex-wrap gap-3">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-border/40 transition-all"
-                    >
-                      Voir sur GitHub →
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-border/40 transition-all"
-                    >
-                      Voir la démo →
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Footer CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="pt-20 border-t border-border/15"
-            >
-              <button
-                onClick={() => navigate("/projects")}
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Retour à tous les projets
-              </button>
-            </motion.div>
+      <section className="px-6 md:px-8 pb-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-3 mb-8">
+            {[
+              ["Contexte", project.affected_users || project.period || "Projet produit"],
+              ["Mon rôle", project.role || "Conception et réalisation"],
+              ["Livrable", project.outcome || project.simplification || "Solution documentée"]
+            ].map(([title, text]) => <div key={title} className="rounded-2xl border border-[#e0e2d9] bg-[#f9faf6]/90 p-5"><p className={label}>{title}</p><p className="text-sm leading-6 text-[#354439] mt-3">{text}</p></div>)}
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+
+          <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(290px,.75fr)] gap-5 items-start">
+            <div className="space-y-5">
+              <Panel eyebrow="01 / Le point de départ" title="Comprendre avant de construire">
+                {project.fullDescription && <p className={copy}>{project.fullDescription}</p>}
+                {project.observed_problem && <div className="mt-5 rounded-xl bg-[#f7f2eb] p-5 border-l-[3px] border-[#b98364]"><p className="text-xs font-semibold text-[#986448] uppercase tracking-wider mb-2">La difficulté</p><p className={copy}>{project.observed_problem}</p></div>}
+                {project.impact && <p className={copy + " mt-5"}><strong className="font-medium text-[#34453a]">Ce que l'on cherchait à améliorer. </strong>{project.impact}</p>}
+              </Panel>
+              {(project.architecture || project.workflows || project.pipelines) && <Panel eyebrow="02 / Le système" title="Du besoin au fonctionnement">
+                {project.architecture && <p className={copy}>{project.architecture}</p>}
+                <Flow description={project.workflows || project.pipelines}/>
+                {project.automation_logic && <p className={copy + " mt-5"}><strong className="font-medium text-[#34453a]">Logique de traitement. </strong>{project.automation_logic}</p>}
+              </Panel>}
+              {(outcomes.length > 0 || project.friction_reduction) && <Panel eyebrow="03 / Ce qui est vérifiable" title="Livrable et résultats">
+                {project.friction_reduction && <p className={copy + " mb-5"}>{project.friction_reduction}</p>}
+                <Bullets items={outcomes}/>
+                <p className="text-xs text-[#80877f] mt-5">Les éléments ci-dessus décrivent les réalisations documentées, pas des performances extrapolées.</p>
+              </Panel>}
+              {(project.current_limits || project.tradeoffs || project.next_steps) && <Panel eyebrow="04 / Transparence" title="Ce qui reste ouvert">
+                {project.current_limits && <p className={copy}>{project.current_limits}</p>}
+                {project.tradeoffs && <p className={copy + " mt-3"}>{project.tradeoffs}</p>}
+                {project.next_steps && <p className={copy + " mt-3"}>{project.next_steps}</p>}
+              </Panel>}
+            </div>
+            <aside className="space-y-5 lg:sticky lg:top-28">
+              <div className="rounded-[24px] bg-[#2e4036] text-[#f4f1e8] p-6 md:p-7">
+                <div className="flex items-center gap-2 text-[#a7c7ac] text-[11px] tracking-[.16em] uppercase"><GitBranch size={15}/> Les choix derrière le projet</div>
+                <h2 className="font-serif text-2xl md:text-3xl leading-tight mt-5 mb-4">Construire, c'est aussi arbitrer.</h2>
+                {project.key_observation && <p className="text-sm leading-7 text-[#d7e2d8]">{project.key_observation}</p>}
+                {project.hypothesis && <p className="text-sm leading-7 text-[#d7e2d8] mt-4">{project.hypothesis}</p>}
+              </div>
+              {stack.length > 0 && <div className="rounded-[24px] bg-white/70 border border-[#dedfd6] p-6">
+                <div className="flex gap-2 items-center text-[#9b6a4c]"><ShieldCheck size={16}/><p className={label}>Environnement technique</p></div>
+                <div className="flex flex-wrap gap-2 mt-5">{stack.map(t => <span key={t} className="rounded-full bg-[#f0f2ec] border border-[#e2e5dc] px-3 py-2 text-xs text-[#43564a]">{t}</span>)}</div>
+                {project.data_sources && <p className="text-xs text-[#66736a] leading-6 mt-5">{project.data_sources}</p>}
+              </div>}
+              {lessons.length > 0 && <div className="rounded-[24px] bg-[#f5ede3] border border-[#e7d9c7] p-6">
+                <div className="flex items-center gap-2 text-[#9b6a4c]"><Lightbulb size={17}/><p className={label}>Ce que j'en retiens</p></div>
+                <ul className="mt-4 space-y-3">{lessons.map((lesson, i) => <li className="text-sm leading-6 text-[#6c6257]" key={i}>{lesson}</li>)}</ul>
+              </div>}
+            </aside>
+          </div>
+          <div className="mt-10 border-t border-[#d6dcd1] pt-8 flex flex-wrap items-center justify-between gap-5">
+            <div><p className={label}>Continuer l'exploration</p><h2 className="font-serif text-2xl md:text-3xl text-[#2e4036] mt-2">D'autres problèmes, d'autres réponses.</h2></div>
+            <div className="flex flex-wrap gap-3"><Link to="/projects" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[#aab4a8] text-sm text-[#2e4036] hover:bg-white">Tous les projets <ArrowRight size={16}/></Link><Link to="/#contact" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#2e4036] text-sm text-white">Échanger <ArrowUpRight size={16}/></Link></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer/>
+  </>;
 }

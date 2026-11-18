@@ -10,7 +10,7 @@ const points=[
 ];
 function ConnectedVisual(){
  const reduced=useReducedMotion();
- return <div className="relative w-full h-[380px] lg:h-[470px] isolate" aria-label="Cartographie des domaines Data, produit et automatisation">
+ return <div className="relative w-full h-[310px] sm:h-[380px] lg:h-[470px] isolate" aria-label="Cartographie des domaines Data, produit et automatisation">
    <div className="absolute inset-[8%] rounded-full blur-3xl opacity-60" style={{background:"radial-gradient(circle,#e5c6a7 0%,#d9e8df 48%,transparent 72%)"}}/>
    <svg viewBox="0 0 500 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
      <circle cx="250" cy="250" r="176" fill="none" stroke="#b6b5a8" strokeDasharray="2 8" strokeWidth="1"/>
@@ -18,10 +18,10 @@ function ConnectedVisual(){
      <path d="M100 108 L250 250 L408 82 M250 250 L80 408 M250 250 L420 395" fill="none" stroke="#c1b0a0" strokeWidth="1.5"/>
      <circle cx="250" cy="250" r="5" fill="#ad704e"/>
    </svg>
-   <motion.div animate={reduced?{}:{y:[0,-8,0]}} transition={{duration:8,repeat:Infinity,ease:"easeInOut"}} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[205px] h-[205px] lg:w-[245px] lg:h-[245px] rounded-[35%] rotate-[-12deg] border border-white/80 bg-white/45 backdrop-blur-xl shadow-[0_30px_90px_#6d6a5529] flex items-center justify-center">
-     <div className="rotate-[12deg] text-center"><span className="block text-[10px] uppercase tracking-[.23em] text-[#a1694b] mb-3">Made by Akim</span><span className="font-serif text-4xl lg:text-5xl text-[#333a34] leading-none">Idées<br/><em>→ impact.</em></span><span className="block text-xs text-[#6d756d] mt-4">Business × Data × Digital</span></div>
+   <motion.div animate={reduced?{}:{y:[0,-8,0]}} transition={{duration:8,repeat:Infinity,ease:"easeInOut"}} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] sm:w-[205px] sm:h-[205px] lg:w-[245px] lg:h-[245px] rounded-[35%] rotate-[-12deg] border border-white/80 bg-white/45 backdrop-blur-xl shadow-[0_30px_90px_#6d6a5529] flex items-center justify-center">
+     <div className="rotate-[12deg] text-center"><span className="block text-[10px] uppercase tracking-[.23em] text-[#a1694b] mb-3">Made by Akim</span><span className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#333a34] leading-none">Idées<br/><em>→ impact.</em></span><span className="block text-xs text-[#6d756d] mt-4">Business × Data × Digital</span></div>
    </motion.div>
-   {points.map(({icon:Icon,label,x,tone},i)=><motion.div key={label} animate={reduced?{}:{y:[0,i%2?-7:7,0]}} transition={{duration:5+i,repeat:Infinity,ease:"easeInOut"}} className={`absolute ${x} z-10 flex items-center gap-2 rounded-2xl border border-white/80 bg-white/65 backdrop-blur-xl px-3 py-3 lg:px-4 shadow-[0_12px_32px_#44443314]`}><Icon size={17} className={tone}/><span className="text-xs font-medium text-[#455047]">{label}</span></motion.div>)}
+   {points.map(({icon:Icon,label,x,tone},i)=><motion.div key={label} animate={reduced?{}:{y:[0,i%2?-7:7,0]}} transition={{duration:5+i,repeat:Infinity,ease:"easeInOut"}} className={`absolute ${x} z-10 flex items-center gap-2 rounded-2xl border border-white/80 bg-white/65 backdrop-blur-xl px-2.5 py-2.5 sm:px-3 sm:py-3 lg:px-4 shadow-[0_12px_32px_#44443314]`}><Icon size={17} className={tone}/><span className="text-xs font-medium text-[#455047]">{label}</span></motion.div>)}
    <Link to="/cartographie" className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-[#8f5d42] border-b border-[#8f5d42]/40 pb-1 hover:border-[#8f5d42]">Explorer la cartographie ↗</Link>
  </div>
 }

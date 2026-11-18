@@ -1,4 +1,4 @@
-import { Activity, Clock3, Database, ExternalLink, GitBranch, Server, ShieldCheck } from "lucide-react";
+import { Activity, Clock3, Database, GitBranch, Server, ShieldCheck } from "lucide-react";
 
 const details = {
   "event-signal": {

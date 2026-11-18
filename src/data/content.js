@@ -10,9 +10,9 @@ export const siteContent = {
   },
 
   hero: {
-    headline: "Je ne suis pas uniquement",
-    headlineAccent: "Data Analyst.",
-    body: "Je relie le business, la donnée et l'automatisation. Deux ans chez Sidel à transformer des données commerciales en dashboards et recommandations, puis des produits Data/IA construits de bout en bout avec MadeByAkim.",
+    headline: "Je relie les idées, les gens",
+    headlineAccent: "et la technologie.",
+    body: "Je transforme des besoins concrets en outils utiles : dashboards, automatisations, produits Data et expériences digitales. De l’analyse du problème à la mise en œuvre, je construis ce qui permet de passer à l’action.",
     status: [
       { label: "Paris · Île-de-France", type: "map" },
       { label: "Disponible immédiatement", type: "dot" },
@@ -24,12 +24,12 @@ export const siteContent = {
     orbCards: [
       { text: "6+ dashboards Power BI", position: "top-20 left-0" },
       { text: "5–6 h → 1 h / semaine", position: "bottom-24 right-8" },
-      { text: "45 min → 5 min", position: "top-40 right-0" },
+      { text: "Du besoin au produit", position: "top-40 right-0" },
     ],
     proof: [
       { value: "6+", label: "dashboards Power BI déployés" },
-      { value: "80 %", label: "de temps de traitement économisé" },
-      { value: "45 → 5", label: "minutes sur un workflow automatisé" },
+      { value: "3", label: "produits mis en lumière" },
+      { value: "Data +", label: "produit, automatisation et création" },
     ],
   },
 
@@ -88,8 +88,8 @@ export const siteContent = {
   sections: {
     work: {
       eyebrow: "Expériences et produits",
-      heading: "Ce que j'ai rendu actionnable.",
-      intro: "Dashboards commerciaux, analytics événementiel, automatisation et produits Data/IA : des sujets réels, des résultats vérifiables et le détail de ce que j'ai effectivement construit.",
+      heading: "Des idées devenues des systèmes.",
+      intro: "Trois projets au croisement de la donnée, du produit et de la création. Chaque réalisation raconte un problème, une solution, les choix techniques et ce qui reste à améliorer.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },

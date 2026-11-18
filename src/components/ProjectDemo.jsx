@@ -114,7 +114,7 @@ function JobDemo(){
 }
 export default function ProjectDemo({slug}){
  if(slug!=="event-signal"&&slug!=="job-apply-assistant")return null;
- return <section aria-label="Démonstration interactive du projet" className="my-10">
+ return <section id="interactive-demo" aria-label="Démonstration interactive du projet" className="my-10 scroll-mt-28">
   <p className="text-[11px] uppercase tracking-[.17em] text-[#9f6a4e] font-semibold">Le produit en action</p>
   <h2 className="font-serif text-3xl sm:text-4xl text-[#2e4538] tracking-tight mt-3">Explorer le fonctionnement.</h2>
   <p className="max-w-3xl text-sm leading-7 text-[#6d7e70] mt-3 mb-6">Reconstitution interactive des écrans observés dans l'application. Les chiffres et les entreprises sont fictifs pour ne pas exposer les données privées. Ce n'est pas une capture du produit connecté.</p>

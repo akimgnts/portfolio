@@ -97,8 +97,8 @@ export const siteContent = {
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },
     contact: {
       eyebrow: "Échangeons",
-      heading: "Un sujet Data, métier ou automatisation ?",
-      subheading: "Décris le contexte, le problème à résoudre ou le poste que tu envisages. Je te répondrai avec un premier retour concret.",
+      heading: "On peut en parler.",
+      subheading: "Un poste, un projet ou une idée à confronter à la réalité ? Dis-moi ce que tu cherches à construire ou à résoudre.",
       projectTypeLabel: "Le sujet concerne…",
       responseTimeLabel: "Disponibilité",
       responseTime: "Basé au Havre · Mobile en Île-de-France · Ouvert aux opportunités CDI",

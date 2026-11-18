@@ -3,6 +3,7 @@ export const siteContent = {
     brand: "Akim Guentas",
     links: [
       { label: "Projets", href: "#work" },
+      { label: "Cartographie", href: "cartographie" },
       { label: "Parcours", href: "#about" },
       { label: "Méthode", href: "#approach" },
     ],

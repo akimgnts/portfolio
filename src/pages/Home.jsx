@@ -3,7 +3,6 @@ import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import About from "../components/About";
 import Approach from "../components/Approach";
-import BehindSite from "../components/BehindSite";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
@@ -16,7 +15,6 @@ export default function Home() {
         <Projects />
         <About />
         <Approach />
-        <BehindSite />
         <Contact />
       </main>
       <Footer />

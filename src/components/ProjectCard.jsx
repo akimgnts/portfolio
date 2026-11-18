@@ -77,49 +77,13 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
           )}
         </div>
 
-        {/* Friction + Observed Problem (key signal) */}
-        {(project.impact || project.observed_problem) && (
-          <div className="mb-6 pb-6 border-b border-border/15">
-            {project.impact && (
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-1">
-                  Impact métier
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                  {project.impact}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Role + Outcome (what changed) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-5 border-t border-b border-border/15">
-          {project.role && (
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-2">
-                Rôle
-              </p>
-              <p className="text-[15px] text-muted-foreground leading-relaxed">
-                {project.role}
-              </p>
-            </div>
-          )}
-          {project.friction_reduction && (
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium block mb-2">
-                Résultat
-              </p>
-              <p className="text-[15px] text-muted-foreground leading-relaxed">
-                {project.friction_reduction}
-              </p>
-            </div>
-          )}
+        <div className="flex items-center gap-2 text-xs text-muted-foreground border-t border-border/40 pt-4">
+          <span className="font-medium text-foreground">{project.role || "Projet personnel"}</span>
         </div>
 
         {/* Stack tags (minimal) */}
         {project.stack && project.stack.length > 0 && (
-          <div className="pt-5 flex flex-wrap gap-2">
+          <div className="pt-4 flex flex-wrap gap-2">
             {project.stack.slice(0, 3).map((tech) => (
               <Tag key={tech}>{tech}</Tag>
             ))}

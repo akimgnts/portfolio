@@ -3,10 +3,9 @@ export const siteContent = {
     brand: "Akim Guentas",
     links: [
       { label: "Projets", href: "#work" },
+      { label: "CV", href: "cv" },
       { label: "Cartographie", href: "cartographie" },
-      { label: "CV interactif", href: "cv" },
       { label: "Parcours", href: "#about" },
-      
     ],
     cta: { label: "Me contacter", href: "#contact" },
   },
@@ -90,8 +89,8 @@ export const siteContent = {
   sections: {
     work: {
       eyebrow: "Expériences et produits",
-      heading: "Des problèmes réels. Des systèmes construits.",
-      intro: "De Sidel à mes produits indépendants, je montre les problèmes rencontrés, les décisions prises, les architectures construites et les limites encore ouvertes. Pas de démonstration sans contexte.",
+      heading: "Trois projets pour comprendre mon travail.",
+      intro: "Un cas réel en entreprise, puis deux produits indépendants. Pour chacun : le besoin, mon rôle, mes choix et ce qui fonctionne réellement.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },
@@ -112,7 +111,6 @@ export const siteContent = {
       { label: "Email", href: "mailto:akimguentas13@gmail.com" },
       { label: "LinkedIn", href: "https://linkedin.com/in/akimguentas" },
       { label: "GitHub", href: "https://github.com/akimgnts" },
-      { label: "Site", href: "https://madebyakim.com" },
     ],
   },
 

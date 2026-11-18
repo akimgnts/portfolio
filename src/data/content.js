@@ -6,7 +6,7 @@ export const siteContent = {
       { label: "Cartographie", href: "cartographie" },
       { label: "CV interactif", href: "cv" },
       { label: "Parcours", href: "#about" },
-      { label: "Méthode", href: "#approach" },
+      
     ],
     cta: { label: "Me contacter", href: "#contact" },
   },
@@ -101,7 +101,7 @@ export const siteContent = {
       subheading: "Décris le contexte, le problème à résoudre ou le poste que tu envisages. Je te répondrai avec un premier retour concret.",
       projectTypeLabel: "Le sujet concerne…",
       responseTimeLabel: "Disponibilité",
-      responseTime: "CDI · Paris / Puteaux · mobilité immédiate",
+      responseTime: "Basé au Havre · Mobile en Île-de-France · Ouvert aux opportunités CDI",
       socialLabel: "Retrouve-moi",
     },
   },

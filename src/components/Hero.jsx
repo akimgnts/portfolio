@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ArrowDownRight, Database, Workflow, Sparkles, Code2, BriefcaseBusiness } from "lucide-react";
-import { siteContent } from "../data/content";
 
 const points=[
   {icon:Database,label:"Data & BI",x:"left-[3%] top-[15%]",tone:"text-[#5f806e]"},
@@ -38,7 +37,7 @@ export default function Hero(){
       <Link to="/projects" className="inline-flex items-center gap-3 rounded-full bg-[#2e4036] text-white px-6 py-3.5 text-sm font-medium hover:bg-[#405a49] transition-colors">Explorer mes réalisations <ArrowUpRight size={17}/></Link>
       <Link to="/cartographie" className="inline-flex items-center gap-3 rounded-full border border-[#b9bcb1] bg-white/45 backdrop-blur-md text-[#354138] px-6 py-3.5 text-sm font-medium hover:bg-white/80 transition-colors">Mes compétences <ArrowDownRight size={17}/></Link>
     </div>
-    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-9 pt-5 border-t border-[#d9d9cf] text-xs text-[#737b72]"><span>Data & Business Analyst</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Paris · Île-de-France</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Ouvert aux opportunités</span></div>
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-9 pt-5 border-t border-[#d9d9cf] text-xs text-[#737b72]"><span>Data & Business Analyst</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Le Havre · Mobile à Paris</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Disponible pour un CDI</span></div>
    </motion.div>
    <ConnectedVisual/>
   </div>

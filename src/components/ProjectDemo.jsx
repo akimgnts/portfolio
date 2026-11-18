@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, CircleHelp, FileText, Mail, Search, ShieldCheck, Ticket, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle2, CircleHelp, FileText, Mail, Search, ShieldCheck } from "lucide-react";
 
 // Public, privacy-safe recreations of verified application flows. These are not screenshots.
 const jobs=[

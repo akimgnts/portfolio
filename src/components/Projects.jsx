@@ -28,17 +28,17 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="work" className="py-20 md:py-28 px-6 md:px-8">
+    <section id="work" className="py-14 md:py-20 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           eyebrow={siteContent.sections.work.eyebrow}
           heading={siteContent.sections.work.heading}
-          className="mb-12"
+          className="mb-7"
         />
 
         {siteContent.sections.work.intro && (
           <motion.p
-            className="text-[15px] text-muted-foreground leading-relaxed mb-20 max-w-3xl"
+            className="text-[15px] text-muted-foreground leading-relaxed mb-9 max-w-3xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

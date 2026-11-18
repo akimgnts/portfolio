@@ -2,7 +2,7 @@ import { Database, ChartNoAxesCombined, FileImage, FileText, Bot, ShieldCheck, A
 function Pill({children,dark=false}){return <span className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-semibold border shadow-sm ${dark?"border-white/15 bg-white/10 text-white":"border-white/90 bg-white/75 text-[#384a40]"}`}>{children}</span>}
 function Event(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#203d33] text-[#e6f0e6] overflow-hidden">
  <div className="absolute -right-12 -top-16 size-64 rounded-full bg-[#72b28b]/15 blur-3xl"/>
- <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#a6cbb2]"><span>01 / Event intelligence</span><span>Bronze → Silver → Gold</span></div>
+ <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#a6cbb2]"><span>Event intelligence</span><span>Bronze → Silver → Gold</span></div>
  <div className="relative mt-7 grid grid-cols-[1fr_auto_1fr_auto_1fr] gap-2 items-center">
  <div className="space-y-2"><Pill dark><CalendarDays size={13}/> Shotgun</Pill><Pill dark>Meta Ads</Pill><Pill dark>Instagram</Pill></div>
  <ArrowRight size={16} className="text-[#9ac4a9]"/>
@@ -13,7 +13,7 @@ function Event(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#2
  </div>}
 function Nuit(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#f3e7d5] text-[#594737] overflow-hidden">
  <div className="absolute -right-12 -bottom-20 size-60 bg-[#d5ad80]/25 rounded-full blur-3xl"/>
- <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#997452]"><span>02 / Content pipeline</span><span>Sheets → PNG</span></div>
+ <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#997452]"><span>Content pipeline</span><span>Sheets → PNG</span></div>
  <div className="relative mt-7 flex items-center justify-between gap-1 sm:gap-2">
  <div className="rounded-2xl bg-white/75 border border-white p-2 sm:p-3 shadow-sm"><Table2 size={22} className="text-[#578768]"/><div className="mt-3 space-y-1">{[0,1,2].map(i=><div key={i} className="flex gap-1">{[0,1,2].map(j=><span key={j} className="w-3 sm:w-5 h-2 rounded-[2px] bg-[#b7d3bf]"/>)}</div>)}</div><span className="block text-[10px] mt-2">Google Sheets</span></div>
  <ArrowRight size={17} className="shrink-0"/>
@@ -23,7 +23,7 @@ function Nuit(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#f3
  </div><p className="relative text-[11px] text-[#997452] mt-6">Automatiser la production sans changer les habitudes de l'équipe.</p></div>}
 function Job(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#e5e8e8] text-[#37434a] overflow-hidden">
  <div className="absolute -right-12 -top-16 size-60 bg-[#b2c9c9]/45 rounded-full blur-3xl"/>
- <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#6d8086]"><span>03 / AI orchestration</span><span>Human in the loop</span></div>
+ <div className="relative flex justify-between text-[10px] tracking-[.16em] uppercase text-[#6d8086]"><span>AI orchestration</span><span>Human in the loop</span></div>
  <div className="relative mt-8 flex flex-wrap gap-2 items-center justify-center"><Pill><FileText size={13}/> Offre</Pill><ArrowRight size={14}/><Pill><Bot size={13}/> Analyse</Pill><ArrowRight size={14}/><Pill>Matching</Pill><ArrowRight size={14}/><Pill><ShieldCheck size={13}/> Contrôle</Pill></div>
  <div className="relative mx-auto mt-6 w-[80%] rounded-2xl border border-white/90 bg-white/60 backdrop-blur-lg p-4 shadow-[0_14px_40px_#53626a20]"><div className="flex justify-between items-center"><span className="text-[10px] uppercase tracking-wider text-[#6d8086]">Sorties générées</span><Database size={13}/></div><div className="grid grid-cols-3 gap-2 mt-3">{["CV","Lettre","Mail"].map(x=><div key={x} className="rounded-lg border border-[#d6dfe0] bg-white/75 py-3 text-center text-xs font-semibold">{x}</div>)}</div></div>
  <p className="relative text-[11px] text-[#6d8086] mt-5">Analyser, valider, générer — sans inventer le parcours.</p></div>}
@@ -32,7 +32,7 @@ function Sidel(){
  const bars=[38,66,46,78,58,90,73];
  return <div className="relative overflow-hidden min-h-[270px] p-5 sm:p-7 bg-[#f0eee9] text-[#36433f]">
   <div className="absolute -right-16 -top-20 w-72 h-72 bg-[#cfa6a7]/20 blur-3xl rounded-full" aria-hidden="true"/>
-  <div className="relative flex justify-between gap-3 text-[10px] uppercase tracking-[.15em] text-[#936667]"><span>01 / Business intelligence</span><span>CRM → décision</span></div>
+  <div className="relative flex justify-between gap-3 text-[10px] uppercase tracking-[.15em] text-[#936667]"><span>Business intelligence</span><span>CRM → décision</span></div>
   <div className="relative mt-5 grid grid-cols-[.65fr_1.35fr] gap-3 items-stretch">
    <div className="rounded-xl border border-[#ddd3cb] bg-white/75 p-3 flex flex-col gap-3">
     <div className="flex items-center gap-2 text-[#9b6166]"><BriefcaseBusiness size={15}/><span className="text-[10px] font-semibold">CRM</span></div>
@@ -50,7 +50,7 @@ function Sidel(){
 function Europe(){
  return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#e9f0f3] text-[#34495a] overflow-hidden">
   <div className="absolute -right-16 -top-12 w-72 h-72 bg-[#adc9d8]/40 blur-3xl rounded-full" aria-hidden="true"/>
-  <div className="relative flex items-center justify-between text-[10px] tracking-[.16em] uppercase text-[#5b8295]"><span>02 / Event analytics</span><span>Europe · salons</span></div>
+  <div className="relative flex items-center justify-between text-[10px] tracking-[.16em] uppercase text-[#5b8295]"><span>Event analytics</span><span>Europe · salons</span></div>
   <div className="relative mt-5 grid grid-cols-1 sm:grid-cols-[1fr_.55fr] gap-3">
    <div className="rounded-2xl bg-white/75 border border-white p-4 sm:p-5">
     <p className="text-[10px] uppercase tracking-wider text-[#688c9f] mb-4">Du contact au suivi</p>
@@ -65,7 +65,7 @@ function Europe(){
 function Elevia(){
  return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#292b39] text-[#f4f0ee] overflow-hidden">
   <div className="absolute -right-16 -top-20 w-72 h-72 bg-[#957ab7]/20 blur-3xl rounded-full" aria-hidden="true"/>
-  <div className="relative flex justify-between gap-3 uppercase tracking-[.15em] text-[10px] text-[#c9b5df]"><span>03 / Semantic matching</span><span>ESCO · Data / IA</span></div>
+  <div className="relative flex justify-between gap-3 uppercase tracking-[.15em] text-[10px] text-[#c9b5df]"><span>Semantic matching</span><span>ESCO · Data / IA</span></div>
   <div className="relative mt-6 grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-4 items-center">
    <div className="rounded-2xl border border-[#a3a2b7]/30 bg-white/[.08] p-3 sm:p-4 min-w-0"><div className="flex items-center gap-2"><Users size={17} className="text-[#d0b2e5]"/><span className="text-[11px] font-semibold">Profil</span></div><div className="mt-4 space-y-2">{["Compétences","Expérience","Contexte"].map(x=><div key={x} className="rounded-lg border border-white/10 px-2 sm:px-3 py-2 bg-white/[.06] text-[10px] text-[#e4dbe9]">{x}</div>)}</div></div>
    <div className="flex flex-col items-center gap-2"><Network size={20} className="text-[#dbb6d8]"/><span className="w-px h-10 bg-[#ad91bf]/50"/><Target size={20} className="text-[#dbb6d8]"/></div>
@@ -77,7 +77,7 @@ function Elevia(){
 function Skillmap(){
  return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#e9f0e9] text-[#344c40] overflow-hidden">
   <div className="absolute -right-20 -top-20 size-72 rounded-full bg-[#b9d4b7]/35 blur-3xl" aria-hidden="true"/>
-  <div className="relative flex items-center justify-between gap-2 text-[10px] uppercase tracking-[.15em] text-[#678a6c]"><span>07 / Market intelligence</span><span>Snapshot → API</span></div>
+  <div className="relative flex items-center justify-between gap-2 text-[10px] uppercase tracking-[.15em] text-[#678a6c]"><span>Market intelligence</span><span>Snapshot → API</span></div>
   <div className="relative grid grid-cols-[1fr_.72fr] gap-3 mt-6">
    <div className="rounded-2xl border border-[#d5e0d4] bg-white/80 p-4 shadow-[0_15px_30px_#375e4020]">
     <div className="flex items-center gap-2 text-[#557f61]"><Network size={16}/><span className="text-[11px] font-semibold">Explorer les compétences</span></div>
@@ -89,13 +89,13 @@ function Skillmap(){
     {["/skills","/offers","/insights","/workflows"].map(s=><div key={s} className="flex gap-2 items-center rounded-lg bg-white/75 border border-[#e1e8dd] px-2 py-2 text-[10px]"><span className="size-1.5 bg-[#83aa8c] rounded-full"/><span className="truncate">{s}</span></div>)}
    </div>
   </div>
-  <p className="relative mt-4 text-[11px] text-[#708c75]">Données agrégées · workflow de démonstration clairement identifié.</p>
+  <p className="relative mt-4 text-[11px] text-[#708c75]">Données agrégées · éléments de démonstration identifiés.</p>
  </div>;
 }
 function Csg(){
  return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#e3edf0] text-[#39525f] overflow-hidden">
   <div className="absolute -right-14 -top-20 size-72 bg-[#b5d8e1]/40 rounded-full blur-3xl" aria-hidden="true"/>
-  <div className="relative flex justify-between gap-2 uppercase tracking-[.15em] text-[10px] text-[#668b9a]"><span>08 / Knowledge system</span><span>Documents → réponse</span></div>
+  <div className="relative flex justify-between gap-2 uppercase tracking-[.15em] text-[10px] text-[#668b9a]"><span>Knowledge system</span><span>Documents → réponse</span></div>
   <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
    <span className="rounded-xl border border-white bg-white/80 px-3 py-3 text-[11px] flex gap-2 items-center"><FileText size={15}/> PDF / Web</span>
    <ArrowRight size={15} className="text-[#7295a2]"/>
@@ -112,7 +112,7 @@ function Csg(){
 function YevaSite(){
  return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#101011] text-[#f2ede5] overflow-hidden">
   <div className="absolute -right-8 -top-24 w-72 h-72 rounded-full bg-[#ef492d]/15 blur-3xl" aria-hidden="true"/>
-  <div className="relative flex justify-between gap-2 text-[10px] uppercase tracking-[.17em] text-[#a9aaa1]"><span>09 / Culture & digital</span><span>Site collectif</span></div>
+  <div className="relative flex justify-between gap-2 text-[10px] uppercase tracking-[.17em] text-[#a9aaa1]"><span>Culture & digital</span><span>Site collectif</span></div>
   <div className="relative mt-4 grid grid-cols-[1.1fr_.9fr] gap-3 items-stretch">
    <div className="border border-white/10 rounded-xl p-4 sm:p-5 min-h-[165px] flex flex-col justify-between bg-[#1d1d1d]">
     <div className="flex justify-between items-start"><span className="text-[9px] uppercase tracking-[.2em]">Musique · Création · Rencontres</span><span className="size-2 rounded-full bg-[#ef492d]"/></div>

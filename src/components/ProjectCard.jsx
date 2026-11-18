@@ -11,7 +11,7 @@ const MotionLink = motion.create(Link);
  * Used on: homepage, /projects gallery, admin, related projects, anywhere projects are listed
  * Single source of truth for project card design
  */
-export function ProjectCard({ project, index = 0, variant = "default" }) {
+export function ProjectCard({ project, variant = "default" }) {
   const isLink = variant !== "admin";
   const Component = isLink ? MotionLink : motion.div;
 

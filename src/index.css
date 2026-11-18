@@ -113,3 +113,29 @@
     background: linear-gradient(180deg, hsl(36,30%,97%) 0%, hsl(30,40%,94%) 100%);
   }
 }
+
+
+/* Print only the recruiter's CV, not the interactive controls. */
+@media print {
+  @page { size: A4; margin: 11mm; }
+  html { scroll-behavior: auto !important; }
+  body, #root, main { background: white !important; color: #18271d !important; min-height: 0 !important; }
+  nav, footer, .no-print { display: none !important; }
+  .cv-paper {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .cv-paper section { margin-top: 13px !important; break-inside: avoid; }
+  .cv-paper section p, .cv-paper section li { line-height: 1.35 !important; }
+  .cv-paper section h3 { font-size: 15px !important; }
+  .cv-paper section a { color: inherit !important; text-decoration: none !important; }
+  .cv-paper section .grid { gap: 6px !important; }
+  .cv-paper section .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
+  .cv-paper .text-\[15px\] { font-size: 12px !important; }
+  main { padding: 0 !important; }
+}

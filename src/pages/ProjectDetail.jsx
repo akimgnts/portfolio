@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NotFound from "./NotFound";
 import ProjectVisual from "../components/ProjectVisual";
+import ProjectDemo from "../components/ProjectDemo";
 import { fetchProjectBySlug } from "../services/projectService";
 
 const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
@@ -61,7 +62,7 @@ export default function ProjectDetail() {
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];
   const outcomes = project.results || [];
-  const hasVisual = ["event-signal", "nuit-blanche", "job-apply-assistant", "sidel-reporting-commercial", "event-analytics-europe", "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
+  const hasVisual = ["nuit-blanche", "sidel-reporting-commercial", "event-analytics-europe", "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
 
   return <>
     <Navbar/>
@@ -75,10 +76,13 @@ export default function ProjectDetail() {
               <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
               <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
             </div>
-            {(project.githubUrl || project.demoUrl) && <a href={project.demoUrl || project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">{project.demoUrl ? "Voir le site" : "Code & documentation"} <ArrowUpRight size={16}/></a>}
+            <div className="flex flex-wrap gap-2 items-center">{(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <a href="#interactive-demo" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 border border-[#8ea996] text-[#34533d] text-sm font-semibold hover:bg-[#edf5ec] transition-colors">Tester une démo <ArrowRight size={16}/></a>}
+            {(project.githubUrl || project.demoUrl) && <a href={project.demoUrl || project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">{project.demoUrl ? "Voir le site" : "Code & documentation"} <ArrowUpRight size={16}/></a>}</div>
           </div>
         </div>
       </header>
+
+      {(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/></div>}
 
       {hasVisual && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8">
         <div className="rounded-[24px] overflow-hidden border border-white/75 shadow-[0_18px_65px_rgba(38,56,46,.10)]"><ProjectVisual slug={project.slug}/></div>

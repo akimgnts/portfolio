@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 import { projects } from "../data/projects";
 
 const angles=[
- {id:"data",title:"Data Analyst / BI",summary:"Je donne une forme exploitable aux données métier : collecte, fiabilisation, analyse et restitution pour aider les équipes à décider.",skills:["Power BI","DAX","Power Query","SQL","Excel","Python","PostgreSQL"],ids:["sidel-reporting-commercial","event-analytics-europe","event-signal","elevia"]},
- {id:"automation",title:"Automatisation / IA",summary:"Je construis des systèmes qui relient des sources, des règles de traitement et des actions concrètes, avec des contrôles et une validation humaine quand elle compte.",skills:["Python","FastAPI","API REST","PostgreSQL","n8n","Make","Apps Script","OpenAI"],ids:["job-apply-assistant","nuit-blanche","elevia","event-signal"]},
+ {id:"data",title:"Data & Business Analyst",summary:"Je donne une forme exploitable aux données métier : collecte, fiabilisation, analyse et restitution pour aider les équipes à décider.",skills:["Power BI","DAX","Power Query","SQL","Excel","Python","PostgreSQL"],ids:["sidel-reporting-commercial","event-analytics-europe","event-signal","elevia"]},
+ {id:"automation",title:"Automatisation / IA",summary:"Je construis des systèmes qui relient des sources, des règles de traitement et des actions concrètes, avec des contrôles et une validation humaine quand elle compte.",skills:["Python","FastAPI","API REST","PostgreSQL","Apps Script","OpenAI"],ids:["job-apply-assistant","nuit-blanche","elevia","event-signal"]},
  {id:"product",title:"Business Analyst / Produit",summary:"Je fais le lien entre une question métier et une solution utilisable : écouter les besoins, structurer, prototyper et apprendre des usages.",skills:["Analyse des besoins","Power BI","SQL","Python","FastAPI","React","Next.js","Gestion de projet"],ids:["sidel-reporting-commercial","event-signal","job-apply-assistant","nuit-blanche"]}
 ];
 const experience=[
@@ -25,7 +25,11 @@ export default function InteractiveCV(){
  const [copied,setCopied]=useState(false);
  const chosen=angles.find(x=>x.id===active);
  const related=useMemo(()=>chosen.ids.map(id=>projects.find(p=>p.slug===id)).filter(Boolean),[chosen]);
- const matched=chosen.skills.filter(t=>offer.toLocaleLowerCase("fr").includes(t.toLocaleLowerCase("fr")));
+ const glossary=["Power BI","SQL","Python","Power Query","DAX","PostgreSQL","Excel","FastAPI","OpenAI","Snowflake","dbt","Databricks","Microsoft Fabric","Tableau","Looker","Airflow","Spark","React","Next.js","n8n","Make","Azure"];
+ const normalizedOffer=" "+offer.toLocaleLowerCase("fr").replace(/[^a-z0-9+#]+/g," ").trim()+" ";
+ const requested=offer.trim() ? glossary.filter(t=>normalizedOffer.includes(" "+t.toLocaleLowerCase("fr")+" ")) : [];
+ const evidenceFor=t=>projects.find(p=>(p.stack||[]).some(skill=>skill.toLocaleLowerCase("fr")===t.toLocaleLowerCase("fr")));
+ const declared=t=>chosen.skills.some(skill=>skill.toLocaleLowerCase("fr")===t.toLocaleLowerCase("fr"));
  const share=["Akim Guentas — "+chosen.title,chosen.summary, "Compétences : "+chosen.skills.join(", "), "Expérience : Sidel · Made by Akim · YEVA", "Projets : "+related.map(p=>p.title).join(", "),"Portfolio : https://madebyakim.com"].join("\n");
  const copy=async()=>{try{await navigator.clipboard.writeText(share);setCopied(true)}catch{setCopied(false)}};
  return <><Navbar/><main id="main-content" tabIndex={-1} className="min-h-screen pt-32 pb-20 px-6 md:px-8">
@@ -58,8 +62,15 @@ export default function InteractiveCV(){
          <h2 className="font-serif text-2xl text-[#304439] mt-4">Tu recrutes sur un poste précis ?</h2>
          <p className="text-xs leading-6 text-[#667469] mt-3">Colle une description de poste. Les compétences explicitement présentes dans cette sélection apparaîtront ici. Il n'y a ni score de compatibilité inventé ni données envoyées à un serveur.</p>
          <label htmlFor="cv-offer" className="sr-only">Description de poste</label><textarea id="cv-offer" value={offer} onChange={e=>setOffer(e.target.value)} rows={6} placeholder="Description du poste…" className="w-full mt-4 rounded-xl border border-[#d8e0d5] p-3 text-sm text-[#405248] bg-white/90 resize-y focus:outline-[#a1694b]"/>
-         <div className="mt-4 flex items-center gap-2 text-xs text-[#667469]"><Search size={14}/> Technologies retrouvées</div>
-         <div className="flex flex-wrap gap-2 mt-3">{offer.trim()?(matched.length?matched.map(t=><span key={t} className="rounded-full bg-[#e4efe5] px-3 py-2 text-xs text-[#456e4f]">{t}</span>):<p className="text-xs text-[#90968d]">Aucun terme de cette liste identifié.</p>):<p className="text-xs text-[#90968d]">En attente d'une description.</p>}</div>
+         
+         <div className="mt-4 flex items-center gap-2 text-xs text-[#667469]"><Search size={14}/> Compétences repérées dans l'offre</div>
+         {requested.length ? <ul className="mt-3 space-y-2">
+          {requested.map(term=>{const proof=evidenceFor(term);return <li key={term} className="flex items-start justify-between gap-3 rounded-xl border border-[#e0e6dd] bg-white/80 p-3">
+           <div><p className="text-xs font-semibold text-[#35493e]">{term}</p><p className="text-[11px] leading-5 mt-1 text-[#64766a]">{proof?"Illustrée par une étude de cas":declared(term)?"Mentionnée sur ce CV, sans étude de cas associée":"Pas de preuve sur ce portfolio"}</p></div>
+           {proof&&<Link to={"/projects/"+proof.slug} className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium text-[#8d624a] hover:underline underline-offset-2" aria-label={"Voir le projet "+proof.title}>Voir <ArrowUpRight size={13}/></Link>}
+          </li>})}
+         </ul> : <p className="text-xs text-[#879188] mt-3">{offer.trim()?"Aucun des termes suivis n'a été repéré.":"En attente d'une description."}</p>}
+         <p className="text-[11px] leading-5 text-[#8e988e] mt-3">Lecture par mots-clés connus, non exhaustive. « Pas de preuve » ne signifie pas absence de compétence.</p>
        </div>
        <div className="rounded-[24px] border border-[#e0e3da] bg-[#f6efe6] p-6"><p className={eyebrow}>Partager</p><h2 className="font-serif text-2xl text-[#304439] mt-3">Une version facile à transmettre.</h2><p className="text-xs leading-6 text-[#737469] mt-3">L'impression produit une version épurée de ce CV. Le texte copié reprend le positionnement actuellement sélectionné.</p><div className="flex flex-wrap gap-2 mt-5">
         <button type="button" onClick={()=>window.print()} className="inline-flex gap-2 items-center rounded-full bg-[#30473a] px-4 py-3 text-white text-xs"><Printer size={15}/> Imprimer / PDF</button>

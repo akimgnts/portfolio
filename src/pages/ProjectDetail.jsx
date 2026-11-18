@@ -61,7 +61,7 @@ export default function ProjectDetail() {
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];
   const outcomes = project.results || [];
-  const hasVisual = ["event-signal", "nuit-blanche", "job-apply-assistant", "sidel-reporting-commercial", "event-analytics-europe", "elevia"].includes(project.slug);
+  const hasVisual = ["event-signal", "nuit-blanche", "job-apply-assistant", "sidel-reporting-commercial", "event-analytics-europe", "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
 
   return <>
     <Navbar/>
@@ -75,7 +75,7 @@ export default function ProjectDetail() {
               <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
               <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
             </div>
-            {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">Code & documentation <ArrowUpRight size={16}/></a>}
+            {(project.githubUrl || project.demoUrl) && <a href={project.demoUrl || project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">{project.demoUrl ? "Voir le site" : "Code & documentation"} <ArrowUpRight size={16}/></a>}
           </div>
         </div>
       </header>

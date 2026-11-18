@@ -1,150 +1,46 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDownRight, MapPin, Dot } from "lucide-react";
-import { Button } from "./ui/Button";
+import { ArrowUpRight, ArrowDownRight, Database, Workflow, Sparkles, Code2, BriefcaseBusiness } from "lucide-react";
 import { siteContent } from "../data/content";
 
-function AtmosphericOrb() {
-  const reduceMotion = useReducedMotion();
-  return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      {/* Outer glow */}
-      <div
-        className="absolute w-80 h-80 rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsla(25,80%,75%,0.18) 0%, hsla(200,60%,75%,0.10) 50%, transparent 75%)",
-        }}
-      />
-
-      {/* Core orb */}
-      <motion.div
-        className="absolute w-64 h-64 rounded-full"
-        style={{
-          background: "radial-gradient(circle at 35% 35%, hsla(36,80%,85%,0.85) 0%, hsla(25,70%,72%,0.55) 45%, hsla(200,50%,75%,0.25) 80%, transparent 100%)",
-        }}
-        animate={reduceMotion ? {} : { scale: [1, 1.04, 1], opacity: [0.7, 0.9, 0.7] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Floating cards */}
-      {siteContent.hero.orbCards.map((card, idx) => {
-        const durations = [5, 6, 7];
-        const yAnimations = [[0, -14, 0], [0, 10, 0], [0, -8, 0]];
-        return (
-          <motion.div
-            key={idx}
-            className={`bg-white/90 backdrop-blur-sm border border-border rounded-xl px-4 py-3 shadow-sm absolute ${card.position}`}
-            animate={reduceMotion ? {} : { y: yAnimations[idx] }}
-            transition={{ duration: durations[idx], repeat: Infinity, ease: "easeInOut", delay: idx }}
-          >
-            <p className="text-sm">{card.text}</p>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
+const points=[
+  {icon:Database,label:"Data & BI",x:"left-[3%] top-[15%]",tone:"text-[#5f806e]"},
+  {icon:Workflow,label:"Automatisation",x:"right-[2%] top-[7%]",tone:"text-[#aa6847]"},
+  {icon:Code2,label:"Produit",x:"left-[1%] bottom-[15%]",tone:"text-[#7e8278]"},
+  {icon:Sparkles,label:"IA appliquée",x:"right-[0%] bottom-[18%]",tone:"text-[#aa6847]"},
+];
+function ConnectedVisual(){
+ const reduced=useReducedMotion();
+ return <div className="relative w-full h-[380px] lg:h-[470px] isolate" aria-label="Cartographie des domaines Data, produit et automatisation">
+   <div className="absolute inset-[8%] rounded-full blur-3xl opacity-60" style={{background:"radial-gradient(circle,#e5c6a7 0%,#d9e8df 48%,transparent 72%)"}}/>
+   <svg viewBox="0 0 500 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
+     <circle cx="250" cy="250" r="176" fill="none" stroke="#b6b5a8" strokeDasharray="2 8" strokeWidth="1"/>
+     <circle cx="250" cy="250" r="122" fill="none" stroke="#d7c4af" strokeWidth="1"/>
+     <path d="M100 108 L250 250 L408 82 M250 250 L80 408 M250 250 L420 395" fill="none" stroke="#c1b0a0" strokeWidth="1.5"/>
+     <circle cx="250" cy="250" r="5" fill="#ad704e"/>
+   </svg>
+   <motion.div animate={reduced?{}:{y:[0,-8,0]}} transition={{duration:8,repeat:Infinity,ease:"easeInOut"}} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[205px] h-[205px] lg:w-[245px] lg:h-[245px] rounded-[35%] rotate-[-12deg] border border-white/80 bg-white/45 backdrop-blur-xl shadow-[0_30px_90px_#6d6a5529] flex items-center justify-center">
+     <div className="rotate-[12deg] text-center"><span className="block text-[10px] uppercase tracking-[.23em] text-[#a1694b] mb-3">Made by Akim</span><span className="font-serif text-4xl lg:text-5xl text-[#333a34] leading-none">Idées<br/><em>→ impact.</em></span><span className="block text-xs text-[#6d756d] mt-4">Business × Data × Digital</span></div>
+   </motion.div>
+   {points.map(({icon:Icon,label,x,tone},i)=><motion.div key={label} animate={reduced?{}:{y:[0,i%2?-7:7,0]}} transition={{duration:5+i,repeat:Infinity,ease:"easeInOut"}} className={`absolute ${x} z-10 flex items-center gap-2 rounded-2xl border border-white/80 bg-white/65 backdrop-blur-xl px-3 py-3 lg:px-4 shadow-[0_12px_32px_#44443314]`}><Icon size={17} className={tone}/><span className="text-xs font-medium text-[#455047]">{label}</span></motion.div>)}
+   <Link to="/cartographie" className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-[#8f5d42] border-b border-[#8f5d42]/40 pb-1 hover:border-[#8f5d42]">Explorer la cartographie ↗</Link>
+ </div>
 }
-
-export default function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: "easeOut" },
-    },
-  };
-
-  return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-8 section-gradient-hero">
-      {/* Ambient overlay */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-30"
-        style={{
-          background: "radial-gradient(ellipse 80% 60% at 60% 40%, hsla(25,70%,80%,0.08), transparent)",
-        }}
-      />
-
-      <div className="max-w-5xl mx-auto relative z-10">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center md:min-h-[520px]"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Text */}
-          <motion.div variants={itemVariants}>
-            <p className="text-xs uppercase tracking-[0.18em] text-accent font-medium mb-6">Business · Data · Automatisation / IA</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight text-foreground mb-6">
-              {siteContent.hero.headline}{" "}
-              <em className="not-italic text-accent">
-                {siteContent.hero.headlineAccent}
-              </em>
-            </h1>
-
-            <motion.p className="text-lg text-muted-foreground leading-relaxed mb-8" variants={itemVariants}>
-              {siteContent.hero.body}
-            </motion.p>
-
-            {/* Status pills */}
-            <motion.div className="flex flex-col sm:flex-row gap-3 mb-10" variants={itemVariants}>
-              {siteContent.hero.status.map((status, idx) => (
-                <div
-                  key={idx}
-                  className="px-4 py-2.5 rounded-lg bg-white/35 backdrop-blur-sm border border-border/15 flex items-center gap-2 text-sm w-fit hover:bg-white/50 hover:border-border/35 transition-all"
-                >
-                  {status.type === "dot" ? (
-                    <Dot className="w-2 h-2" style={{ color: "#16a34a" }} />
-                  ) : (
-                    <MapPin className="w-4 h-4" />
-                  )}
-                  {status.label}
-                </div>
-              ))}
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
-              {siteContent.hero.ctas.map((cta, idx) => (
-                <Button key={idx} variant={cta.variant} size="default" asChild>
-                  <Link to={cta.href.startsWith("#") ? `/${cta.href}` : cta.href}>
-                    {cta.label}
-                    {idx === 0 && <ArrowDownRight className="w-4 h-4" />}
-                  </Link>
-                </Button>
-              ))}
-            </motion.div>
-            <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 pt-6 border-t border-border" variants={itemVariants}>
-              {siteContent.hero.proof.map((item) => (
-                <div key={item.value}>
-                  <p className="font-serif text-2xl text-foreground">{item.value}</p>
-                  <p className="text-xs leading-relaxed text-muted-foreground mt-1">{item.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Atmospheric visual */}
-          <motion.div
-            className="h-96 hidden md:flex"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <AtmosphericOrb />
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
+export default function Hero(){
+ return <section className="relative overflow-hidden px-6 md:px-8 pt-32 pb-12 md:pt-36 md:pb-16">
+  <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(ellipse 55% 70% at 82% 36%,#e6ece6 0%,transparent 75%)"}}/>
+  <div className="relative max-w-6xl mx-auto grid md:grid-cols-[1.05fr_.95fr] gap-4 lg:gap-10 items-center">
+   <motion.div initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7}}>
+    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[.18em] font-semibold text-[#a1694b] mb-6"><span className="size-2 rounded-full bg-[#719a79]"/> Data · Produit · Automatisation</div>
+    <h1 className="font-serif text-[clamp(3rem,5.5vw,5.5rem)] tracking-[-.055em] leading-[1.06] text-[#29332e]">Je relie les idées,<br/>les gens <span className="italic font-normal text-[#a1694b]">et la<br className="hidden lg:block"/> technologie.</span></h1>
+    <p className="text-[15px] md:text-[17px] text-[#59635c] leading-[1.8] max-w-[550px] mt-7">Je transforme des besoins concrets en produits utiles : données qui éclairent, systèmes qui automatisent et expériences digitales pensées pour les personnes qui les utilisent.</p>
+    <div className="flex flex-wrap gap-3 mt-8">
+      <Link to="/projects" className="inline-flex items-center gap-3 rounded-full bg-[#2e4036] text-white px-6 py-3.5 text-sm font-medium hover:bg-[#405a49] transition-colors">Explorer mes réalisations <ArrowUpRight size={17}/></Link>
+      <Link to="/cartographie" className="inline-flex items-center gap-3 rounded-full border border-[#b9bcb1] bg-white/45 backdrop-blur-md text-[#354138] px-6 py-3.5 text-sm font-medium hover:bg-white/80 transition-colors">Mes compétences <ArrowDownRight size={17}/></Link>
+    </div>
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-9 pt-5 border-t border-[#d9d9cf] text-xs text-[#737b72]"><span>Data & Business Analyst</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Paris · Île-de-France</span><span className="size-1 rounded-full bg-[#b88767]"/><span>Ouvert aux opportunités</span></div>
+   </motion.div>
+   <ConnectedVisual/>
+  </div>
+ </section>
 }

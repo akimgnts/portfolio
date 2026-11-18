@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Tag } from "../components/ui/Tag";
+import ProjectVisual from "../components/ProjectVisual";
 import { fetchProjectBySlug } from "../services/projectService";
 
 const SectionLabel = ({ children }) => (
@@ -90,6 +91,8 @@ export default function ProjectDetail() {
             </motion.div>
           </div>
         </section>
+
+        <div className="max-w-5xl mx-auto px-6 md:px-8 -mt-6 relative z-10"><div className="rounded-2xl overflow-hidden shadow-[0_16px_50px_rgba(32,57,43,0.10)]"><ProjectVisual slug={project.slug} /></div></div>
 
         {/* Content Section */}
         <section className="py-16 md:py-24 px-6 md:px-8">

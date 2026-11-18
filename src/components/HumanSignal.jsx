@@ -22,15 +22,15 @@ export default function HumanSignal() {
         <div className="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-[#e9a47b]/40 blur-3xl" aria-hidden="true"/>
         <div className="relative flex justify-between items-center"><span className="text-[10px] font-semibold tracking-[.22em] uppercase text-[#8f6852]">Expression × Système</span><span className="text-[10px] text-[#9b7864]">YEVA / Made by Akim</span></div>
         <div className="relative grid grid-cols-3 gap-2 sm:gap-3 items-end my-7">
-          <div className="rounded-2xl border border-white/80 bg-white/50 backdrop-blur-md p-3 sm:p-4 -rotate-3 shadow-[0_20px_35px_#5a463315]">
+          <div className="rounded-2xl border border-white/80 bg-white/50 backdrop-blur-md p-2.5 sm:p-4 -rotate-3 shadow-[0_20px_35px_#5a463315]">
             <PenTool size={22} className="text-[#aa6b55]"/>
-            <p className="font-serif text-base sm:text-xl text-[#4a4a39] mt-9">Créer.</p><p className="text-[10px] mt-2 text-[#8d7b6d]">Identité · récit</p>
+            <p className="font-serif text-[13px] sm:text-xl text-[#4a4a39] mt-9">Créer.</p><p className="text-[10px] mt-2 text-[#8d7b6d]">Identité · récit</p>
           </div>
-          <div className="rounded-2xl border border-white/80 bg-[#f8f2e8]/80 backdrop-blur-md p-3 sm:p-4 translate-y-4 shadow-[0_20px_35px_#5a463315]">
+          <div className="rounded-2xl border border-white/80 bg-[#f8f2e8]/80 backdrop-blur-md p-2.5 sm:p-4 translate-y-4 shadow-[0_20px_35px_#5a463315]">
             <HeartHandshake size={22} className="text-[#698b72]"/>
             <p className="font-serif text-base sm:text-xl text-[#4a4a39] mt-9">Relier.</p><p className="text-[10px] mt-2 text-[#8d7b6d]">Équipe · public</p>
           </div>
-          <div className="rounded-2xl border border-white/80 bg-white/50 backdrop-blur-md p-3 sm:p-4 rotate-3 shadow-[0_20px_35px_#5a463315]">
+          <div className="rounded-2xl border border-white/80 bg-white/50 backdrop-blur-md p-2.5 sm:p-4 rotate-3 shadow-[0_20px_35px_#5a463315]">
             <Workflow size={22} className="text-[#aa6b55]"/>
             <p className="font-serif text-base sm:text-xl text-[#4a4a39] mt-9">Mesurer.</p><p className="text-[10px] mt-2 text-[#8d7b6d]">Donnée · usage</p>
           </div>

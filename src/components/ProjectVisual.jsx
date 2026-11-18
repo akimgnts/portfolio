@@ -82,7 +82,7 @@ function Skillmap(){
    <div className="rounded-2xl border border-[#d5e0d4] bg-white/80 p-4 shadow-[0_15px_30px_#375e4020]">
     <div className="flex items-center gap-2 text-[#557f61]"><Network size={16}/><span className="text-[11px] font-semibold">Explorer les compétences</span></div>
     <div className="mt-4 grid grid-cols-2 gap-2">{["SQL","Python","Data BI","Automation","Cloud","APIs"].map((x,i)=><span key={x} className={"rounded-lg border py-2 text-center text-[10px] " + (i%3===0?"bg-[#dfeee1] border-[#b3cdb8]":"bg-white border-[#e4e9e0]")}>{x}</span>)}</div>
-    <div className="mt-4 border-t border-[#e0e7df] pt-3"><div className="flex gap-1 items-end h-9">{[35,66,45,80,56,92,65,53].map((h,i)=><span key={i} style={{height:h+"%"}} className="rounded-t-sm bg-[#8bac96] flex-1"/></div></div>
+    <div className="mt-4 border-t border-[#e0e7df] pt-3"><div className="flex gap-1 items-end h-9">{[35,66,45,80,56,92,65,53].map((h,i)=><span key={i} style={{height:h+"%"}} className="rounded-t-sm bg-[#8bac96] flex-1"/>)}</div></div>
    </div>
    <div className="rounded-2xl border border-[#d5e0d4] bg-[#f7faf5]/90 p-3 sm:p-4 flex flex-col gap-2">
     <p className="text-[10px] uppercase tracking-wide text-[#6a9275] mb-1">Routes locales</p>

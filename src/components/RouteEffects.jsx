@@ -3,13 +3,13 @@ import { useLocation } from "react-router-dom";
 import { projects } from "../data/projects";
 
 const titles = {
- "/": "Data · Produit · Automatisation",
+ "/": "Data & Business Analyst",
  "/projects": "Projets & études de cas",
  "/cartographie": "Cartographie des compétences",
  "/cv": "CV interactif"
 };
 const descriptions = {
- "/": "Akim Guentas relie besoins métier, données, IA, produit et création. Découvrez des projets réels, leurs architectures et leurs résultats.",
+ "/": "Akim Guentas, Data & Business Analyst. Reporting Power BI chez Sidel, automatisations et projets Data documentés.",
  "/projects": "Découvrez les études de cas de Sidel, Event Signal, Elevia, Nuit Blanche et Job Apply Assistant.",
  "/cartographie": "Une cartographie interactive qui relie les compétences Data, BI, IA, produit et Business à des projets documentés.",
  "/cv": "Explorez le CV interactif d'Akim Guentas : expériences, compétences, réalisations et lectures par métier."

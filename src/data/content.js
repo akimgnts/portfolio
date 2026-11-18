@@ -4,6 +4,7 @@ export const siteContent = {
     links: [
       { label: "Projets", href: "#work" },
       { label: "Cartographie", href: "cartographie" },
+      { label: "CV interactif", href: "cv" },
       { label: "Parcours", href: "#about" },
       { label: "Méthode", href: "#approach" },
     ],
@@ -89,8 +90,8 @@ export const siteContent = {
   sections: {
     work: {
       eyebrow: "Expériences et produits",
-      heading: "Des idées devenues des systèmes.",
-      intro: "Trois projets au croisement de la donnée, du produit et de la création. Chaque réalisation raconte un problème, une solution, les choix techniques et ce qui reste à améliorer.",
+      heading: "Des problèmes réels. Des systèmes construits.",
+      intro: "De Sidel à mes produits indépendants, je montre les problèmes rencontrés, les décisions prises, les architectures construites et les limites encore ouvertes. Pas de démonstration sans contexte.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },

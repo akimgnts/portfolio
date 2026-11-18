@@ -36,7 +36,7 @@ export default function ProjectsGallery() {
   const technologies = [...new Set(projects.flatMap((project) => project.stack || []))].sort();
   const searchTerms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   const filteredProjects = projects.filter((project) => {
-    const searchable = [project.title, project.description, ...(project.stack || [])]
+    const searchable = [project.title, project.description, project.fullDescription, project.observed_problem, project.impact, project.workflows, project.role, ...(project.stack || [])]
       .join(" ").toLowerCase();
     return searchTerms.every((term) => searchable.includes(term))
       && (!technology || project.stack?.includes(technology));
@@ -77,7 +77,7 @@ export default function ProjectsGallery() {
           </div>
         </section>
 
-        <section className="pb-20 md:pb-28 px-6 md:px-8" aria-label="Browse projects">
+        <section className="pb-20 md:pb-28 px-6 md:px-8" aria-label="Explorer les projets">
           <div className="max-w-5xl mx-auto">
             <div className="rounded-2xl border border-border bg-white/60 p-5 sm:p-6 mb-8">
               <div className="grid gap-4 sm:grid-cols-[1fr_auto]">

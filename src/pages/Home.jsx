@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import About from "../components/About";
+import HumanSignal from "../components/HumanSignal";
 import Approach from "../components/Approach";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <Projects />
         <About />
+        <HumanSignal />
         <Approach />
         <Contact />
       </main>

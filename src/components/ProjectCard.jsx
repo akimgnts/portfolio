@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Tag } from "./ui/Tag";
+import ProjectVisual from "./ProjectVisual";
 
 const MotionLink = motion.create(Link);
 
@@ -34,6 +35,8 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: "easeOut", delay: Math.min(index * 0.06, 0.24) }}
     >
+      <ProjectVisual slug={project.slug} />
+
       {/* Accent band */}
       <div
         className="h-1 w-full opacity-60 group-hover:opacity-100 transition-opacity duration-500"

@@ -24,7 +24,7 @@ export default function InteractiveCV(){
  const [offer,setOffer]=useState("");
  const [copied,setCopied]=useState(false);
  const chosen=angles.find(x=>x.id===active);
- const related=useMemo(()=>chosen.ids.map(id=>projects.find(p=>p.id===id)).filter(Boolean),[chosen]);
+ const related=useMemo(()=>chosen.ids.map(id=>projects.find(p=>p.slug===id)).filter(Boolean),[chosen]);
  const matched=chosen.skills.filter(t=>offer.toLocaleLowerCase("fr").includes(t.toLocaleLowerCase("fr")));
  const share=["Akim Guentas — "+chosen.title,chosen.summary, "Compétences : "+chosen.skills.join(", "), "Expérience : Sidel · Made by Akim · YEVA", "Projets : "+related.map(p=>p.title).join(", "),"Portfolio : https://madebyakim.com"].join("\n");
  const copy=async()=>{try{await navigator.clipboard.writeText(share);setCopied(true)}catch{setCopied(false)}};

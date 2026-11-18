@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import ProjectsGallery from './pages/ProjectsGallery'
 import ProjectDetail from './pages/ProjectDetail'
+import SkillsMap from './pages/SkillsMap'
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminProjects = lazy(() => import('./pages/admin/AdminProjects'))
 const AdminProjectCreate = lazy(() => import('./pages/admin/AdminProjectCreate'))
@@ -22,6 +23,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<ProjectsGallery />} />
+        <Route path="/cartographie" element={<SkillsMap />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
 
         {/* Admin Routes */}

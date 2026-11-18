@@ -1,23 +1,50 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { projects } from "../data/projects";
 
-export default function RouteEffects() {
-  const { pathname, hash, key } = useLocation();
-  useEffect(() => {
-    const titles = { "/": "Business · Data · Automation / IA", "/projects": "Projets" };
-    document.title = `Akim Guentas — ${titles[pathname] || (pathname.startsWith("/admin") ? "Espace projets" : "Portfolio")}`;
-    const frame = requestAnimationFrame(() => {
-      const target = hash ? document.getElementById(hash.slice(1)) : document.getElementById("main-content");
-      if (hash && target) {
-        target.scrollIntoView({ behavior: "instant", block: "start" });
-        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-        target.focus({ preventScroll: true });
-      } else if (!hash) {
-        window.scrollTo({ top: 0, behavior: "instant" });
-        target?.focus({ preventScroll: true });
-      }
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [pathname, hash, key]);
-  return null;
+const titles = {
+ "/": "Data · Produit · Automatisation",
+ "/projects": "Projets & études de cas",
+ "/cartographie": "Cartographie des compétences",
+ "/cv": "CV interactif"
+};
+const descriptions = {
+ "/": "Akim Guentas relie besoins métier, données, IA, produit et création. Découvrez des projets réels, leurs architectures et leurs résultats.",
+ "/projects": "Découvrez les études de cas de Sidel, Event Signal, Elevia, Nuit Blanche et Job Apply Assistant.",
+ "/cartographie": "Une cartographie interactive qui relie les compétences Data, BI, IA, produit et Business à des projets documentés.",
+ "/cv": "Explorez le CV interactif d'Akim Guentas : expériences, compétences, réalisations et lectures par métier."
+};
+export default function RouteEffects(){
+ const {pathname,hash,key}=useLocation();
+ useEffect(()=>{
+  const detail=pathname.startsWith("/projects/") ? projects.find(p=>"/projects/"+p.slug===pathname) : null;
+  const title=detail?.title || titles[pathname] || "Portfolio";
+  const description=detail?.description || descriptions[pathname] || descriptions["/"];
+  const url="https://madebyakim.com" + (pathname==="/" ? "/" : pathname);
+  document.title=title+" — Akim Guentas";
+  document.documentElement.lang="fr";
+  const meta=document.querySelector('meta[name="description"]');
+  const ogTitle=document.querySelector('meta[property="og:title"]');
+  const ogDesc=document.querySelector('meta[property="og:description"]');
+  const ogUrl=document.querySelector('meta[property="og:url"]');
+  const canonical=document.querySelector('link[rel="canonical"]');
+  if(meta) meta.setAttribute("content",description);
+  if(ogTitle) ogTitle.setAttribute("content",document.title);
+  if(ogDesc) ogDesc.setAttribute("content",description);
+  if(ogUrl) ogUrl.setAttribute("content",url);
+  if(canonical) canonical.setAttribute("href",url);
+  const frame=requestAnimationFrame(()=>{
+    const target=hash?document.getElementById(hash.slice(1)):document.getElementById("main-content");
+    if(hash && target){
+      target.scrollIntoView({behavior:"auto",block:"start"});
+      if(!target.hasAttribute("tabindex"))target.setAttribute("tabindex","-1");
+      target.focus({preventScroll:true});
+    } else if(!hash){
+      window.scrollTo({top:0,behavior:"auto"});
+      target?.focus({preventScroll:true});
+    }
+  });
+  return ()=>cancelAnimationFrame(frame);
+ },[pathname,hash,key]);
+ return null;
 }

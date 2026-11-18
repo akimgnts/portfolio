@@ -211,3 +211,4 @@
 .tour-state-note{padding:35px 30px;background:#f3efe5;border-bottom:1px solid #ddd6c6;color:#685940}.tour-state-note>p:first-child{font-size:10px;text-transform:uppercase;letter-spacing:.12em}.tour-state-note h3{font-size:24px;margin:14px 0}.tour-state-note>p:last-child{font-size:13px;line-height:1.9;max-width:650px}
 
 .tour-full-image img{width:auto;min-width:0;max-width:none;height:auto;max-height:none}
+.tour-capture-viewport.portrait img{width:auto;max-width:100%;height:auto}

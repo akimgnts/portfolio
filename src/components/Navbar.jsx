@@ -43,7 +43,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <nav ref={nav} aria-label="Main navigation" className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isScrolled || menuOpen ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-background/80 backdrop-blur-sm"}`}>
+    <nav ref={nav} aria-label="Navigation principale" className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isScrolled || menuOpen ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-background/80 backdrop-blur-sm"}`}>
       <div className="max-w-5xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between gap-4">
         <Link to="/" className="font-medium tracking-tight text-foreground" onClick={() => setMenuRoute(null)}>
           {siteContent.nav.brand}<span className="text-accent" aria-hidden="true">.</span>
@@ -59,7 +59,7 @@ export default function Navbar() {
           <Button variant="nav" size="sm" asChild className="hidden md:inline-flex">
             <Link to={`/${siteContent.nav.cta.href}`}>{siteContent.nav.cta.label}</Link>
           </Button>
-          <button ref={toggle} type="button" className="md:hidden flex h-11 w-11 items-center justify-center rounded-lg border border-border" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuRoute(menuOpen ? null : location.key)}>
+          <button ref={toggle} type="button" className="md:hidden flex h-11 w-11 items-center justify-center rounded-lg border border-border" aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuRoute(menuOpen ? null : location.key)}>
             {menuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>

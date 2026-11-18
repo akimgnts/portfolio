@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import NotFound from "./NotFound";
 import ProjectVisual from "../components/ProjectVisual";
 import ProjectDemo from "../components/ProjectDemo";
+import ProductionEvidence from "../components/ProductionEvidence";
 import { fetchProjectBySlug } from "../services/projectService";
 
 const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
@@ -82,7 +83,7 @@ export default function ProjectDetail() {
         </div>
       </header>
 
-      {(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/></div>}
+      {(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/><ProductionEvidence slug={project.slug}/></div>}
 
       {hasVisual && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8">
         <div className="rounded-[24px] overflow-hidden border border-white/75 shadow-[0_18px_65px_rgba(38,56,46,.10)]"><ProjectVisual slug={project.slug}/></div>

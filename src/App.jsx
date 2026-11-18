@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import ProjectsGallery from './pages/ProjectsGallery'
 import ProjectDetail from './pages/ProjectDetail'
 import SkillsMap from './pages/SkillsMap'
+import InteractiveCV from './pages/InteractiveCV'
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminProjects = lazy(() => import('./pages/admin/AdminProjects'))
 const AdminProjectCreate = lazy(() => import('./pages/admin/AdminProjectCreate'))
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<ProjectsGallery />} />
         <Route path="/cartographie" element={<SkillsMap />} />
+        <Route path="/cv" element={<InteractiveCV />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
 
         {/* Admin Routes */}

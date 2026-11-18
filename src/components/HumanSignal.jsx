@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, HeartHandshake, PenTool, Workflow } from "lucide-react";
 
 export default function HumanSignal() {
-  return <section id="creation" className="px-6 md:px-8 py-14 md:py-18" aria-labelledby="creation-heading">
+  return <section id="creation" className="px-6 md:px-8 py-14 md:py-16" aria-labelledby="creation-heading">
     <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_1.08fr] overflow-hidden rounded-[28px] border border-[#355045] bg-[#243c32]">
       <div className="p-7 sm:p-10 md:p-12 text-[#f3efe4] flex flex-col justify-between">
         <div>

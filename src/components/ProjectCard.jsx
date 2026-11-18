@@ -30,10 +30,10 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
       className={`relative h-full rounded-2xl border border-border/70 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-0.5 transition-all duration-500 ${
         cardProps.className || ""
       }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: "easeOut", delay: Math.min(index * 0.06, 0.24) }}
+      initial={false}
+      
+      
+      
     >
       <ProjectVisual slug={project.slug} />
 
@@ -56,14 +56,14 @@ export function ProjectCard({ project, index = 0, variant = "default" }) {
       />
 
       {/* Content */}
-      <div className="relative z-10 p-6 md:p-8">
+      <div className="relative z-10 p-5 md:p-6">
         {/* Meta */}
         <p className="text-xs font-mono text-muted-foreground mb-2">
           {project.period || project.year || new Date().getFullYear()}
         </p>
 
         {/* Title + Arrow */}
-        <div className="flex items-start justify-between mb-6">
+        <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <h3 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground mb-2">
               {project.title}

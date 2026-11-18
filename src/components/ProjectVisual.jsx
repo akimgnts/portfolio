@@ -1,4 +1,4 @@
-import { Database, ChartNoAxesCombined, FileImage, FileText, Bot, ShieldCheck, ArrowRight, CalendarDays, Table2, Workflow } from "lucide-react";
+import { Database, ChartNoAxesCombined, FileImage, FileText, Bot, ShieldCheck, ArrowRight, CalendarDays, Table2, Workflow, BriefcaseBusiness, Users, Network, Target, BarChart3, MapPinned } from "lucide-react";
 function Pill({children,dark=false}){return <span className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-semibold border shadow-sm ${dark?"border-white/15 bg-white/10 text-white":"border-white/90 bg-white/75 text-[#384a40]"}`}>{children}</span>}
 function Event(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#203d33] text-[#e6f0e6] overflow-hidden">
  <div className="absolute -right-12 -top-16 size-64 rounded-full bg-[#72b28b]/15 blur-3xl"/>
@@ -27,4 +27,50 @@ function Job(){return <div className="relative min-h-[260px] p-6 md:p-8 bg-[#e5e
  <div className="relative mt-8 flex flex-wrap gap-2 items-center justify-center"><Pill><FileText size={13}/> Offre</Pill><ArrowRight size={14}/><Pill><Bot size={13}/> Analyse</Pill><ArrowRight size={14}/><Pill>Matching</Pill><ArrowRight size={14}/><Pill><ShieldCheck size={13}/> Contrôle</Pill></div>
  <div className="relative mx-auto mt-6 w-[80%] rounded-2xl border border-white/90 bg-white/60 backdrop-blur-lg p-4 shadow-[0_14px_40px_#53626a20]"><div className="flex justify-between items-center"><span className="text-[10px] uppercase tracking-wider text-[#6d8086]">Sorties générées</span><Database size={13}/></div><div className="grid grid-cols-3 gap-2 mt-3">{["CV","Lettre","Mail"].map(x=><div key={x} className="rounded-lg border border-[#d6dfe0] bg-white/75 py-3 text-center text-xs font-semibold">{x}</div>)}</div></div>
  <p className="relative text-[11px] text-[#6d8086] mt-5">Analyser, valider, générer — sans inventer le parcours.</p></div>}
-export default function ProjectVisual({slug}){if(slug==="event-signal")return <Event/>;if(slug==="nuit-blanche")return <Nuit/>;if(slug==="job-apply-assistant")return <Job/>;return null;}
+
+function Sidel(){
+ const bars=[38,66,46,78,58,90,73];
+ return <div className="relative overflow-hidden min-h-[270px] p-5 sm:p-7 bg-[#f0eee9] text-[#36433f]">
+  <div className="absolute -right-16 -top-20 w-72 h-72 bg-[#cfa6a7]/20 blur-3xl rounded-full" aria-hidden="true"/>
+  <div className="relative flex justify-between gap-3 text-[10px] uppercase tracking-[.15em] text-[#936667]"><span>01 / Business intelligence</span><span>CRM → décision</span></div>
+  <div className="relative mt-5 grid grid-cols-[.65fr_1.35fr] gap-3 items-stretch">
+   <div className="rounded-xl border border-[#ddd3cb] bg-white/75 p-3 flex flex-col gap-3">
+    <div className="flex items-center gap-2 text-[#9b6166]"><BriefcaseBusiness size={15}/><span className="text-[10px] font-semibold">CRM</span></div>
+    <div className="space-y-2">{["Comptes","Opportunités","Interactions","Suivi"].map((x,i)=><div key={x} className={"rounded-md border px-2 py-2 text-[10px] " + (i===1?"border-[#aa7d79] bg-[#f0e3e0]":"border-[#e7e4dd] bg-[#f7f7f4]")}>{x}</div>)}</div>
+   </div>
+   <div className="rounded-xl border border-[#d7dad4] bg-[#fdfefd]/90 shadow-[0_10px_35px_#424d4312] p-3 sm:p-4 min-w-0">
+    <div className="flex justify-between items-start gap-2"><div><p className="text-[9px] uppercase tracking-[.12em] text-[#a66d69]">Power BI / Sidel</p><p className="font-serif text-[17px] sm:text-xl mt-1">Pilotage commercial</p></div><BarChart3 size={18} className="text-[#9b6166] shrink-0"/></div>
+    <div className="grid grid-cols-3 gap-2 mt-3">{["Activité","Suivi","Priorités"].map(t=><div key={t} className="rounded-md bg-[#f2f4f0] border border-[#e0e5dd] text-center py-2"><span className="block text-[9px] text-[#728279]">{t}</span><div className="mx-auto mt-2 h-1 w-3/5 rounded-full bg-[#d0a7a1]"/></div>)}</div>
+    <div className="mt-4 flex h-16 sm:h-20 gap-2 items-end border-b border-[#d0d8d1] pb-1">{bars.map((b,i)=><div key={i} style={{height:b+"%"}} className="flex-1 min-w-0 rounded-t-[3px] bg-[#b77d7d]/80"/> )}</div>
+   </div>
+  </div>
+  <p className="relative text-[11px] text-[#8c7773] mt-4">Une lecture métier des interactions et des opportunités. Vue illustrative.</p>
+ </div>;
+}
+function Europe(){
+ return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#e9f0f3] text-[#34495a] overflow-hidden">
+  <div className="absolute -right-16 -top-12 w-72 h-72 bg-[#adc9d8]/40 blur-3xl rounded-full" aria-hidden="true"/>
+  <div className="relative flex items-center justify-between text-[10px] tracking-[.16em] uppercase text-[#5b8295]"><span>02 / Event analytics</span><span>Europe · salons</span></div>
+  <div className="relative mt-5 grid grid-cols-1 sm:grid-cols-[1fr_.55fr] gap-3">
+   <div className="rounded-2xl bg-white/75 border border-white p-4 sm:p-5">
+    <p className="text-[10px] uppercase tracking-wider text-[#688c9f] mb-4">Du contact au suivi</p>
+    <div className="space-y-2">{[{t:"Visites & échanges",w:"100%"},{t:"Contacts qualifiés",w:"81%"},{t:"Rendez-vous",w:"62%"},{t:"Suivi commercial",w:"44%"}].map((x,i)=><div key={x.t} className="flex items-center gap-3"><span className="w-24 sm:w-32 text-[10px] text-[#4b6572]">{x.t}</span><div className="flex-1 h-5 bg-[#ebf1f3] rounded-md overflow-hidden"><div style={{width:x.w,opacity:1-i*.14}} className="h-full rounded-md bg-[#719eb3]"/></div></div>)}</div>
+    <p className="text-[9px] text-[#7f9198] mt-4">Barres schématiques · aucune métrique simulée</p>
+   </div>
+   <div className="rounded-2xl border border-[#dae5eb] bg-[#d9e7ee]/55 p-4 flex flex-col justify-between"><div className="flex gap-2 items-center"><MapPinned size={19} className="text-[#59879b]"/><p className="text-[12px] font-semibold">Vue Europe</p></div><div className="flex flex-col gap-3 mt-4">{["Salons","Satisfaction","Opportunités"].map(x=><span key={x} className="rounded-lg bg-white/70 border border-white px-3 py-2 text-[11px]">{x}</span>)}</div></div>
+  </div>
+  <p className="text-[11px] text-[#628196] mt-4">Rapprocher les étapes plutôt que compter les visiteurs seuls.</p>
+ </div>;
+}
+function Elevia(){
+ return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#292b39] text-[#f4f0ee] overflow-hidden">
+  <div className="absolute -right-16 -top-20 w-72 h-72 bg-[#957ab7]/20 blur-3xl rounded-full" aria-hidden="true"/>
+  <div className="relative flex justify-between gap-3 uppercase tracking-[.15em] text-[10px] text-[#c9b5df]"><span>03 / Semantic matching</span><span>ESCO · Data / IA</span></div>
+  <div className="relative mt-6 grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-4 items-center">
+   <div className="rounded-2xl border border-[#a3a2b7]/30 bg-white/[.08] p-3 sm:p-4 min-w-0"><div className="flex items-center gap-2"><Users size={17} className="text-[#d0b2e5]"/><span className="text-[11px] font-semibold">Profil</span></div><div className="mt-4 space-y-2">{["Compétences","Expérience","Contexte"].map((x,i)=><div key={x} className="rounded-lg border border-white/10 px-2 sm:px-3 py-2 bg-white/[.06] text-[10px] text-[#e4dbe9]">{x}</div>)}</div></div>
+   <div className="flex flex-col items-center gap-2"><Network size={20} className="text-[#dbb6d8]"/><span className="w-px h-10 bg-[#ad91bf]/50"/><Target size={20} className="text-[#dbb6d8]"/></div>
+   <div className="rounded-2xl border border-[#a3a2b7]/30 bg-white/[.08] p-3 sm:p-4 min-w-0"><div className="flex items-center gap-2"><Database size={17} className="text-[#d0b2e5]"/><span className="text-[11px] font-semibold">Opportunité</span></div><div className="mt-4 space-y-2">{["Extraction","Normalisation","Comparaison"].map(x=><div key={x} className="rounded-lg border border-white/10 px-2 sm:px-3 py-2 bg-white/[.06] text-[10px] text-[#e4dbe9]">{x}</div>)}</div></div>
+  </div><div className="relative mt-4 rounded-xl border border-[#bda8d0]/20 bg-[#bda8d0]/10 p-3 flex justify-between items-center gap-3"><p className="text-[11px] text-[#dbcfe3]">Évaluation explicable · cycles reproductibles</p><ShieldCheck size={17} className="text-[#d1bce1] shrink-0"/></div>
+ </div>;
+}
+export default function ProjectVisual({slug}){if(slug==="event-signal")return <Event/>;if(slug==="nuit-blanche")return <Nuit/>;if(slug==="job-apply-assistant")return <Job/>;if(slug==="sidel-reporting-commercial")return <Sidel/>;if(slug==="event-analytics-europe")return <Europe/>;if(slug==="elevia")return <Elevia/>;return null;}

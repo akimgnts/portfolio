@@ -138,3 +138,58 @@
   .cv-paper .text-\[15px\] { font-size: 12px !important; }
   main { padding: 0 !important; }
 }
+
+/* Documentary product tours: real captures, progressive explanations. */
+.product-tour{margin:3rem 0 4rem;color:#293f32;min-width:0}
+.tour-intro{max-width:760px;margin-bottom:2rem}
+.tour-eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:#90583d;font-weight:600}
+.tour-intro h2{font-size:clamp(2.1rem,4vw,3.6rem);letter-spacing:-.045em;line-height:1.12;margin:16px 0 22px}
+.tour-intro h2 em{font-weight:400;color:#9b6449}
+.tour-intro>p:not(.tour-eyebrow){font-size:15px;line-height:1.9;color:#53695a;max-width:660px}
+.tour-meta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:11px;color:#506a57;margin-top:24px}
+.tour-meta>span:last-child{margin-left:8px;border-left:1px solid #b8c5b8;padding-left:16px}
+.tour-dot{width:6px;height:6px;border-radius:50%;background:#668c6b}
+.tour-shell{display:grid;grid-template-columns:190px minmax(0,1fr);border:1px solid #d1dbd0;border-radius:22px;overflow:hidden;background:#fffdf9;box-shadow:0 24px 65px #2b44330c}
+.tour-nav{display:flex;flex-direction:column;align-items:stretch;gap:4px;background:#2b4437;padding:22px 10px;min-width:0}
+.tour-nav button{display:flex;align-items:center;gap:10px;text-align:left;min-height:43px;border-radius:8px;padding:10px;color:#dae5db;font-size:11px;line-height:1.4;cursor:pointer}
+.tour-nav button>span{font-size:9px;color:#b0c3b2;font-variant-numeric:tabular-nums}
+.tour-nav button>svg{margin-left:auto;flex-shrink:0}
+.tour-nav button:hover{background:#ffffff0d}
+.tour-nav button[aria-current=step]{background:#f0f1e8;color:#294034;font-weight:600}
+.tour-nav button[aria-current=step]>span{color:#77563d}
+.tour-stage{min-width:0}
+.tour-window-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:#edf0e9;border-bottom:1px solid #d5dfd0;font-size:10px;color:#536857}
+.tour-window-bar>span:last-child{color:#687b6c;font-size:9px}
+.tour-window-dots{display:flex;gap:4px}.tour-window-dots i{width:5px;height:5px;border-radius:50%;background:#acb9a8}
+.tour-figure{margin:0;background:#f0f2ec}
+.tour-capture{display:block;position:relative;width:100%;cursor:zoom-in;overflow:hidden;background:#f1f3ee;border-bottom:1px solid #dce2d8}
+.tour-capture img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;min-height:100px;max-height:570px}
+.tour-capture.portrait{padding:18px;background:radial-gradient(ellipse at 50% 50%,#d9e3d4,#edf0e8)}
+.tour-capture.portrait img{width:auto;max-width:100%;height:440px;max-height:52vh;margin:auto;box-shadow:0 8px 28px #1c33231a;border-radius:8px}
+.tour-expand{position:absolute;bottom:12px;right:12px;display:flex;align-items:center;gap:6px;background:#fffef4f0;color:#324d39;border:1px solid #c5d2bd;padding:7px 10px;border-radius:30px;font-size:10px;box-shadow:0 2px 8px #00000008}
+.tour-figure figcaption{padding:12px 22px;font-size:11px;line-height:1.65;color:#5c705f}
+.tour-story{padding:26px 30px 22px}
+.tour-step-line{display:flex;gap:12px;justify-content:space-between;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#856044;margin-bottom:14px}
+.tour-step-line>span:last-child{color:#627566}
+.tour-story h3{font-size:clamp(1.5rem,2.5vw,2rem);letter-spacing:-.035em;line-height:1.25;margin-bottom:14px}
+.tour-action{font-size:14px;line-height:1.8;color:#435a49}
+.tour-annotation{display:flex;align-items:flex-start;gap:12px;border-left:2px solid #bc9576;margin:20px 0 22px;padding-left:16px;color:#647260;font-size:12px;line-height:1.8}
+.tour-annotation>span{color:#9c7150}
+.tour-data{border-top:1px solid #dce2d6;border-bottom:1px solid #dce2d6;font-size:12px}
+.tour-data summary{display:flex;align-items:center;gap:10px;padding:16px 0;cursor:pointer;color:#3f6149;font-weight:600;line-height:1.7}
+.tour-data summary:after{content:'+';margin-left:auto;font-size:20px;font-weight:400}.tour-data[open] summary:after{content:'−'}
+.tour-data dl{display:grid;gap:18px;padding:4px 0 22px}
+.tour-data dt{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#875b3f;font-weight:600;margin-bottom:5px}
+.tour-data dd{color:#4d6555;font-size:12px;line-height:1.9;margin:0}
+.tour-limit{font-size:11px;color:#706a59;line-height:1.9;background:#f5f0e7;padding:13px 16px;border-radius:8px;margin-top:20px}
+.tour-limit strong{font-weight:600;color:#76553a}
+.tour-controls{display:flex;align-items:center;justify-content:space-between;padding:16px 30px;border-top:1px solid #dce2d6;font-size:11px;color:#506a57}
+.tour-controls button{display:flex;align-items:center;gap:8px;min-height:42px;padding:8px 12px;border:1px solid #c9d4c2;border-radius:30px;cursor:pointer}
+.tour-controls button:hover:not(:disabled){background:#edf2e9}.tour-controls button:disabled{opacity:.4;cursor:default}
+.tour-footnote{color:#667563;font-size:11px;line-height:1.9;max-width:900px;margin:18px 0 0}
+.tour-dialog{position:fixed;inset:0;width:min(96vw,1600px);max-width:96vw;max-height:94vh;margin:auto;border:1px solid #a8b9a2;background:#f7f8f1;color:#2a4433;border-radius:15px;padding:16px;box-shadow:0 30px 100px #0005;overflow:auto}
+.tour-dialog::backdrop{background:#15251ddb;backdrop-filter:blur(5px)}
+.tour-dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px}.tour-dialog-head button{padding:10px;cursor:pointer;border:1px solid #c5d2bc;border-radius:50%}
+.tour-dialog>img{display:block;max-width:100%;width:auto;max-height:76vh;margin:0 auto;object-fit:contain}
+.tour-dialog>p{font-size:11px;margin-top:14px}
+@media(max-width:760px){.tour-shell{grid-template-columns:minmax(0,1fr);border-radius:16px}.tour-nav{flex-direction:row;overflow-x:auto;padding:10px;gap:5px;scrollbar-width:thin}.tour-nav button{flex-shrink:0;white-space:nowrap;padding:10px 12px;min-height:42px}.tour-nav button>svg{display:none}.tour-story{padding:23px 20px}.tour-controls{padding:12px 16px}.tour-window-bar{padding:12px 14px}.tour-window-bar>span:last-child{display:none}.tour-figure figcaption{padding:12px 16px}.tour-step-line>span:last-child{display:none}.tour-intro{margin-bottom:24px}.tour-meta>span:last-child{margin-left:0}.tour-capture.portrait img{height:350px;max-height:55vh}.tour-capture img{min-height:0}.tour-expand{font-size:9px;padding:5px 8px;bottom:7px;right:7px}}

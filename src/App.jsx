@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react'
 import { MotionConfig } from 'framer-motion'
 import RouteEffects from './components/RouteEffects'
 const NotFound = lazy(() => import('./pages/NotFound'))
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 const ProjectsGallery = lazy(() => import('./pages/ProjectsGallery'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
@@ -26,6 +26,7 @@ function App() {
         <Route path="/projects" element={<ProjectsGallery />} />
         <Route path="/cartographie" element={<SkillsMap />} />
         <Route path="/cv" element={<InteractiveCV />} />
+        <Route path="/projects/elevia" element={<Navigate to="/projects/job-apply-assistant" replace />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
 
         {/* Admin Routes */}

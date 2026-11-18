@@ -14,7 +14,7 @@ export default function Projects() {
   useEffect(() => {
     const load = async () => {
       const data = await fetchProjects(0, 100);
-      const featured = ["sidel-reporting-commercial", "event-signal", "elevia"];
+      const featured = ["job-apply-assistant", "sidel-reporting-commercial", "event-signal"];
       const visible = data.filter((project) => project.published !== false);
       const ordered = [...visible].sort((a, b) => {
         const ai = featured.indexOf(a.slug);

@@ -10,7 +10,7 @@ const titles = {
 };
 const descriptions = {
  "/": "Akim Guentas, Data & Business Analyst. Reporting Power BI chez Sidel, automatisations et projets Data documentés.",
- "/projects": "Découvrez les études de cas de Sidel, Event Signal, Elevia, Nuit Blanche et Job Apply Assistant.",
+ "/projects": "Découvrez les parcours réels de Job Apply et Event Signal, leurs données et leur architecture, et mon expérience Power BI chez Sidel.",
  "/cartographie": "Une cartographie interactive qui relie les compétences Data, BI, IA, produit et Business à des projets documentés.",
  "/cv": "Explorez le CV interactif d'Akim Guentas : expériences, compétences, réalisations et lectures par métier."
 };

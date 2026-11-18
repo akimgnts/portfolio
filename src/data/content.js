@@ -37,7 +37,7 @@ export const siteContent = {
   about: {
     heading: "À l'interface du métier et de la technique.",
     bio: [
-      "Pendant deux ans chez Sidel, groupe Tetra Laval, j'ai transformé des données commerciales et clients en dashboards Power BI et en recommandations directement exploitables par les équipes Marketing, Sales et Management.",
+      "Pendant mon alternance chez Sidel, groupe Tetra Laval, j'ai transformé des données commerciales et clients en dashboards Power BI et en recommandations directement exploitables par les équipes Marketing, Sales et Management.",
       "En parallèle, avec MadeByAkim, je conçois des produits Data/IA de bout en bout : analyse du besoin, architecture, développement, contrôle qualité, tests et déploiement. Cette double culture me permet de relier une question métier à une solution concrète.",
       "Mon approche reste simple : comprendre le problème, fiabiliser la donnée, construire le bon outil et mesurer ce qu'il change réellement.",
     ],
@@ -89,8 +89,8 @@ export const siteContent = {
   sections: {
     work: {
       eyebrow: "Expériences et produits",
-      heading: "Trois projets pour comprendre mon travail.",
-      intro: "Un cas réel en entreprise, puis deux produits indépendants. Pour chacun : le besoin, mon rôle, mes choix et ce qui fonctionne réellement.",
+      heading: "Du besoin métier au produit qui tourne.",
+      intro: "Job Apply pour le produit Data/IA, Sidel pour la BI en entreprise, Event Signal pour les intégrations et le pilotage. Des parcours réels, des données expliquées et des limites visibles.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },

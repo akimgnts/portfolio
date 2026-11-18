@@ -15,14 +15,14 @@ export default function Hero() {
      Des données plus claires.<br/><em className="font-normal text-[#aa6a4c]">Des décisions plus simples.</em>
     </h1>
     <p className="mt-7 text-[16px] md:text-[17px] leading-[1.8] text-[#455b4e] max-w-[590px]">
-     Chez Sidel, en alternance, j'ai conçu des tableaux de bord Power BI pour aider des équipes commerciales et marketing à piloter leur activité. Aujourd'hui, je prolonge cette expérience avec des projets Data, automatisation et produit.
+     Chez Sidel, en alternance, j'ai conçu des tableaux de bord Power BI pour aider des équipes commerciales et marketing à piloter leur activité. Je conçois aussi des solutions Data/IA que je développe, automatise et déploie sur serveur.
     </p>
     <div className="flex flex-wrap gap-3 mt-8">
      <Link to="/cv" className="inline-flex items-center gap-2.5 rounded-full bg-[#294337] hover:bg-[#3c5b49] text-white px-6 py-3.5 text-sm font-semibold transition-colors">
       Consulter mon CV <ArrowUpRight size={16} aria-hidden="true"/>
      </Link>
      <Link to="/projects" className="inline-flex items-center gap-2.5 rounded-full border border-[#b8c5b9] bg-white/70 hover:bg-white text-[#324e3b] px-6 py-3.5 text-sm font-semibold transition-colors">
-      Voir mes projets <ArrowRight size={16} aria-hidden="true"/>
+      Explorer les produits <ArrowRight size={16} aria-hidden="true"/>
      </Link>
     </div>
     <div className="flex flex-wrap gap-x-5 gap-y-3 mt-9 pt-6 border-t border-[#d6ddd3] text-[12px] text-[#5b7060]">
@@ -53,7 +53,7 @@ export default function Hero() {
       <p className="text-[10px] uppercase tracking-[.16em] text-[#89978a] font-semibold">En parallèle · Projets indépendants</p>
       <div className="grid sm:grid-cols-2 gap-2 mt-3">
        <Link to="/projects/event-signal" className="flex items-center justify-between gap-3 rounded-xl bg-[#eff3ed] border border-[#e0e7de] hover:border-[#a3bca6] px-4 py-3 text-xs font-medium text-[#405d46]">Event Signal <ArrowUpRight size={15} aria-hidden="true"/></Link>
-       <Link to="/projects/elevia" className="flex items-center justify-between gap-3 rounded-xl bg-[#f5efe8] border border-[#e9e0d5] hover:border-[#cfab93] px-4 py-3 text-xs font-medium text-[#6c5447]">Elevia <ArrowUpRight size={15} aria-hidden="true"/></Link>
+       <Link to="/projects/job-apply-assistant" className="flex items-center justify-between gap-3 rounded-xl bg-[#f5efe8] border border-[#e9e0d5] hover:border-[#cfab93] px-4 py-3 text-xs font-medium text-[#6c5447]">Job Apply <ArrowUpRight size={15} aria-hidden="true"/></Link>
       </div>
      </div>
     </div>

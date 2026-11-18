@@ -1,49 +1,46 @@
-import { Activity, Clock3, Database, GitBranch, Server, ShieldCheck } from "lucide-react";
+import { Activity, Database, Server, ShieldCheck } from 'lucide-react';
 
-const details = {
-  "event-signal": {
-    subtitle:"Un cockpit réellement hébergé, avec des synchronisations opérationnelles.",
-    verified:"Interface privée relue le 18 novembre 2026",
-    items:[
-      {icon:Server,title:"Application en production",body:"Déploiement privé Coolify sur VPS, authentification et PostgreSQL 17 avec volume persistant."},
-      {icon:Clock3,title:"Synchronisation toutes les 15 minutes",body:"Worker serveur, verrouillage des cycles concurrents et contrôle des erreurs par source."},
-      {icon:Database,title:"3 intégrations métier",body:"Shotgun Tickets/Events, Meta Ads et Instagram Insights, en lecture seule. Les observations ManyChat sont identifiées séparément."},
-      {icon:Activity,title:"Indicateurs utilisés",body:"Billets, commandes, prix, scans, dépenses publicitaires, publications et fraîcheur des données, par événement."},
-    ],
-    note:"La fréquence du worker est documentée côté déploiement. Une heure de synchronisation affichée dans le cockpit n'établit pas à elle seule une garantie de disponibilité continue."
-  },
-  "job-apply-assistant": {
-    subtitle:"Une application web exploitée, pas uniquement une expérimentation Telegram.",
-    verified:"Interface web et état Coolify relus le 18 novembre 2026",
-    items:[
-      {icon:Server,title:"Web + API en production",body:"Application hébergée sur Coolify, API protégée et stockage PostgreSQL. État Running / Healthy observé."},
-      {icon:Database,title:"Collecte et suivi multi-sources",body:"Business France VIE et APEC avec dates de dernière collecte ; radar séparant offres actives, archives et nouveautés."},
-      {icon:GitBranch,title:"Workflow de candidature complet",body:"Analyse du poste, choix du positionnement, préparation de CV / lettre / email, validation et suivi du dossier."},
-      {icon:ShieldCheck,title:"Contrôles et traçabilité",body:"Documents versionnés, PDF testé, avertissements de fraîcheur et statut explicite des connexions comme Gmail."},
-    ],
-    note:"Le fonctionnement web est vérifié ; la cadence exacte des tâches planifiées Job Apply n'a pas été contrôlée. La collecte APEC et l'autorisation Gmail présentent des limites documentées."
-  }
+const evidence = {
+ 'job-apply-assistant': {
+  architecture:'Interface HTML / CSS / JavaScript → API FastAPI → services Python → PostgreSQL via SQLAlchemy. Documents et analyses restent rattachés au dossier. Le Dockerfile web prévoit les migrations Alembic et un contrôle de disponibilité.',
+  source:'https://github.com/akimgnts/job-apply-assistant',
+  rows:[
+   ['Web & API','Observé en ligne','Pages et dossiers existants consultés dans Chrome. Application indiquée Running dans Coolify.'],
+   ['Collecte planifiée','Exécutions vérifiées','Tâche Coolify « Collecte offres Business France + APEC », cron 0 8,18 * * *. Historique observé à 08 h et 18 h UTC, soit 09 h et 19 h à Paris en novembre.'],
+   ['Qualité de la collecte','Échecs par source','Exécution du 18 novembre à 08:00 UTC marquée Success par Coolify, mais logs : timeout Business France, HTTP 403 APEC et aucune nouvelle offre. Le statut du processus ne suffit pas à valider la collecte.'],
+   ['Persistance & contrôles','Vérifié dans le code','Modèles SQLAlchemy pour offres, dossiers, analyses, documents, profil et emails. Transactions, migrations, filtres par propriétaire et contrôles de complétude.'],
+   ['Génération Data/IA','Code et livrables existants','Analyse par modèle si configurée, qualification par règles sinon ; génération documentaire avec repli déterministe. Documents existants consultables, aucune génération relancée pendant la visite.'],
+   ['Gmail & assistant','Validation partielle','Gmail déconnecté et page de suivi en erreur. Interface de l’assistant ouverte ; réponse non testée. Ordonnanceur Gmail présent dans le code, activation non vérifiée.']
+  ],
+  note:'Je distingue le code disponible, l’interface déployée et le fonctionnement observé. La collecte tourne réellement à heures fixes ; sa réussite métier reste à contrôler source par source.'
+ },
+ 'event-signal': {
+  architecture:'Next.js 15 / React / TypeScript → connecteurs métier → PostgreSQL 17. Bronze conserve les relevés et les journaux ; Silver normalise les objets ; Gold expose les agrégations SQL utilisées par le cockpit.',
+  source:'https://github.com/akimgnts/event',
+  rows:[
+   ['Application privée','Observée en ligne','Cockpit connecté exploré pour deux événements. Accès protégé ; données et dates de collecte visibles dans les pages.'],
+   ['Synchronisations','Succès successifs observés','Shotgun, Meta et Instagram affichent des succès à 16:22–16:23 puis 16:38, heure de Paris. Le worker du dépôt attend 900 secondes entre les cycles ; ce délai ne constitue pas une garantie de service.'],
+   ['Docker & persistance','Configuration du dépôt','Compose Coolify : services web, worker et PostgreSQL 17 ; volume postgres-data ; redémarrage et healthchecks. Cette configuration complète les preuves visibles, sans certifier un test de restauration.'],
+   ['Fiabilité du pipeline','Vérifiée dans le code','Pagination avant publication, validations de schéma, mises à jour par identifiant, transaction et rollback, journal des erreurs et verrou PostgreSQL contre les cycles concurrents.'],
+   ['Intégrations métier','Trois sources actualisées','Shotgun pour la billetterie, Meta pour la publicité, Instagram pour les contenus. ManyChat manuel ; SumUp en erreur 401 ; trafic Smartboard non configuré lors du relevé.'],
+   ['Planning & assistant','Limites vérifiées','Planning stocké localement dans le navigateur. Assistant à analyses prédéfinies, sans LLM externe ; une réponse de bilan obtenue en consultation.']
+  ],
+  note:'Les métriques indisponibles restent inconnues. Les campagnes et les contenus sont associés explicitement aux événements ; cela ne démontre pas l’attribution individuelle des achats.'
+ }
 };
 export default function ProductionEvidence({slug}){
- const item=details[slug]; if(!item)return null;
- return <section aria-labelledby="production-proof-heading" className="mt-9 mb-10 rounded-[25px] overflow-hidden border border-[#cfdccf] bg-[#e9f0e8]">
-  <div className="flex flex-wrap items-center justify-between gap-3 bg-[#284737] text-[#f2f6ef] px-6 sm:px-8 py-5">
-    <div className="flex items-center gap-3"><span className="size-2.5 rounded-full bg-[#b1d6ad]" aria-hidden="true"/><div><p className="text-[10px] uppercase tracking-[.18em] text-[#b2d3b7]">Preuves d'exploitation</p><h2 id="production-proof-heading" className="font-serif text-2xl mt-1">Déployé. Utilisé. Documenté.</h2></div></div>
-    <span className="inline-flex gap-2 items-center rounded-full border border-white/20 px-3 py-2 text-[11px] text-[#e4f0e2]"><Activity size={15}/> Production vérifiée</span>
-  </div>
-  <div className="p-6 sm:p-8">
-    <p className="text-sm leading-7 text-[#4f6855] mb-6">{item.subtitle}</p>
-    <div className="grid sm:grid-cols-2 gap-3">
-     {item.items.map(({icon:Icon,title,body})=><div key={title} className="rounded-2xl border border-[#d9e5d7] bg-white/85 p-5">
-      <Icon size={19} className="text-[#5b8768]" aria-hidden="true"/>
-      <h3 className="font-semibold text-[14px] text-[#304d39] mt-4">{title}</h3>
-      <p className="text-[12px] leading-6 text-[#617465] mt-2">{body}</p>
-     </div>)}
-    </div>
-    <div className="flex flex-wrap gap-3 items-start justify-between border-t border-[#d2dfd0] pt-5 mt-6">
-      <p className="text-[11px] text-[#68806e]">{item.verified}</p>
-      <p className="text-[11px] leading-5 text-[#7b8f7f] max-w-2xl">{item.note}</p>
-    </div>
+ const item=evidence[slug];if(!item)return null;
+ return <section className="mt-10 mb-10 rounded-3xl overflow-hidden border border-[#cdd9c8] bg-[#edf1e9]" aria-labelledby="production-proof-heading">
+  <header className="p-6 md:p-8 bg-[#2b4437] text-[#f3f3e9]">
+   <p className="flex items-center gap-2 text-[10px] tracking-[.17em] uppercase text-[#c0d2bb]"><Server size={15} aria-hidden="true"/> Derrière les écrans</p>
+   <h2 id="production-proof-heading" className="font-serif text-3xl md:text-4xl mt-3 tracking-tight">Du code au serveur.</h2>
+   <p className="text-sm leading-7 text-[#d6e1d1] max-w-4xl mt-4">{item.architecture}</p>
+  </header>
+  <div className="p-5 md:p-8">
+   <div className="flex items-center gap-2 text-[11px] text-[#546d56] mb-5"><Activity size={15} aria-hidden="true"/> État vérifié le 18 novembre 2026 · consultation seule</div>
+   <div className="overflow-x-auto"><table className="w-full min-w-[540px] text-left border-collapse text-xs"><caption className="sr-only">Éléments techniques, niveau de vérification et preuves de {slug === 'event-signal' ? 'Event Signal' : 'Job Apply'}</caption><thead><tr className="text-[10px] uppercase tracking-wider text-[#6a705b] border-b border-[#cdd8c4]"><th scope="col" className="pb-3 pr-5">Élément</th><th scope="col" className="pb-3 pr-5">Vérification</th><th scope="col" className="pb-3">Preuve et périmètre</th></tr></thead><tbody>{item.rows.map(([name,status,detail])=><tr key={name} className="border-b border-[#d6dfd0]"><th scope="row" className="py-5 pr-5 align-top font-semibold text-[#34523c] w-[20%]">{name}</th><td className="py-5 pr-5 align-top text-[#856244] w-[24%]">{status}</td><td className="py-5 align-top leading-6 text-[#506451]">{detail}</td></tr>)}</tbody></table></div>
+   <p className="flex gap-2 items-start mt-6 text-xs leading-6 text-[#5c715b]"><ShieldCheck size={16} className="shrink-0 mt-1" aria-hidden="true"/>{item.note}</p>
+   <a href={item.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-5 text-xs underline underline-offset-4 text-[#3d6144]"><Database size={14} aria-hidden="true"/> Dépôt source · accès selon permissions GitHub</a>
   </div>
  </section>;
 }

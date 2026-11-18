@@ -62,7 +62,7 @@ export default function InteractiveCV(){
          <div className="flex flex-wrap gap-2 mt-3">{offer.trim()?(matched.length?matched.map(t=><span key={t} className="rounded-full bg-[#e4efe5] px-3 py-2 text-xs text-[#456e4f]">{t}</span>):<p className="text-xs text-[#90968d]">Aucun terme de cette liste identifié.</p>):<p className="text-xs text-[#90968d]">En attente d'une description.</p>}</div>
        </div>
        <div className="rounded-[24px] border border-[#e0e3da] bg-[#f6efe6] p-6"><p className={eyebrow}>Partager</p><h2 className="font-serif text-2xl text-[#304439] mt-3">Une version facile à transmettre.</h2><p className="text-xs leading-6 text-[#737469] mt-3">L'impression produit une version épurée de ce CV. Le texte copié reprend le positionnement actuellement sélectionné.</p><div className="flex flex-wrap gap-2 mt-5">
-        <button type="button" onClick={()=>window.print()} className="inline-flex gap-2 items-center rounded-full bg-[#30473a] px-4 py-3 text-white text-xs"><Printer size={15}/> Export PDF</button>
+        <button type="button" onClick={()=>window.print()} className="inline-flex gap-2 items-center rounded-full bg-[#30473a] px-4 py-3 text-white text-xs"><Printer size={15}/> Imprimer / PDF</button>
         <button type="button" onClick={copy} className="inline-flex gap-2 items-center rounded-full border border-[#b6b7a9] px-4 py-3 text-[#465447] text-xs">{copied?<Check size={15}/>:<Copy size={15}/>} {copied?"Copié":"Copier la synthèse"}</button>
        </div></div>
        <p className="text-xs leading-6 text-[#829087] px-2">Ce CV met en valeur des compétences et projets documentés, sans créer de qualifications ou résultats supplémentaires.</p>

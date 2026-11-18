@@ -8,7 +8,7 @@ export const projects = [
     ...common,
     id: "event-signal",
     slug: "event-signal",
-    index: "06",
+    index: "04",
     title: "Event Signal",
     description: "Un cockpit analytique multi-événements pour relier billetterie, publicité et performance des contenus YEVA.",
     fullDescription: "Event Signal est un système de pilotage événementiel développé pour YEVA. Il rapproche les données Shotgun et Meta avec un modèle analytique traçable et une lecture par événement.",
@@ -93,7 +93,7 @@ export const projects = [
     technologies: ["Power BI", "Power Query", "Excel"],
     accentColor: "hsl(210, 55%, 42%)",
     year: 2024,
-    period: "2023 – 2025 · Sidel — Groupe Tetra Laval",
+    period: "2024 – 2025 · Sidel — Groupe Tetra Laval",
   },
   {
     ...common,

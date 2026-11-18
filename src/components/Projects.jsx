@@ -21,7 +21,7 @@ export default function Projects() {
         const bi = featured.indexOf(b.slug);
         return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
       });
-      setProjects(ordered);
+      setProjects(ordered.slice(0, 4));
       setLoading(false);
     };
     load();

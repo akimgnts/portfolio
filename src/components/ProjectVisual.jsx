@@ -116,7 +116,7 @@ function YevaSite(){
   <div className="relative mt-4 grid grid-cols-[1.1fr_.9fr] gap-3 items-stretch">
    <div className="border border-white/10 rounded-xl p-4 sm:p-5 min-h-[165px] flex flex-col justify-between bg-[#1d1d1d]">
     <div className="flex justify-between items-start"><span className="text-[9px] uppercase tracking-[.2em]">Musique · Création · Rencontres</span><span className="size-2 rounded-full bg-[#ef492d]"/></div>
-    <div><p className="text-[clamp(2.5rem,8vw,5rem)] font-black tracking-[-.07em] leading-[.9]">YEVA<span className="text-[#ef492d]">.</span></p><p className="text-[11px] mt-4 text-[#b2afa8]">Un lieu numérique pour un collectif vivant.</p></div>
+    <div><p className="text-[clamp(1.9rem,7vw,5rem)] font-black tracking-[-.07em] leading-[.9]">YEVA<span className="text-[#ef492d]">.</span></p><p className="text-[11px] mt-4 text-[#b2afa8]">Un lieu numérique pour un collectif vivant.</p></div>
    </div>
    <div className="flex flex-col gap-2"><div className="rounded-xl bg-[#ef492d] text-white p-3 sm:p-4 flex-1 flex flex-col justify-between"><span className="text-[9px] uppercase tracking-wider">Programmation</span><span className="font-semibold text-base sm:text-xl leading-tight">TRAP SESSION</span></div><div className="rounded-xl border border-white/15 bg-[#202021] p-3 sm:p-4 flex gap-2 items-center justify-between"><span className="text-[11px]">Billetterie</span><ArrowRight size={17} className="text-[#ef492d]"/></div></div>
   </div>

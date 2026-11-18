@@ -14,7 +14,14 @@ export default function Projects() {
   useEffect(() => {
     const load = async () => {
       const data = await fetchProjects(0, 100);
-      setProjects(data.filter((project) => project.published !== false).slice(0, 4));
+      const featured = ["nuit-blanche", "event-signal", "job-apply-assistant"];
+      const visible = data.filter((project) => project.published !== false);
+      const ordered = [...visible].sort((a, b) => {
+        const ai = featured.indexOf(a.slug);
+        const bi = featured.indexOf(b.slug);
+        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+      });
+      setProjects(ordered.slice(0, 4));
       setLoading(false);
     };
     load();

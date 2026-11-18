@@ -39,7 +39,6 @@
       hsl(200, 30%, 95%) 70%,
       hsl(36, 30%, 97%) 100%
     );
-    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

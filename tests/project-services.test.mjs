@@ -9,7 +9,7 @@ async function loadServices(apiUrl) {
       resolveDir: process.cwd(),
     },
     bundle: true, write: false, platform: 'node', format: 'esm',
-    define: { 'import.meta.env.VITE_API_URL': JSON.stringify(apiUrl) },
+    define: { 'import.meta.env.VITE_API_URL': JSON.stringify(apiUrl), 'import.meta.env.DEV': 'false', 'import.meta.env.VITE_ENABLE_ADMIN': '"true"' },
   });
   return import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString('base64')}`);
 }

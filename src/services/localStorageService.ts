@@ -5,8 +5,13 @@ import { isProject, isProjectList } from "./projectValidation";
 const STORAGE_KEY = "portfolio_projects";
 const defaults = (): Project[] => structuredClone(defaultProjects) as Project[];
 
+// Visitors always read the published static content. Browser-saved edits only
+// apply where the local admin is enabled, so stale or tampered storage never
+// changes what a recruiter sees.
+const LOCAL_EDITS_ENABLED = import.meta.env.DEV || import.meta.env.VITE_ENABLE_ADMIN === "true";
+
 function readProjects(): Project[] {
-  if (typeof window === "undefined") return defaults();
+  if (typeof window === "undefined" || !LOCAL_EDITS_ENABLED) return defaults();
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === null) return defaults();
   const parsed: unknown = JSON.parse(stored);

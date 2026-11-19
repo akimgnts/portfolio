@@ -10,6 +10,8 @@ import ProjectDemo from "../components/ProjectDemo";
 import { productTours } from "../data/productTours";
 import ProductionEvidence from "../components/ProductionEvidence";
 import { fetchProjectBySlug } from "../services/projectService";
+import { isMission } from "../data/missions";
+import { MissionReportPage } from "../components/MissionReport";
 
 const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
 const copy = "text-[15px] leading-[1.8] text-[#536059]";
@@ -64,6 +66,8 @@ export default function ProjectDetail() {
   const project = result?.project;
   if (loading) return <><Navbar/><main id="main-content" tabIndex={-1} className="min-h-screen grid place-items-center"><p role="status">Chargement du projet…</p></main><Footer/></>;
   if (!project) return <NotFound/>;
+
+  if (isMission(project.slug)) return <><Navbar/><main id="main-content" tabIndex={-1} className="flex-1"><MissionReportPage project={project}/></main><Footer/></>;
 
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];

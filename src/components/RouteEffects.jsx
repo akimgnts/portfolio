@@ -5,13 +5,11 @@ import { projects } from "../data/projects";
 const titles = {
  "/": "Data & Business Analyst",
  "/projects": "Projets & études de cas",
- "/cartographie": "Cartographie des compétences",
  "/cv": "CV interactif"
 };
 const descriptions = {
  "/": "Akim Guentas, Data & Business Analyst. Reporting Power BI chez Sidel, automatisations et projets Data documentés.",
  "/projects": "Explorez Job Apply, Signal et Nuit Blanche · Content Engine : captures réelles, données et architecture. Puis mes réalisations Power BI chez Sidel.",
- "/cartographie": "Une cartographie interactive qui relie les compétences Data, BI, IA, produit et Business à des projets documentés.",
  "/cv": "Explorez le CV interactif d'Akim Guentas : expériences, compétences, réalisations et lectures par métier."
 };
 export default function RouteEffects(){

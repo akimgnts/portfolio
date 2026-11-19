@@ -6,6 +6,7 @@ import { siteContent } from "../data/content";
 import { SectionHeader } from "./ui/SectionHeader";
 import { ProjectCard } from "./ProjectCard";
 import { fetchProjects } from "../services/projectService";
+import { MissionReportCard } from "./MissionReport";
 
 export default function Projects() {
   const [projects, setProjects] = useState(defaultProjects);
@@ -54,13 +55,11 @@ export default function Projects() {
           ))}
         </div>
 
-        {!loading && companyProjects.length > 0 && <section className="mt-14 pt-10 border-t border-border" aria-labelledby="sidel-work-heading">
-          <Reveal blur><p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Puis, l’expérience en entreprise</p>
-          <h2 id="sidel-work-heading" className="font-serif text-3xl md:text-4xl text-foreground">Chez Sidel, partir des besoins métier.</h2>
-          <p className="text-base text-muted-foreground leading-7 max-w-3xl mt-4 mb-7">En alternance, j’ai travaillé sur le reporting commercial et l’analyse des salons européens. Je présente les problèmes, les solutions et leur usage. Les données et les écrans internes ne sont pas publiés.</p>
-          </Reveal><div className="grid md:grid-cols-2 gap-5">{companyProjects.map((project, i) => <Reveal key={project.slug} delay={i * .08}><Link to={`/projects/${project.slug}`} className="block h-full rounded-2xl border border-border bg-white/60 p-6 hover:border-[#8ea996] transition-colors">
-            <p className="text-xs text-muted-foreground mb-3">{project.period}</p><h3 className="font-serif text-2xl mb-3">{project.title}</h3><p className="text-base leading-7 text-muted-foreground">{project.description}</p><span className="block text-sm font-semibold text-[#47634e] mt-5">Lire le problème et la solution</span>
-          </Link></Reveal>)}</div>
+        {!loading && companyProjects.length > 0 && <section className="mt-16 pt-12 border-t border-border" aria-labelledby="missions-heading">
+          <Reveal blur><p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Missions en entreprise</p>
+          <h2 id="missions-heading" className="font-serif text-3xl md:text-4xl text-foreground">Ce que j'ai livré pour des équipes.</h2>
+          <p className="text-base text-muted-foreground leading-7 max-w-2xl mt-4 mb-8">Chaque mission en format rapport : contexte, actions, équipes, stack et livrables. Données et écrans internes non publiés.</p>
+          </Reveal><div className="grid md:grid-cols-2 gap-5">{companyProjects.map((project, i) => <MissionReportCard key={project.slug} project={project} index={i} />)}</div>
         </section>}
 
         <div className="mt-12 text-center">

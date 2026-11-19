@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 const ProjectsGallery = lazy(() => import('./pages/ProjectsGallery'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
-const SkillsMap = lazy(() => import('./pages/SkillsMap'))
 const InteractiveCV = lazy(() => import('./pages/InteractiveCV'))
-const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
-const AdminProjects = lazy(() => import('./pages/admin/AdminProjects'))
-const AdminProjectCreate = lazy(() => import('./pages/admin/AdminProjectCreate'))
-const AdminProjectEdit = lazy(() => import('./pages/admin/AdminProjectEdit'))
+// Admin is a local editing tool: never shipped in the public build unless explicitly enabled.
+const ADMIN_ENABLED = import.meta.env.DEV || import.meta.env.VITE_ENABLE_ADMIN === 'true'
+const AdminDashboard = ADMIN_ENABLED ? lazy(() => import('./pages/admin/AdminDashboard')) : null
+const AdminProjects = ADMIN_ENABLED ? lazy(() => import('./pages/admin/AdminProjects')) : null
+const AdminProjectCreate = ADMIN_ENABLED ? lazy(() => import('./pages/admin/AdminProjectCreate')) : null
+const AdminProjectEdit = ADMIN_ENABLED ? lazy(() => import('./pages/admin/AdminProjectEdit')) : null
 
 function App() {
   return (
@@ -24,16 +25,17 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<ProjectsGallery />} />
-        <Route path="/cartographie" element={<SkillsMap />} />
+        <Route path="/cartographie" element={<Navigate to="/" replace />} />
         <Route path="/cv" element={<InteractiveCV />} />
         <Route path="/projects/elevia" element={<Navigate to="/projects/job-apply-assistant" replace />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
 
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/projects" element={<AdminProjects />} />
-        <Route path="/admin/projects/new" element={<AdminProjectCreate />} />
-        <Route path="/admin/projects/:slug/edit" element={<AdminProjectEdit />} />
+        {ADMIN_ENABLED && <>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/projects" element={<AdminProjects />} />
+          <Route path="/admin/projects/new" element={<AdminProjectCreate />} />
+          <Route path="/admin/projects/:slug/edit" element={<AdminProjectEdit />} />
+        </>}
 
         <Route path="*" element={<NotFound />} />
       </Routes>

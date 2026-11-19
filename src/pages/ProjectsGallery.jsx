@@ -7,7 +7,8 @@ import Footer from "../components/Footer";
 import { Button } from "../components/ui/Button";
 import { ProjectCard } from "../components/ProjectCard";
 import { fetchProjects } from "../services/projectService";
-import { siteContent } from "../data/content";
+import { isMission } from "../data/missions";
+import { MissionReportCard } from "../components/MissionReport";
 
 export default function ProjectsGallery() {
   const [projects, setProjects] = useState([]);
@@ -41,6 +42,8 @@ export default function ProjectsGallery() {
     return searchTerms.every((term) => searchable.includes(term))
       && (!technology || project.stack?.includes(technology));
   });
+  const filteredProducts = filteredProjects.filter((project) => !isMission(project.slug));
+  const filteredMissions = filteredProjects.filter((project) => isMission(project.slug));
   const hasFilters = Boolean(query || technology);
   const resetFilters = () => {
     setQuery("");
@@ -65,13 +68,13 @@ export default function ProjectsGallery() {
               className="max-w-2xl"
             >
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-4">
-                {siteContent.sections.work.eyebrow}
+                Produits & missions
               </p>
               <h1 id="projects-heading" className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-foreground mb-6">
-                {siteContent.sections.work.heading}
+                Réalisations
               </h1>
               <p className="text-base text-muted-foreground leading-relaxed">
-                {siteContent.sections.work.intro}
+                Deux formats : les produits que je construis, à explorer visuellement ; les missions en entreprise, présentées en rapport.
               </p>
             </motion.div>
           </div>
@@ -147,10 +150,23 @@ export default function ProjectsGallery() {
                   <Button type="button" onClick={retry}>Réessayer</Button>
                 </div>
               ) : filteredProjects.length ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredProjects.map((project, idx) => (
-                    <ProjectCard key={project.id || project.slug} project={project} index={idx} />
-                  ))}
+                <div className="space-y-14">
+                  {filteredProducts.length > 0 && <section aria-labelledby="gallery-products">
+                    <h2 id="gallery-products" className="text-xs uppercase tracking-widest text-muted-foreground mb-5">Produits · {filteredProducts.length}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {filteredProducts.map((project, idx) => (
+                        <ProjectCard key={project.id || project.slug} project={project} index={idx} />
+                      ))}
+                    </div>
+                  </section>}
+                  {filteredMissions.length > 0 && <section aria-labelledby="gallery-missions">
+                    <h2 id="gallery-missions" className="text-xs uppercase tracking-widest text-muted-foreground mb-5">Missions en entreprise · {filteredMissions.length}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {filteredMissions.map((project, idx) => (
+                        <MissionReportCard key={project.id || project.slug} project={project} index={idx} />
+                      ))}
+                    </div>
+                  </section>}
                 </div>
               ) : (
                 <div className="text-center rounded-2xl border border-border bg-white/50 px-6 py-16">

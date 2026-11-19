@@ -8,6 +8,19 @@ const textFields = [
   "accentColor", "accentHover", "publishedAt", "createdAt", "updatedAt", "seoTitle",
   "seoDescription", "githubUrl", "demoUrl", "status",
 ];
+const urlFields = ["githubUrl", "demoUrl"];
+
+// Links are rendered as href: only absolute https URLs (no javascript:, data:, etc.).
+function isSafeUrl(value: unknown): boolean {
+  if (value == null || value === "") return true;
+  if (typeof value !== "string") return false;
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 const listFields = ["stack", "technologies", "results", "learnings", "lessons", "seoKeywords"];
 
 // Validate data from storage and the API before it reaches React's render methods.
@@ -20,6 +33,7 @@ export function isProject(value: unknown): value is Project {
     typeof project.title === "string" && project.title.length > 0 &&
     typeof project.description === "string" &&
     textFields.every((key) => project[key] == null || typeof project[key] === "string") &&
+    urlFields.every((key) => isSafeUrl(project[key])) &&
     listFields.every((key) => project[key] == null || (
       Array.isArray(project[key]) && project[key].every((item) => typeof item === "string")
     )) &&

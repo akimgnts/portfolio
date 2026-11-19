@@ -14,7 +14,7 @@ function ProductTour({ tour }) {
       <p className="tour-eyebrow">Dans le produit / visite guidée</p>
       <h2 id="tour-heading">Les écrans. Les usages.<br/><em>Les données derrière.</em></h2>
       <p>{tour.intro}</p>
-      <div className="tour-meta"><span className="tour-dot"/> Captures réelles · 18 novembre 2026 <span>{count} étapes à explorer</span></div>
+      <div className="tour-meta"><span className="tour-dot"/> Captures réelles · {tour.capturedAt || '18 novembre 2026'} <span>{count} étapes à explorer</span></div>
     </div>
     <div className="tour-shell">
       <nav className="tour-nav" aria-label={`Étapes de la visite ${tour.name}`}>
@@ -38,7 +38,7 @@ function ProductTour({ tour }) {
           <p className="tour-action">{chapter.action}</p>
           <div className="tour-annotation"><span aria-hidden="true">↳</span><p>{chapter.why}</p></div>
           <details className="tour-data" key={chapter.id + '-details'}>
-            <summary><Database size={16} aria-hidden="true"/> D’où viennent ces chiffres ? Comment sont-ils traités ?</summary>
+            <summary><Database size={16} aria-hidden="true"/> Quelles données ? Quels traitements ?</summary>
             <dl><div><dt>Données utilisées</dt><dd>{chapter.data}</dd></div><div><dt>Traitement & analyse</dt><dd>{chapter.processing}</dd></div><div><dt>Ce que je peux en déduire</dt><dd>{chapter.insight}</dd></div></dl>
           </details>
           <p className="tour-limit"><strong>Limite vérifiée.</strong> {chapter.limit}</p>

@@ -47,3 +47,16 @@ Read-only exploration of authenticated Chrome sessions. No applications sent, ca
 All 22 originals were visually reviewed. The 21 displayed product images were recaptured: complete main content for Event Signal; complete public Job Apply pages or deliberately bounded sections for private views. The Gmail failure image is no longer a primary tour visual; its observed state is explained in text. Company view uses an ASTEK filter with counts only. Profile shows complete skill blocks. Drawer captures use page coordinates including scroll offsets.
 
 A real Job Apply assistant query about SQL offers was made without executing proposed actions. Its relevance is not certified. Scrollable capture frames and native-size zoom avoid shrinking long pages and avoid stretching portrait crops. Intrinsic image dimensions are tracked explicitly.
+
+## Nuit Blanche · Content Engine — ajout des 18–19 novembre
+
+- Ordre de présentation : Job Apply, Event Signal, Nuit Blanche · Content Engine ; les deux cas Sidel viennent ensuite dans une section métier. L’accueil et la galerie utilisent cet ordre.
+- Huit captures véritables, prises dans Chrome connecté : formulaire vide, étapes du mode d’emploi, référentiel LIEUX, OPTIONS_LIEUX, semaine/statuts, aperçu de quatre événements, couverture PNG et slide du vendredi ouvertes dans Drive.
+- Aucune création d’événement, génération d’image, notification, publication ni installation de déclencheur pendant cette visite. Seul « Vérifier les événements » a été actionné dans le panneau de génération.
+- Le classeur est un agenda de test. Les données ne certifient pas la programmation des établissements. Les exports d’août et l’aperçu de novembre sont présentés séparément et explicitement.
+- Une erreur 422 sur plusieurs identifiants d’événement vides était déjà présente à la reprise. Le contrôle d’aperçu fonctionne mais ne suffit pas à valider le contrat API.
+- Code du dépôt nuitblanche inspecté : Pydantic, normalisation, tri, groupement, pagination à huit, Jinja2/Playwright, stockage local, ZIP, URLs signées. GoogleDriveStorageProvider est un stub ; le menu Apps Script du dépôt diffère de la version installée. La présence d’exports Drive ne certifie pas leur production par le commit inspecté.
+- Aucun cron actif ni déploiement Coolify Nuit Blanche vérifié. Ne pas annoncer une génération hebdomadaire en production ou une publication Instagram automatique.
+- Aucune donnée privée publiée : captures cadrées hors compte Google, adresses personnelles, URLs de fichiers et identifiants Drive. Les ID_LIEU visibles sont des clés métier publiques d’établissements, sans secret d’accès.
+- Sidel : suppression des graphiques illustratifs à barres arbitraires ; restitution de la démarche et des cas métier. Les volumes préexistants (six dashboards, portefeuille de 61 comptes) restent des éléments déclarés du bilan d’alternance, sans nouveau gain chiffré inventé.
+- Validation portfolio : lint sans erreur, build Vite et huit tests de service réussis ; huit boutons de visite testés dans le navigateur, explications de données et dialogue d’agrandissement ouverts/fermés ; aucun débordement horizontal en desktop.

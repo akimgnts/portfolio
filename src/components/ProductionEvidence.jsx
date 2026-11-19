@@ -1,6 +1,20 @@
 import { Activity, Database, Server, ShieldCheck } from 'lucide-react';
 
 const evidence = {
+ 'nuit-blanche': {
+  checkedAt:'18–19 novembre 2026',
+  architecture:'Google Sheets et interface Apps Script pour la saisie et la sélection. Dans le dépôt : FastAPI / Pydantic → normalisation → tri et groupement → templates Jinja2 → Playwright → PNG, manifest et ZIP. Les exports existants ont été ouverts dans Drive.',
+  source:'https://github.com/akimgnts/nuitblanche',
+  rows:[
+   ['Parcours Sheets','Observé dans la session connectée','Référentiel des lieux, variantes, mode d’emploi, formulaire et panneau de génération présents. Prévisualisation de quatre événements validés obtenue sans lancer de rendu.'],
+   ['Livrables','Fichiers existants consultés','Dossier Drive contenant une couverture, trois slides de jours, une fin, payload.json et manifest.json. Couverture et vendredi ouverts puis capturés.'],
+   ['Traitements Python','Vérifiés dans le code','Validation Pydantic, normalisation, tri, groupement par jour, pagination à huit événements, rendu HTML en PNG et ZIP. Pas de base PostgreSQL dans cette architecture : fichiers et tableur portent les données.'],
+   ['Intégration Drive','Deux versions à distinguer','Des fichiers existent dans le Drive connecté, mais GoogleDriveStorageProvider reste un stub dans le dépôt. Le menu Apps Script installé diffère du code versionné ; je ne certifie pas leur correspondance.'],
+   ['Planification & exploitation','Activation non vérifiée','Déclencheur hebdomadaire et Dockerfile présents dans le dépôt. Aucun historique de tâche active ni configuration Coolify de ce produit inspecté pendant cette visite.'],
+   ['Fiabilité','Limite observée','Erreur 422 présente à la reprise : certains événements n’ont pas d’identifiant. L’aperçu fonctionne ensuite ; aucune génération n’a été relancée.']
+  ],
+  note:'Je montre des écrans et des fichiers réels. Je distingue le code du dépôt, la version installée dans Sheets et le résultat d’une génération antérieure.'
+ },
  'job-apply-assistant': {
   architecture:'Interface HTML / CSS / JavaScript → API FastAPI → services Python → PostgreSQL via SQLAlchemy. Documents et analyses restent rattachés au dossier. Le Dockerfile web prévoit les migrations Alembic et un contrôle de disponibilité.',
   source:'https://github.com/akimgnts/job-apply-assistant',
@@ -37,8 +51,8 @@ export default function ProductionEvidence({slug}){
    <p className="text-sm leading-7 text-[#d6e1d1] max-w-4xl mt-4">{item.architecture}</p>
   </header>
   <div className="p-5 md:p-8">
-   <div className="flex items-center gap-2 text-[11px] text-[#546d56] mb-5"><Activity size={15} aria-hidden="true"/> État vérifié le 18 novembre 2026 · consultation seule</div>
-   <div className="overflow-x-auto"><table className="w-full min-w-[540px] text-left border-collapse text-xs"><caption className="sr-only">Éléments techniques, niveau de vérification et preuves de {slug === 'event-signal' ? 'Event Signal' : 'Job Apply'}</caption><thead><tr className="text-[10px] uppercase tracking-wider text-[#6a705b] border-b border-[#cdd8c4]"><th scope="col" className="pb-3 pr-5">Élément</th><th scope="col" className="pb-3 pr-5">Vérification</th><th scope="col" className="pb-3">Preuve et périmètre</th></tr></thead><tbody>{item.rows.map(([name,status,detail])=><tr key={name} className="border-b border-[#d6dfd0]"><th scope="row" className="py-5 pr-5 align-top font-semibold text-[#34523c] w-[20%]">{name}</th><td className="py-5 pr-5 align-top text-[#856244] w-[24%]">{status}</td><td className="py-5 align-top leading-6 text-[#506451]">{detail}</td></tr>)}</tbody></table></div>
+   <div className="flex items-center gap-2 text-[11px] text-[#546d56] mb-5"><Activity size={15} aria-hidden="true"/> État vérifié · {item.checkedAt || '18 novembre 2026'} · consultation seule</div>
+   <div className="overflow-x-auto"><table className="w-full min-w-[540px] text-left border-collapse text-xs"><caption className="sr-only">Éléments techniques, niveau de vérification et preuves de {slug === 'event-signal' ? 'Event Signal' : slug === 'nuit-blanche' ? 'Nuit Blanche' : 'Job Apply'}</caption><thead><tr className="text-[10px] uppercase tracking-wider text-[#6a705b] border-b border-[#cdd8c4]"><th scope="col" className="pb-3 pr-5">Élément</th><th scope="col" className="pb-3 pr-5">Vérification</th><th scope="col" className="pb-3">Preuve et périmètre</th></tr></thead><tbody>{item.rows.map(([name,status,detail])=><tr key={name} className="border-b border-[#d6dfd0]"><th scope="row" className="py-5 pr-5 align-top font-semibold text-[#34523c] w-[20%]">{name}</th><td className="py-5 pr-5 align-top text-[#856244] w-[24%]">{status}</td><td className="py-5 align-top leading-6 text-[#506451]">{detail}</td></tr>)}</tbody></table></div>
    <p className="flex gap-2 items-start mt-6 text-xs leading-6 text-[#5c715b]"><ShieldCheck size={16} className="shrink-0 mt-1" aria-hidden="true"/>{item.note}</p>
    <a href={item.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-5 text-xs underline underline-offset-4 text-[#3d6144]"><Database size={14} aria-hidden="true"/> Dépôt source · accès selon permissions GitHub</a>
   </div>

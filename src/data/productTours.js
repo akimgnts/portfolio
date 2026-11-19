@@ -2,6 +2,122 @@
 // These are still images of real products, never live connections or simulations.
 const shot = (name) => `/proof/${name}.jpg`;
 export const productTours = {
+  "nuit-blanche": {
+  "name": "Nuit Blanche · Content Engine",
+  "capturedAt": "18–19 novembre 2026",
+  "intro": "Je pars du tableur de l’équipe pour expliquer les règles de saisie, la sélection d’une semaine et le résultat visuel. Les PNG montrés existaient déjà dans Drive : je les distingue de l’aperçu consulté, sans faire croire à une génération exécutée pendant la visite.",
+  "chapters": [
+{
+    "id": "form",
+    "label": "Formulaire événement",
+    "title": "Guider la saisie sans quitter le tableur.",
+    "image": "/proof/nuit-form.jpg",
+    "portrait": true,
+    "action": "Je choisis un lieu existant ou un nouveau lieu, puis je renseigne la date, le nom et la programmation.",
+    "why": "Une interface guidée rend les champs attendus plus visibles qu’une longue ligne de colonnes.",
+    "data": "Choix du lieu, date, nom de l’événement et artistes ; plus bas, type, horaires, tarif, visuel, source et statut.",
+    "processing": "L’interface installée propose les lieux du référentiel. Les valeurs habituelles et variantes servent à préparer les choix ; le bouton Ajouter l’événement réalise l’enregistrement, qui n’est pas déclenché ici.",
+    "insight": "La structure des données peut être accessible à une équipe éditoriale sans exposer le fonctionnement du moteur de rendu.",
+    "limit": "Capture d’un formulaire vide : aucune ligne créée, aucun visuel téléversé. La compression et le dépôt Drive annoncés par le formulaire n’ont pas été testés pendant la visite.",
+    "caption": "Formulaire Apps Script réel, capturé sans soumission."
+},
+    {
+      "id": "guide",
+      "label": "Saisie & validation",
+      "title": "Garder Google Sheets comme point d’entrée.",
+      "image": "/proof/nuit-guide.jpg",
+      "action": "Je rassemble les informations de l’événement dans un formulaire : lieu, date, nom, programmation et type. Le mode d’emploi rappelle les étapes de validation.",
+      "why": "L’équipe peut travailler dans son tableur habituel. Le formulaire guide la saisie au lieu de demander de connaître toutes les colonnes.",
+      "data": "Champs d’agenda, lieu existant ou nouveau, horaires, prix, visuel, source, mise en avant et statut éditorial.",
+      "processing": "Le formulaire propose des choix liés au lieu. Le mode d’emploi précise que PRIX_FINAL devient la valeur utilisée pour le carrousel et que le statut Validé permet de retenir l’événement pour la semaine.",
+      "insight": "La préparation du contenu commence par une donnée structurée, avant la mise en page.",
+      "limit": "Le formulaire est capturé sans soumission. Cette visite ne crée aucun événement et ne mesure pas un gain de temps.",
+      "caption": "Étapes du mode d’emploi réellement présent dans le classeur de test."
+    },
+    {
+      "id": "lieux",
+      "label": "Référentiel des lieux",
+      "title": "Éviter de ressaisir les informations habituelles.",
+      "image": "/proof/nuit-lieux.jpg",
+      "action": "Je retrouve un lieu par son identifiant et son nom officiel, avec son type, ses horaires et son prix par défaut.",
+      "why": "Un même lieu peut revenir chaque semaine. Centraliser ses valeurs réduit les divergences entre deux lignes d’événement.",
+      "data": "ID_LIEU, NOM_OFFICIEL, TYPE_PAR_DEFAUT, horaires et PRIX_PAR_DEFAUT.",
+      "processing": "Le référentiel porte les valeurs réutilisables ; la ligne d’événement conserve les informations propres à la programmation. Les identifiants de lieux montrés sont des clés métier, sans secret d’accès.",
+      "insight": "Je peux distinguer les propriétés du lieu de celles de l’événement.",
+      "limit": "Les horaires et prix sont des données de test visibles dans le classeur, pas une vérification auprès de chaque établissement.",
+      "caption": "Extrait réel de l’onglet LIEUX, cadré sur les attributs métier."
+    },
+    {
+      "id": "options",
+      "label": "Variantes & tarifs",
+      "title": "Un lieu peut accueillir plusieurs formats.",
+      "image": "/proof/nuit-options.jpg",
+      "action": "Je consulte les options par lieu : concert, DJ set, karaoké ou autre format, avec les horaires et le prix associés.",
+      "why": "Une seule valeur par défaut ne suffit pas lorsqu’un lieu propose plusieurs programmations.",
+      "data": "Lieu, type d’événement, début, fin, prix, indicateur PAR_DEFAUT et ORDRE.",
+      "processing": "Les variantes sont organisées en lignes distinctes. PAR_DEFAUT et ORDRE permettent de distinguer une proposition habituelle des autres choix. Le mode d’emploi documente aussi les prix libres et les offres incluant une consommation.",
+      "insight": "Le modèle conserve les nuances métier sans obliger à tout écrire en texte libre.",
+      "limit": "Certaines lignes peuvent encore être incohérentes : le tableur ne constitue pas à lui seul une validation complète des données.",
+      "caption": "OPTIONS_LIEUX : variantes de programmation et valeurs proposées."
+    },
+    {
+      "id": "preview",
+      "label": "Semaine & statuts",
+      "title": "Choisir le périmètre avant de produire.",
+      "image": "/proof/nuit-preview.jpg",
+      "portrait": true,
+      "action": "Je choisis la semaine du 16 au 22 novembre et je conserve uniquement le statut Validé.",
+      "why": "Un brouillon ne doit pas entrer dans la publication simplement parce qu’il possède une date.",
+      "data": "Semaine sélectionnée, bornes de dates et statuts Validé, Brouillon ou À vérifier.",
+      "processing": "L’interface prépare un périmètre éditorial. La vérification charge ensuite un aperçu ; le lancement du rendu reste une action distincte.",
+      "insight": "Je sais quelle semaine et quels statuts sont concernés avant de générer les images.",
+      "limit": "La capture ne prouve ni une génération réussie ni une tâche automatique. Aucun rendu n’a été lancé pendant cette visite.",
+      "caption": "Panneau Apps Script réel : choix de semaine et filtres éditoriaux."
+    },
+    {
+      "id": "selection",
+      "label": "Événements retenus",
+      "title": "Relire la sélection avant l’export.",
+      "image": "/proof/nuit-selection.jpg",
+      "portrait": true,
+      "action": "Le bouton de vérification renvoie quatre événements, regroupés du mercredi au samedi avec leur lieu et leurs horaires.",
+      "why": "Un contrôle lisible doit précéder la production des fichiers, pour repérer une omission ou une erreur de programmation.",
+      "data": "Quatre événements du classeur de test pour la semaine 47 : date, lieu, type, nom et horaires.",
+      "processing": "Le résultat de la sélection est restitué sous forme de cartes par date. Dans le moteur Python du dépôt, les événements sont validés, normalisés, triés et groupés par jour avant pagination.",
+      "insight": "La prévisualisation fonctionne sur ce périmètre. Elle ne garantit pas que toutes les lignes respectent le contrat de l’API.",
+      "limit": "Une erreur 422 sur des identifiants manquants était présente dans le panneau à la reprise. L’aperçu seul ne détecte donc pas tous les blocages du rendu.",
+      "caption": "Résultat réel de la vérification : quatre événements de test, sans création ni publication."
+    },
+    {
+      "id": "cover",
+      "label": "Couverture générée",
+      "title": "Passer de la semaine à un support visuel.",
+      "image": "/proof/nuit-cover.jpg",
+      "portrait": true,
+      "action": "J’ouvre dans Drive la couverture PNG déjà générée pour la semaine du 3 au 9 août 2026.",
+      "why": "Le résultat du workflow doit être visible : un fichier exploitable, avec la semaine, la période et l’identité du média.",
+      "data": "Numéro de semaine, dates, ville et catégories de la programmation.",
+      "processing": "Le dépôt contient des templates Jinja2 : le HTML est rendu par Playwright en PNG. Le dossier Drive consulté contient la couverture, les slides de jours, une fin, un payload et un manifest.",
+      "insight": "Des livrables visuels existent réellement dans Drive ; cette image n’est pas une maquette créée pour le portfolio.",
+      "limit": "Cet export concerne une autre semaine que l’aperçu précédent. Sa présence ne démontre ni une publication Instagram ni l’activation du déclencheur hebdomadaire.",
+      "caption": "Capture du véritable fichier 01-cover.png dans Drive, recadrée sur le visuel."
+    },
+    {
+      "id": "day",
+      "label": "Slide événement",
+      "title": "Conserver le lien entre la donnée et la carte.",
+      "image": "/proof/nuit-slide.jpg",
+      "portrait": true,
+      "action": "La slide du vendredi reprend le lieu, la catégorie, la programmation et les horaires du même export d’août.",
+      "why": "Une carte doit rester compréhensible même lorsque l’affiche ou le tarif n’est pas disponible.",
+      "data": "Événement du vendredi 7 août : lieu Caïd, catégorie Concert, programmation, horaires et disponibilité du tarif.",
+      "processing": "Le code normalise les textes, prévoit « Tarif non communiqué » si le prix manque et pagine à huit événements par slide. Les adaptations d’affichage ne réécrivent pas la donnée source.",
+      "insight": "Je peux montrer la transformation d’une ligne métier en contenu visuel, avec ses informations manquantes explicites.",
+      "limit": "L’affiche est absente et le résultat reste peu dense avec un seul événement. La qualité du livrable dépend aussi de la complétude et de la relecture éditoriale.",
+      "caption": "Capture du véritable fichier 03-vendredi.png ; affiche manquante et tarif non communiqué visibles."
+    }
+  ]
+},
   'job-apply-assistant': {
     name: 'Job Apply',
     intro: "Je pars d’une offre récente et je garde le même fil jusqu’au dossier à relire. Cette visite montre les écrans réellement accessibles, les données qui les alimentent et les limites rencontrées.",

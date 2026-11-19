@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import NotFound from "./NotFound";
 import ProjectVisual from "../components/ProjectVisual";
 import ProjectDemo from "../components/ProjectDemo";
+import { productTours } from "../data/productTours";
 import ProductionEvidence from "../components/ProductionEvidence";
 import { fetchProjectBySlug } from "../services/projectService";
 
@@ -62,7 +63,7 @@ export default function ProjectDetail() {
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];
   const outcomes = project.results || [];
-  const hasVisual = ["nuit-blanche", "sidel-reporting-commercial", "event-analytics-europe", "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
+  const hasVisual = [ "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
 
   return <>
     <Navbar/>
@@ -76,13 +77,13 @@ export default function ProjectDetail() {
               <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
               <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
             </div>
-            <div className="flex flex-wrap gap-2 items-center">{(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <a href="#interactive-demo" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 border border-[#8ea996] text-[#34533d] text-sm font-semibold hover:bg-[#edf5ec] transition-colors">Explorer le produit <ArrowRight size={16}/></a>}
+            <div className="flex flex-wrap gap-2 items-center">{productTours[project.slug] && <a href="#interactive-demo" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 border border-[#8ea996] text-[#34533d] text-sm font-semibold hover:bg-[#edf5ec] transition-colors">Explorer le produit <ArrowRight size={16}/></a>}
             {(project.githubUrl || project.demoUrl) && <a href={project.demoUrl || project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">{project.demoUrl ? "Voir le site" : "Code & documentation"} <ArrowUpRight size={16}/></a>}</div>
           </div>
         </div>
       </header>
 
-      {(project.slug === "event-signal" || project.slug === "job-apply-assistant") && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/><ProductionEvidence slug={project.slug}/>{project.slug === "job-apply-assistant" && <section id="research" className="rounded-3xl border border-[#d6dccc] bg-[#f4efe5] p-7 md:p-10 mt-10"><p className={label}>De la recherche au produit</p><h2 className="font-serif text-3xl text-[#2d4535] mt-3 mb-4">Elevia → Job Apply</h2><p className={copy}>Avec Elevia, j’ai travaillé sur l’extraction des offres, la normalisation des compétences, le matching et les méthodes d’évaluation. Job Apply prolonge cette recherche par un produit utilisable : trouver une offre, préparer un dossier et garder le fil.</p><p className={copy + " mt-4"}>Je présente ici un même cheminement de conception. Le dépôt Job Apply contient des adaptateurs Elevia, mais leur présence ne prouve pas une intégration active en production. Le radar observé utilise son propre score par règles.</p></section>}</div>}
+      {productTours[project.slug] && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/><ProductionEvidence slug={project.slug}/>{project.slug === "job-apply-assistant" && <section id="research" className="rounded-3xl border border-[#d6dccc] bg-[#f4efe5] p-7 md:p-10 mt-10"><p className={label}>De la recherche au produit</p><h2 className="font-serif text-3xl text-[#2d4535] mt-3 mb-4">Elevia → Job Apply</h2><p className={copy}>Avec Elevia, j’ai travaillé sur l’extraction des offres, la normalisation des compétences, le matching et les méthodes d’évaluation. Job Apply prolonge cette recherche par un produit utilisable : trouver une offre, préparer un dossier et garder le fil.</p><p className={copy + " mt-4"}>Je présente ici un même cheminement de conception. Le dépôt Job Apply contient des adaptateurs Elevia, mais leur présence ne prouve pas une intégration active en production. Le radar observé utilise son propre score par règles.</p></section>}</div>}
 
       {hasVisual && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8">
         <div className="rounded-[24px] overflow-hidden border border-white/75 shadow-[0_18px_65px_rgba(38,56,46,.10)]"><ProjectVisual slug={project.slug}/></div>

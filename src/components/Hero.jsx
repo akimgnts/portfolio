@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, CircleCheck, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CircleCheck, MapPin } from "lucide-react";
 
 export default function Hero() {
  return <section className="relative px-6 md:px-8 pt-32 sm:pt-36 pb-14 md:pb-20" aria-labelledby="hero-title">
@@ -31,33 +31,18 @@ export default function Hero() {
     </div>
    </div>
 
-   <div className="relative">
-    <div className="absolute -inset-3 rounded-[32px] bg-gradient-to-br from-[#d9e7d7]/60 via-[#e7d9c8]/30 to-transparent blur-xl pointer-events-none" aria-hidden="true"/>
-    <div className="relative rounded-[28px] border border-[#d5dcd2] bg-[#fcfcf8]/95 shadow-[0_22px_75px_rgba(45,72,52,.09)] p-5 sm:p-7 lg:p-8">
-     <div className="flex items-center justify-between gap-4 pb-5 border-b border-[#e0e5dd]">
-      <div><p className="text-[10px] uppercase tracking-[.18em] font-semibold text-[#a27253]">Expérience en entreprise</p><h2 className="font-serif text-[29px] sm:text-[34px] text-[#2e4436] tracking-tight mt-2">Sidel <span className="text-[#9eaa9f] font-normal text-lg">/ 2024—2025</span></h2></div>
-      <BriefcaseBusiness size={26} className="text-[#719079] shrink-0" aria-hidden="true"/>
-     </div>
-     <div className="grid grid-cols-[.7fr_1.3fr] gap-5 py-6">
-      <div className="border-r border-[#e2e6df] pr-5">
-       <p className="font-serif text-[clamp(3.5rem,6vw,5rem)] leading-none text-[#9a614b] tabular-nums">6<span className="text-3xl align-top">+</span></p>
-       <p className="mt-3 text-xs leading-6 text-[#5a7262]">dashboards Power BI conçus</p>
-      </div>
-      <div className="flex flex-col justify-center">
-       <p className="text-sm font-semibold text-[#324b3a]">Reporting commercial & CRM</p>
-       <p className="text-[13px] leading-6 text-[#63796a] mt-2">Suivi des comptes, des interactions et des opportunités pour les équipes métier.</p>
-       <Link to="/projects/sidel-reporting-commercial" className="inline-flex items-center gap-2 text-xs font-semibold text-[#a1674b] mt-3 hover:underline underline-offset-4">Lire l'étude de cas <ArrowUpRight size={14}/></Link>
-      </div>
-     </div>
-     <div className="border-t border-[#e0e5dd] pt-5">
-      <p className="text-[10px] uppercase tracking-[.16em] text-[#89978a] font-semibold">En parallèle · Projets indépendants</p>
-      <div className="grid sm:grid-cols-2 gap-2 mt-3">
-       <Link to="/projects/event-signal" className="flex items-center justify-between gap-3 rounded-xl bg-[#eff3ed] border border-[#e0e7de] hover:border-[#a3bca6] px-4 py-3 text-xs font-medium text-[#405d46]">Event Signal <ArrowUpRight size={15} aria-hidden="true"/></Link>
-       <Link to="/projects/job-apply-assistant" className="flex items-center justify-between gap-3 rounded-xl bg-[#f5efe8] border border-[#e9e0d5] hover:border-[#cfab93] px-4 py-3 text-xs font-medium text-[#6c5447]">Job Apply <ArrowUpRight size={15} aria-hidden="true"/></Link>
-      </div>
-     </div>
-    </div>
-    <p className="text-[11px] leading-5 text-[#819086] mt-3 px-2">Des réalisations décrites dans les études de cas ; les données confidentielles ne sont pas exposées.</p>
+   <div className="rounded-[28px] border border-[#d5dcd2] bg-[#fcfcf8] shadow-[0_22px_75px_rgba(45,72,52,.09)] p-5 sm:p-7">
+    <p className="text-xs uppercase tracking-widest text-[#966547] mb-3">Trois produits, du besoin à l’usage</p>
+    <h2 className="font-serif text-3xl text-[#2e4436] mb-6">Ce que j’ai construit.</h2>
+    <div className="space-y-3">{[
+      {slug:'job-apply-assistant',name:'Job Apply',image:'job-daily',text:'Rechercher, analyser, préparer une candidature.'},
+      {slug:'event-signal',name:'Event Signal',image:'event-overview',text:'Rapprocher les ventes, les contenus et les dépenses.'},
+      {slug:'nuit-blanche',name:'Nuit Blanche · Content Engine',image:'nuit-cover',text:'D’un agenda Google Sheets à un carrousel.'}
+    ].map(item=><Link key={item.slug} to={`/projects/${item.slug}`} className="grid grid-cols-[88px_1fr] sm:grid-cols-[108px_1fr] items-center gap-4 rounded-2xl border border-[#dce4d8] bg-[#f2f5ee] p-3 hover:border-[#89a18d] transition-colors">
+      <div className="h-24 overflow-hidden rounded-lg border border-[#c9d6c5] bg-[#17303b]"><img src={`/proof/${item.image}.jpg`} alt="" width="160" height="120" loading="lazy" className={`h-full w-full object-cover ${item.slug==='nuit-blanche'?'object-center':'object-left-top'}`}/></div>
+      <div><h3 className="text-base font-semibold leading-6 text-[#314c3b]">{item.name}</h3><p className="text-sm leading-6 text-[#5d7261] mt-1">{item.text}</p></div>
+    </Link>)}</div>
+    <p className="text-sm leading-6 text-[#607460] mt-6 pt-5 border-t border-[#dce4d8]">À découvrir ensuite : <Link to="/projects/sidel-reporting-commercial" className="underline underline-offset-4">mon expérience Data & BI chez Sidel</Link>.</p>
    </div>
   </div>
  </section>;

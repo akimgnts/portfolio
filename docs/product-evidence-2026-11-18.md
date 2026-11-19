@@ -83,3 +83,7 @@ A real Job Apply assistant query about SQL offers was made without executing pro
 - Bundled `DX_Brutalist_Free_Desktop_Commercial_License.pdf`, sections 2, 3, 10 and 13, explicitly permits logos, wordmarks, SVG/PNG exports and outlined artwork for commercial projects. Font files are neither committed nor served. Only finished outlined artwork is published.
 - SVG glyphs shaped with HarfBuzz (kerning enabled), outlined from the original OTF with fontTools. Deep green and warm white variants; transparent PNG exports.
 - **Job Apply / DX Ruiga SemiBold remains pending**: official download includes `Read Me First.pdf.pdf` stating personal use only, in conflict with the product page's commercial label. No Ruiga artwork or font is published. Requires written clarification from the foundry or an appropriately licensed replacement. No paid license purchased.
+
+## Thumbnail correction — 2026-11-19
+
+Supersedes the Brutalist proposal above after visual review. Job Apply uses Manrope at weight 750 on deep green (#244A3A); Signal uses Space Grotesk at weight 600 on warm clay (#D59979). Covers contain only the outlined name and one flat background. Both fonts were obtained from google/fonts, and their bundled SIL OFL 1.1 licenses were checked. No font files are served. Headings retain the portfolio typography. Real screenshots remain inside the guided case studies; original routes remain unchanged. PNG and SVG cover exports are available in public/brand.

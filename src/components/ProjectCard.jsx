@@ -1,4 +1,3 @@
-import BrandWordmark from "./BrandWordmark";
 import { Reveal } from "./ui/Reveal";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -68,7 +67,7 @@ export function ProjectCard({ project, variant = "default", index = 0 }) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <h3 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground mb-2">
-              <BrandWordmark slug={project.slug} title={project.title}/>
+              {project.title}
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
               {project.description}

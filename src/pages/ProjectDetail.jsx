@@ -1,4 +1,3 @@
-import BrandWordmark from "../components/BrandWordmark";
 import { Reveal } from "../components/ui/Reveal";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -80,7 +79,7 @@ export default function ProjectDetail() {
           <div className="grid md:grid-cols-[1fr_auto] items-end gap-5">
             <div>
               <p className={label}>{project.period || project.year || "Projet"}</p>
-              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4"><BrandWordmark slug={project.slug} title={project.title} size="detail"/></h1>
+              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
               <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
               {project.slug === "event-signal" && <p className="text-sm text-[#66766b] mt-3">Anciennement Event Signal : les captures conservent le nom affiché dans l’application.</p>}
             </div>

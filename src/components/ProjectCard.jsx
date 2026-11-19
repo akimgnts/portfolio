@@ -1,3 +1,4 @@
+import { Reveal } from "./ui/Reveal";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -11,7 +12,7 @@ const MotionLink = motion.create(Link);
  * Used on: homepage, /projects gallery, admin, related projects, anywhere projects are listed
  * Single source of truth for project card design
  */
-export function ProjectCard({ project, variant = "default" }) {
+export function ProjectCard({ project, variant = "default", index = 0 }) {
   const isLink = variant !== "admin";
   const Component = isLink ? MotionLink : motion.div;
 
@@ -25,7 +26,7 @@ export function ProjectCard({ project, variant = "default" }) {
       };
 
   return (
-    <Component
+    <Reveal className="h-full" delay={Math.min(index * .08, .16)}><Component
       {...cardProps}
       className={`relative h-full rounded-2xl border border-border/70 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-0.5 transition-all duration-500 ${
         cardProps.className || ""
@@ -95,6 +96,6 @@ export function ProjectCard({ project, variant = "default" }) {
           </div>
         )}
       </div>
-    </Component>
+    </Component></Reveal>
   );
 }

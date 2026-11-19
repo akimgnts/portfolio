@@ -202,3 +202,9 @@
 @media(prefers-reduced-motion:reduce){.tour-nav button,.tour-controls button{transition:none!important;transform:none!important}}
 @media(prefers-reduced-transparency:reduce){.tour-dialog::backdrop{background:#14251c;backdrop-filter:none}}
 @media(prefers-contrast:more){.tour-nav button{border-color:#526e57}.tour-disclosure,.case-disclosure{border-color:#526e57}.tour-dialog{border-color:#294337}}
+
+/* Reveal wrappers never change document flow or conceal print/reduced-motion content. */
+.scroll-reveal{min-width:0}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;transform:none!important;filter:none!important}}
+@media(prefers-contrast:more){.scroll-reveal{filter:none!important}}
+@media print{.scroll-reveal{opacity:1!important;transform:none!important;filter:none!important}}

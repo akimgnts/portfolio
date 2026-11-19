@@ -1,5 +1,5 @@
+import { Reveal } from "./ui/Reveal";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Copy, Check } from "lucide-react";
 import { Button } from "./ui/Button";
 import { siteContent } from "../data/content";
@@ -70,12 +70,9 @@ export default function Contact() {
       >
         <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <motion.div
+          <Reveal
             className="text-center mb-10 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
+            blur
           >
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-4">
               {siteContent.sections.contact.eyebrow}
@@ -87,15 +84,12 @@ export default function Contact() {
               {siteContent.sections.contact.subheading}
             </p>
             <a href="mailto:akimguentas13@gmail.com" className="inline-flex items-center gap-2 rounded-full mt-6 bg-[#2e4036] text-white px-5 py-3 text-sm font-medium hover:bg-[#4d6654] transition-colors"><Mail size={16}/> Écrire directement <ArrowUpRight size={15}/></a>
-          </motion.div>
+          </Reveal>
 
           {/* Form grid */}
-          <motion.div
+          <Reveal
             className="grid grid-cols-1 lg:grid-cols-5 gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+
           >
             {/* Form */}
             <form
@@ -253,7 +247,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
     </>

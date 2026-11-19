@@ -68,3 +68,10 @@ A real Job Apply assistant query about SQL offers was made without executing pro
 - Architecture et étude complète accessibles via deux volets distincts, sans suppression des preuves ni des résultats.
 - Retours visuels immédiats au clic, transition brève sans attente imposée, prise en compte des préférences de mouvement réduit, de transparence réduite et de contraste.
 - Lint, build et huit tests réussis. Job Apply et Event Signal contrôlés dans le navigateur : volets fermés par défaut, ouverture des données et preuves, changement d’écran réinitialisant les volets, agrandissement et fermeture, absence de débordement desktop.
+
+## Ambiance au scroll — 19 novembre
+
+- Composant Reveal réutilisable : entrée à 12 % de visibilité avec marge basse de 32 px, une seule fois par montage. Déplacement vertical de 12–22 px, opacité, flou de 5 px réservé aux titres et groupes de texte. Durée 650 ms, léger décalage limité à 240 ms, aucun rebond ni blocage du scroll.
+- Accueil : titres, introduction, produits, cas Sidel, parcours, paragraphes, étapes de méthode et contact. Galerie : cartes. Études de cas : en-tête, visite et panneaux de l’étude complète.
+- Focus clavier : apparition immédiate du groupe ciblé. Mouvement réduit et impression : contenu intégralement visible, sans déplacement ni flou. Contraste renforcé : suppression du flou.
+- Contrôle navigateur : 4 groupes visibles / 21 en attente à l’arrivée ; 9 visibles après le premier défilement, 12 après le suivant ; textes du parcours et trois étapes de méthode révélés. Ancres et accès au parcours préservés. Volet de données et zoom testés après apparition. Aucun débordement desktop.

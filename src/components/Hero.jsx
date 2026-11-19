@@ -1,3 +1,4 @@
+import { Reveal } from "./ui/Reveal";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, CircleCheck, MapPin } from "lucide-react";
 
@@ -11,13 +12,13 @@ export default function Hero() {
      <span className="hidden sm:inline text-[#b3ab9c]">/</span>
      <span className="text-[#60736a]">Power BI · SQL · Python</span>
     </div>
-    <h1 id="hero-title" className="font-serif text-[clamp(3.25rem,5.8vw,5.7rem)] leading-[1.065] tracking-[-.055em] text-[#263b30] mt-6">
+    <Reveal blur delay={0.06}><h1 id="hero-title" className="font-serif text-[clamp(3.25rem,5.8vw,5.7rem)] leading-[1.065] tracking-[-.055em] text-[#263b30] mt-6">
      Des données plus claires.<br/><em className="font-normal text-[#aa6a4c]">Des décisions plus simples.</em>
-    </h1>
-    <p className="mt-7 text-[16px] md:text-[17px] leading-[1.8] text-[#455b4e] max-w-[590px]">
+    </h1></Reveal>
+    <Reveal delay={0.13}><p className="mt-7 text-[16px] md:text-[17px] leading-[1.8] text-[#455b4e] max-w-[590px]">
      Chez Sidel, en alternance, j'ai conçu des tableaux de bord Power BI pour aider des équipes commerciales et marketing à piloter leur activité. Je conçois aussi des solutions Data/IA que je développe, automatise et déploie sur serveur.
-    </p>
-    <div className="flex flex-wrap gap-3 mt-8">
+    </p></Reveal>
+    <Reveal delay={0.2}><div className="flex flex-wrap gap-3 mt-8">
      <Link to="/cv" className="inline-flex items-center gap-2.5 rounded-full bg-[#294337] hover:bg-[#3c5b49] text-white px-6 py-3.5 text-sm font-semibold transition-colors">
       Consulter mon CV <ArrowUpRight size={16} aria-hidden="true"/>
      </Link>
@@ -25,13 +26,13 @@ export default function Hero() {
       Explorer les produits <ArrowRight size={16} aria-hidden="true"/>
      </Link>
     </div>
-    <div className="flex flex-wrap gap-x-5 gap-y-3 mt-9 pt-6 border-t border-[#d6ddd3] text-[12px] text-[#5b7060]">
+    </Reveal><div className="flex flex-wrap gap-x-5 gap-y-3 mt-9 pt-6 border-t border-[#d6ddd3] text-[12px] text-[#5b7060]">
      <span className="inline-flex items-center gap-2"><MapPin size={15} aria-hidden="true"/> Le Havre · Mobile en Île-de-France</span>
      <span className="inline-flex items-center gap-2"><CircleCheck size={15} className="text-[#729878]" aria-hidden="true"/> Ouvert aux opportunités CDI</span>
     </div>
    </div>
 
-   <div className="rounded-[28px] border border-[#d5dcd2] bg-[#fcfcf8] shadow-[0_22px_75px_rgba(45,72,52,.09)] p-5 sm:p-7">
+   <Reveal delay={0.16} className="rounded-[28px] border border-[#d5dcd2] bg-[#fcfcf8] shadow-[0_22px_75px_rgba(45,72,52,.09)] p-5 sm:p-7">
     <p className="text-xs uppercase tracking-widest text-[#966547] mb-3">Trois produits, du besoin à l’usage</p>
     <h2 className="font-serif text-3xl text-[#2e4436] mb-6">Ce que j’ai construit.</h2>
     <div className="space-y-3">{[
@@ -43,7 +44,7 @@ export default function Hero() {
       <div><h3 className="text-base font-semibold leading-6 text-[#314c3b]">{item.name}</h3><p className="text-sm leading-6 text-[#5d7261] mt-1">{item.text}</p></div>
     </Link>)}</div>
     <p className="text-sm leading-6 text-[#607460] mt-6 pt-5 border-t border-[#dce4d8]">À découvrir ensuite : <Link to="/projects/sidel-reporting-commercial" className="underline underline-offset-4">mon expérience Data & BI chez Sidel</Link>.</p>
-   </div>
+   </Reveal>
   </div>
  </section>;
 }

@@ -1,3 +1,4 @@
+import { Reveal } from "./ui/Reveal";
 import { useRef, useState } from 'react';
 import { Expand, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -15,15 +16,15 @@ function ProductTour({ tour }) {
     setIndex(i);
   }
   return <section id="interactive-demo" className="product-tour" aria-labelledby="tour-heading">
-    <header className="tour-intro">
+    <Reveal blur><header className="tour-intro">
       <p className="tour-eyebrow">À l’intérieur du produit</p>
       <h2 id="tour-heading">Voir. Comprendre.<br/><em>À votre rythme.</em></h2>
       <p>Choisissez un écran. Ouvrez les détails qui vous intéressent.</p>
-    </header>
+    </header></Reveal>
     <nav className="tour-nav" aria-label={`Écrans de ${tour.name}`}>
       {tour.chapters.map((item, i) => <button key={item.id} type="button" aria-current={index === i ? 'step' : undefined} onClick={() => select(i)} aria-controls="tour-screen">{item.label}</button>)}
     </nav>
-    <div className="tour-stage" id="tour-screen">
+    <Reveal><div className="tour-stage" id="tour-screen">
       <div className="tour-screen-heading"><p>{chapter.label} <span>{index + 1} / {count}</span></p><h3 aria-live="polite" aria-atomic="true">{chapter.title}</h3></div>
       <motion.div key={chapter.id} initial={reducedMotion ? false : {opacity:0.5,y:4}} animate={{opacity:1,y:0}} transition={{duration:0.18,ease:'easeOut'}}>
       {chapter.noteOnly ? <aside className="tour-state-note"><h4>Suivi Gmail indisponible.</h4><p>Le compte nécessite une nouvelle autorisation. L’écran ne peut pas être présenté comme opérationnel.</p></aside> : <figure className="tour-figure">
@@ -42,7 +43,7 @@ function ProductTour({ tour }) {
       </motion.div>
       <div className="tour-controls"><button type="button" disabled={index === 0} onClick={() => select(index - 1)}>Précédent</button><span>{index + 1} / {count}</span><button type="button" disabled={index === count - 1} onClick={() => select(index + 1)}>Suivant</button></div>
     </div>
-    <p className="tour-footnote">Parcours de captures fixes, sans action sur les logiciels. Les coordonnées privées sont exclues du cadrage.</p>
+    </Reveal><p className="tour-footnote">Parcours de captures fixes, sans action sur les logiciels. Les coordonnées privées sont exclues du cadrage.</p>
     <dialog ref={dialog} className="tour-dialog" aria-label={`Capture agrandie — ${chapter.label}`} onClick={e => {if (e.target === e.currentTarget) dialog.current?.close();}}>
       <div className="tour-dialog-head"><p>{tour.name} / {chapter.label}</p><button type="button" onClick={() => dialog.current?.close()} aria-label="Fermer la capture agrandie"><X size={22}/></button></div>
       <div className="tour-full-image"><img src={chapter.image} alt={chapter.caption} width={size[0]} height={size[1]}/></div><p>{chapter.caption}</p>

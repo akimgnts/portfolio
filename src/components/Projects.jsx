@@ -1,6 +1,6 @@
+import { Reveal } from "./ui/Reveal";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { projects as defaultProjects } from "../data/projects";
 import { siteContent } from "../data/content";
 import { SectionHeader } from "./ui/SectionHeader";
@@ -39,14 +39,11 @@ export default function Projects() {
         />
 
         {siteContent.sections.work.intro && (
-          <motion.p
+          <Reveal><p
             className="text-[15px] text-muted-foreground leading-relaxed mb-9 max-w-3xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
           >
             {siteContent.sections.work.intro}
-          </motion.p>
+          </p></Reveal>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -58,12 +55,12 @@ export default function Projects() {
         </div>
 
         {!loading && companyProjects.length > 0 && <section className="mt-14 pt-10 border-t border-border" aria-labelledby="sidel-work-heading">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Puis, l’expérience en entreprise</p>
+          <Reveal blur><p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Puis, l’expérience en entreprise</p>
           <h2 id="sidel-work-heading" className="font-serif text-3xl md:text-4xl text-foreground">Chez Sidel, partir des besoins métier.</h2>
           <p className="text-base text-muted-foreground leading-7 max-w-3xl mt-4 mb-7">En alternance, j’ai travaillé sur le reporting commercial et l’analyse des salons européens. Je présente les problèmes, les solutions et leur usage. Les données et les écrans internes ne sont pas publiés.</p>
-          <div className="grid md:grid-cols-2 gap-5">{companyProjects.map(project => <Link key={project.slug} to={`/projects/${project.slug}`} className="rounded-2xl border border-border bg-white/60 p-6 hover:border-[#8ea996] transition-colors">
+          </Reveal><div className="grid md:grid-cols-2 gap-5">{companyProjects.map((project, i) => <Reveal key={project.slug} delay={i * .08}><Link to={`/projects/${project.slug}`} className="block h-full rounded-2xl border border-border bg-white/60 p-6 hover:border-[#8ea996] transition-colors">
             <p className="text-xs text-muted-foreground mb-3">{project.period}</p><h3 className="font-serif text-2xl mb-3">{project.title}</h3><p className="text-base leading-7 text-muted-foreground">{project.description}</p><span className="block text-sm font-semibold text-[#47634e] mt-5">Lire le problème et la solution</span>
-          </Link>)}</div>
+          </Link></Reveal>)}</div>
         </section>}
 
         <div className="mt-12 text-center">

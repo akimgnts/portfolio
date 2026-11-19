@@ -1,11 +1,9 @@
 import { Reveal } from "./ui/Reveal";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Tag } from "./ui/Tag";
+import { TechChip } from "./ui/TechIcon";
 import ProjectVisual from "./ProjectVisual";
 
-const MotionLink = motion.create(Link);
 
 /**
  * Universal ProjectCard component
@@ -14,7 +12,7 @@ const MotionLink = motion.create(Link);
  */
 export function ProjectCard({ project, variant = "default", index = 0 }) {
   const isLink = variant !== "admin";
-  const Component = isLink ? MotionLink : motion.div;
+  const Component = isLink ? Link : "div";
 
   const cardProps = isLink
     ? {
@@ -28,13 +26,9 @@ export function ProjectCard({ project, variant = "default", index = 0 }) {
   return (
     <Reveal className="h-full" delay={Math.min(index * .08, .16)}><Component
       {...cardProps}
-      className={`relative h-full rounded-2xl border border-border/70 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-0.5 transition-all duration-500 ${
+      className={`relative h-full rounded-2xl border border-border/70 bg-card overflow-hidden group hover:shadow-[0_8px_40px_hsla(0,0%,0%,0.07)] hover:-translate-y-1 transition-[transform,box-shadow] duration-300 ease-out ${
         cardProps.className || ""
       }`}
-      initial={false}
-      
-      
-      
     >
       <ProjectVisual slug={project.slug} />
 
@@ -85,12 +79,12 @@ export function ProjectCard({ project, variant = "default", index = 0 }) {
         {/* Stack tags (minimal) */}
         {project.stack && project.stack.length > 0 && (
           <div className="pt-4 flex flex-wrap gap-2">
-            {project.stack.slice(0, 3).map((tech) => (
-              <Tag key={tech}>{tech}</Tag>
+            {project.stack.slice(0, 4).map((tech) => (
+              <TechChip key={tech} name={tech} />
             ))}
-            {project.stack.length > 3 && (
+            {project.stack.length > 4 && (
               <span className="text-[11px] px-2.5 py-1 rounded-full bg-secondary/20 text-secondary-foreground border border-border/12">
-                +{project.stack.length - 3}
+                +{project.stack.length - 4}
               </span>
             )}
           </div>

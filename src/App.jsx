@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { MotionConfig } from 'framer-motion'
 import RouteEffects from './components/RouteEffects'
+import PageFade from './components/PageFade'
 const NotFound = lazy(() => import('./pages/NotFound'))
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
@@ -21,6 +22,7 @@ function App() {
       <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-foreground px-5 py-3 text-background focus:translate-y-0">Aller au contenu</a>
       <Suspense fallback={<main id="main-content" className="min-h-screen grid place-items-center"><p role="status">Chargement…</p></main>}>
       <RouteEffects />
+      <PageFade>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -39,6 +41,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </PageFade>
       </Suspense>
       </MotionConfig>
     </BrowserRouter>

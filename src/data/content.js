@@ -28,7 +28,7 @@ export const siteContent = {
     ],
     proof: [
       { value: "6+", label: "dashboards Power BI déployés" },
-      { value: "3", label: "produits mis en lumière" },
+      { value: "4", label: "produits mis en lumière" },
       { value: "Data +", label: "produit, automatisation et création" },
     ],
   },
@@ -49,8 +49,9 @@ export const siteContent = {
     ],
     education: [
       "MSc Business Intelligence & Analytics — Data Analyst for Marketing · Eugenia School · 2025",
+      "Databricks pour Data Engineers · ORSYS · 2026",
       "Bachelor Responsable Commerce & Marketing · EM Normandie · 2023",
-      "BTS Management Commercial Opérationnel · 2021",
+      "BTS Management Commercial Opérationnel · Alternancia · 2022",
     ],
     certifications: "Dataiku ML Practitioner · Python for Machine Learning · Fine-Tuning Large Language Models",
     languages: "Français natif · Anglais professionnel · Espagnol intermédiaire",
@@ -89,7 +90,7 @@ export const siteContent = {
     work: {
       eyebrow: "Produits que je construis",
       heading: "Des outils qui tournent, pas des maquettes.",
-      intro: "Job Apply, Signal et Nuit Blanche : conçus, développés et déployés de bout en bout. Captures réelles, architecture et limites.",
+      intro: "Job Apply, Signal, Nuit Blanche et YEVA : conçus, développés et déployés de bout en bout. Captures réelles, architecture et limites.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },

@@ -4,19 +4,15 @@ import { ArrowLeft, ArrowUpRight, BriefcaseBusiness, Check, Copy, Mail, MapPin, 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { projects } from "../data/projects";
+import { profile, experience, education, training, certifications, languages } from "../data/cv";
+import SkillsProof from "../components/SkillsProof";
+import { TechChip } from "../components/ui/TechIcon";
 
 const angles=[
  {id:"data",title:"Data & Business Analyst",summary:"Je donne une forme exploitable aux données métier : collecte, fiabilisation, analyse et restitution pour aider les équipes à décider.",skills:["Power BI","DAX","Power Query","SQL","Excel","Python","PostgreSQL"],ids:["sidel-reporting-commercial","event-analytics-europe","event-signal","elevia"]},
  {id:"automation",title:"Automatisation / IA",summary:"Je construis des systèmes qui relient des sources, des règles de traitement et des actions concrètes, avec des contrôles et une validation humaine quand elle compte.",skills:["Python","FastAPI","API REST","PostgreSQL","Apps Script","OpenAI"],ids:["job-apply-assistant","nuit-blanche","elevia","event-signal"]},
  {id:"product",title:"Business Analyst / Produit",summary:"Je fais le lien entre une question métier et une solution utilisable : écouter les besoins, structurer, prototyper et apprendre des usages.",skills:["Analyse des besoins","Power BI","SQL","Python","FastAPI","React","Next.js","Gestion de projet"],ids:["sidel-reporting-commercial","event-signal","job-apply-assistant","nuit-blanche"]}
 ];
-const experience=[
- {date:"2026 — aujourd'hui",role:"Fondateur · Made by Akim",place:"Activité indépendante",body:"Conception de solutions numériques, automatisations et produits Data/IA. Du cadrage à la logique technique, avec une attention particulière à la lisibilité du résultat."},
- {date:"2026 — aujourd'hui",role:"Création, communication & opérations · YEVA",place:"Projet associatif et culturel",body:"Identité, contenus, organisation d'événements et mesure de l'acquisition. Un terrain concret pour relier expérience humaine, création et données."},
- {date:"2024 — 2025",role:"Data & Business Analyst · Sidel",place:"Groupe Tetra Laval · Alternance",body:"Dashboards Power BI pour les équipes Marketing, Sales et Management ; rapprochement de données commerciales et événementielles et suivi de KPI."},
- {date:"2022 — 2023",role:"Business Development & Reporting · Vassard OMB Mobilier",place:"Expérience commerciale",body:"Développement commercial et reporting, au contact des usages et des objectifs métier."}
-];
-const studies=["MSc Data & AI — Business Track · Eugenia School · 2025","Bachelor Responsable Commerce & Marketing · EM Normandie · 2023","BTS Management Commercial Opérationnel · 2021"];
 const eyebrow="text-[11px] uppercase tracking-[.16em] text-[#9b6c50] font-semibold";
 
 export default function InteractiveCV(){
@@ -30,7 +26,7 @@ export default function InteractiveCV(){
  const requested=offer.trim() ? glossary.filter(t=>normalizedOffer.includes(" "+t.toLocaleLowerCase("fr")+" ")) : [];
  const evidenceFor=t=>projects.find(p=>(p.stack||[]).some(skill=>skill.toLocaleLowerCase("fr")===t.toLocaleLowerCase("fr")));
  const declared=t=>chosen.skills.some(skill=>skill.toLocaleLowerCase("fr")===t.toLocaleLowerCase("fr"));
- const share=["Akim Guentas — "+chosen.title,chosen.summary, "Compétences : "+chosen.skills.join(", "), "Expérience : Sidel · Made by Akim · YEVA", "Projets : "+related.map(p=>p.title).join(", "),"Portfolio : https://madebyakim.com"].join("\n");
+ const share=["Akim Guentas — "+chosen.title,chosen.summary, "Compétences : "+chosen.skills.join(", "), "Expérience : Sidel (alternance 2023–2025) · MadeByAkim · YEVA", "Projets : "+related.map(p=>p.title).join(", "),"Portfolio : https://madebyakim.com"].join("\n");
  const copy=async()=>{try{await navigator.clipboard.writeText(share);setCopied(true)}catch{setCopied(false)}};
  return <><Navbar/><main id="main-content" tabIndex={-1} className="min-h-screen pt-32 pb-20 px-6 md:px-8">
    <div className="max-w-6xl mx-auto">
@@ -49,15 +45,16 @@ export default function InteractiveCV(){
        <div className="text-xs leading-7 text-[#6d7a70]"><p className="inline-flex gap-2 items-center"><MapPin size={13}/> Le Havre · Mobilité Paris / IDF</p><br/><a className="inline-flex gap-2 items-center hover:underline" href="mailto:akimguentas13@gmail.com"><Mail size={13}/> akimguentas13@gmail.com</a><br/><a className="hover:underline" href="https://madebyakim.com">madebyakim.com</a></div>
       </div>
 
-      <section className="mt-8"><p className={eyebrow}>01 / Positionnement</p><p className="text-[15px] leading-8 text-[#465a4c] mt-3">{chosen.summary}</p></section>
-      <section className="mt-9"><p className={eyebrow}>02 / Expériences</p><div className="mt-5 space-y-6 border-l border-[#d9dfd5] ml-1">{experience.map((e,i)=><div key={i} className="relative pl-6"><span className="absolute -left-[5px] top-2 size-[9px] rounded-full border-2 border-[#658a73] bg-[#fffdfa]"/><p className="text-[11px] tracking-wide font-semibold text-[#9d7058]">{e.date}</p><h3 className="font-serif text-xl text-[#35473c] mt-1">{e.role}</h3><p className="text-xs text-[#87938a] mt-1">{e.place}</p><p className="text-sm leading-7 text-[#617167] mt-2">{e.body}</p></div>)}</div></section>
-      <section className="mt-9"><p className={eyebrow}>03 / Compétences</p><div className="flex flex-wrap gap-2 mt-4">{chosen.skills.map(skill=><span key={skill} className="text-xs text-[#4b6051] bg-[#f1f5ee] border border-[#dce3d8] px-3 py-2 rounded-lg">{skill}</span>)}</div></section>
+      <section className="mt-8"><p className={eyebrow}>01 / Positionnement</p><p className="text-[15px] leading-8 text-[#465a4c] mt-3">{profile}</p><p className="text-[15px] leading-8 text-[#8f644c] mt-3">{chosen.summary}</p></section>
+      <section className="mt-9"><p className={eyebrow}>02 / Expériences</p><div className="mt-5 space-y-7 border-l border-[#d9dfd5] ml-1">{experience.map((e,i)=><div key={i} className="relative pl-6"><span className="absolute -left-[5px] top-2 size-[9px] rounded-full border-2 border-[#658a73] bg-[#fffdfa]"/><p className="text-[11px] tracking-wide font-semibold text-[#9d7058]">{e.date}</p><h3 className="font-serif text-xl text-[#35473c] mt-1">{e.role}</h3><p className="text-xs text-[#87938a] mt-1"><span className="font-semibold text-[#55665a]">{e.org}</span> · {e.place}</p><ul className="mt-2 space-y-1.5">{e.bullets.map((b,j)=><li key={j} className="text-sm leading-6 text-[#617167] pl-3.5 relative before:absolute before:left-0 before:top-[.7em] before:size-1 before:rounded-full before:bg-[#b9a593]">{b}</li>)}</ul>{e.reports&&<p className="no-print flex flex-wrap gap-x-3 gap-y-1 mt-2">{e.reports.map(slug=>{const p=projects.find(x=>x.slug===slug);return p&&<Link key={slug} to={"/projects/"+slug} className="text-xs font-medium text-[#8d624a] hover:underline underline-offset-2">{p.title} →</Link>})}</p>}</div>)}</div></section>
+      <section className="mt-9"><p className={eyebrow}>03 / Compétences</p><div className="flex flex-wrap gap-2 mt-4">{chosen.skills.map(skill=><TechChip key={skill} name={skill} className="text-xs px-3 py-1.5" />)}</div></section>
       <section className="mt-9"><p className={eyebrow}>04 / Réalisations sélectionnées</p><div className="mt-4 grid sm:grid-cols-2 gap-3">{related.map(p=><Link to={"/projects/"+p.slug} key={p.slug} className="rounded-xl border border-[#dee3da] bg-[#fafcf8] p-4 hover:border-[#a1694b] transition-colors"><div className="flex items-start justify-between gap-2"><h3 className="text-sm font-semibold text-[#33483b]">{p.title}</h3><ArrowUpRight className="text-[#a1694b] shrink-0" size={15}/></div><p className="text-xs leading-6 text-[#6e7b71] mt-2">{p.description}</p></Link>)}</div></section>
-      <section className="mt-9 border-t border-[#e2e5dd] pt-7"><p className={eyebrow}>05 / Formation</p><ul className="mt-4 space-y-2">{studies.map(x=><li className="text-sm text-[#617167] leading-6" key={x}>{x}</li>)}</ul><p className="text-xs mt-5 text-[#7b877d]">Français natif · Anglais professionnel</p></section>
+      <section className="mt-9 border-t border-[#e2e5dd] pt-7"><p className={eyebrow}>05 / Formation</p><ul className="mt-4 space-y-4">{[...education,...training].map(x=><li key={x.title}><div className="flex flex-wrap justify-between gap-x-4"><p className="text-sm font-semibold text-[#35473c]">{x.title}</p><p className="text-xs text-[#9d7058] font-semibold">{x.date}</p></div><p className="text-xs text-[#87938a] mt-0.5">{x.school}</p>{x.note&&<p className="text-xs leading-5 text-[#617167] mt-1">{x.note}</p>}</li>)}</ul></section>
+      <section className="mt-8 grid sm:grid-cols-2 gap-6"><div><p className={eyebrow}>06 / Certifications</p><ul className="mt-3 space-y-1">{certifications.map(c=><li key={c} className="text-sm text-[#617167]">{c}</li>)}</ul></div><div><p className={eyebrow}>07 / Langues</p><ul className="mt-3 space-y-1">{languages.map(l=><li key={l} className="text-sm text-[#617167]">{l}</li>)}</ul></div></section>
      </article>
 
      <aside className="no-print space-y-4 lg:sticky lg:top-28">
-       <div className="rounded-[24px] border border-[#e0e3da] bg-white/75 backdrop-blur-md p-6">
+       <div className="rounded-[24px] border border-[#e0e3da] bg-white/75 p-6">
          <div className="flex items-center gap-2 text-[#a1694b]"><BriefcaseBusiness size={17}/><p className={eyebrow}>Lecture recruteur</p></div>
          <h2 className="font-serif text-2xl text-[#304439] mt-4">Tu recrutes sur un poste précis ?</h2>
          <p className="text-xs leading-6 text-[#667469] mt-3">Colle une description de poste. Les compétences explicitement présentes dans cette sélection apparaîtront ici. Il n'y a ni score de compatibilité inventé ni données envoyées à un serveur.</p>
@@ -79,6 +76,7 @@ export default function InteractiveCV(){
        <p className="text-xs leading-6 text-[#829087] px-2">Ce CV met en valeur des compétences et projets documentés, sans créer de qualifications ou résultats supplémentaires.</p>
      </aside>
     </div>
+    <SkillsProof />
    </div>
   </main><Footer/></>;
 }

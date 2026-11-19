@@ -43,7 +43,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <nav ref={nav} aria-label="Navigation principale" className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isScrolled || menuOpen ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-background/80 backdrop-blur-sm"}`}>
+    <nav ref={nav} aria-label="Navigation principale" className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isScrolled || menuOpen ? "border-border bg-background/95 shadow-sm backdrop-blur-sm" : "border-transparent bg-background/80 backdrop-blur-sm"}`}>
       <div className="max-w-5xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between gap-4">
         <Link to="/" className="font-medium tracking-tight text-foreground" onClick={() => setMenuRoute(null)}>
           {siteContent.nav.brand}<span className="text-accent" aria-hidden="true">.</span>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./ui/Reveal";
 import { missions } from "../data/missions";
+import { TechChip } from "./ui/TechIcon";
 
 const label = "text-[10px] font-semibold uppercase tracking-[.18em] text-[#7b6a5c]";
 
@@ -13,14 +14,17 @@ function Facts({ mission, stack, compact = false }) {
     ["Période", mission.period],
     ["Durée", mission.duration],
     ["Équipes", mission.teams?.join(" · ")],
-    ["Stack", stack?.join(" · ")],
   ].filter(([, value]) => value);
-  const visible = compact ? rows.filter(([k]) => ["Contrat", "Période", "Équipes", "Stack"].includes(k)) : rows;
+  const visible = compact ? rows.filter(([k]) => ["Contrat", "Période", "Équipes"].includes(k)) : rows;
   return <dl className={"grid gap-px bg-[#e4ddd3] border border-[#e4ddd3] rounded-lg overflow-hidden " + (compact ? "grid-cols-2" : "sm:grid-cols-2")}>
-    {visible.map(([k, v]) => <div key={k} className="bg-[#fdfbf7] px-4 py-3 min-w-0">
+    {visible.map(([k, v], i) => <div key={k} className={"bg-[#fdfbf7] px-4 py-3 min-w-0 " + (visible.length % 2 && i === visible.length - 1 ? (compact ? "col-span-2" : "sm:col-span-2") : "")}>
       <dt className={label}>{k}</dt>
       <dd className="text-sm text-[#2f3a33] mt-1 break-words">{v}</dd>
     </div>)}
+    {stack?.length > 0 && <div className={"bg-[#fdfbf7] px-4 py-3 " + (compact ? "col-span-2" : "sm:col-span-2")}>
+      <dt className={label}>Stack</dt>
+      <dd className="flex flex-wrap gap-1.5 mt-2">{stack.map(t => <TechChip key={t} name={t} />)}</dd>
+    </div>}
   </dl>;
 }
 

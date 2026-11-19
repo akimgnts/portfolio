@@ -33,12 +33,13 @@ export default function Hero() {
    </div>
 
    <Reveal delay={0.16} className="rounded-[28px] border border-[#d5dcd2] bg-[#fcfcf8] shadow-[0_22px_75px_rgba(45,72,52,.09)] p-5 sm:p-7">
-    <p className="text-xs uppercase tracking-widest text-[#966547] mb-3">Trois produits, du besoin à l’usage</p>
+    <p className="text-xs uppercase tracking-widest text-[#966547] mb-3">Quatre produits, du besoin à l’usage</p>
     <h2 className="font-serif text-3xl text-[#2e4436] mb-6">Ce que j’ai construit.</h2>
     <div className="space-y-3">{[
       {slug:'job-apply-assistant',name:'Job Apply',image:'/brand/job-apply-cover.svg',text:'Rechercher, analyser, préparer une candidature.'},
       {slug:'event-signal',name:'Signal',image:'/brand/signal-cover.svg',text:'Rapprocher les ventes, les contenus et les dépenses.'},
-      {slug:'nuit-blanche',name:'Nuit Blanche · Content Engine',image:'/brand/nuit-blanche-cover.webp',text:'D’un agenda Google Sheets à un carrousel.'}
+      {slug:'nuit-blanche',name:'Nuit Blanche · Content Engine',image:'/brand/nuit-blanche-cover.webp',text:'D’un agenda Google Sheets à un carrousel.'},
+      {slug:'yeva-site',name:'YEVA Club',image:'/brand/yeva-cover.svg',text:'Un site pour l’univers, l’agenda et la billetterie.'}
     ].map(item=><Link key={item.slug} to={`/projects/${item.slug}`} className="grid grid-cols-[88px_1fr] sm:grid-cols-[108px_1fr] items-center gap-4 rounded-2xl border border-[#dce4d8] bg-[#f2f5ee] p-3 hover:border-[#89a18d] transition-colors">
       <div className="aspect-[8/5] overflow-hidden rounded-lg border border-[#c9d6c5] bg-[#17303b]"><img src={item.image} alt="" width="160" height="120" loading="lazy" className="h-full w-full object-contain object-center"/></div>
       <div><h3 className="text-base font-semibold leading-6 text-[#314c3b]">{item.name}</h3><p className="text-sm leading-6 text-[#5d7261] mt-1">{item.text}</p></div>

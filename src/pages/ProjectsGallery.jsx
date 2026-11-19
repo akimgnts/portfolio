@@ -23,7 +23,7 @@ export default function ProjectsGallery() {
     const load = async () => {
       try {
         const data = await fetchProjects(0, 100);
-        if (active) setProjects(data.filter((project) => project.published !== false && project.slug !== "elevia").sort((a,b) => { const order = ["job-apply-assistant", "event-signal", "nuit-blanche", "sidel-reporting-commercial", "event-analytics-europe"]; return (order.includes(a.slug) ? order.indexOf(a.slug) : 99) - (order.includes(b.slug) ? order.indexOf(b.slug) : 99); }));
+        if (active) setProjects(data.filter((project) => project.published !== false && project.slug !== "elevia").sort((a,b) => { const order = ["job-apply-assistant", "event-signal", "nuit-blanche", "yeva-site", "sidel-reporting-commercial", "event-analytics-europe"]; return (order.includes(a.slug) ? order.indexOf(a.slug) : 99) - (order.includes(b.slug) ? order.indexOf(b.slug) : 99); }));
       } catch {
         if (active) setError(true);
       } finally {

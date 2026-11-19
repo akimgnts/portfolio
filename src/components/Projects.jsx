@@ -16,14 +16,14 @@ export default function Projects() {
   useEffect(() => {
     const load = async () => {
       const data = await fetchProjects(0, 100);
-      const featured = ["job-apply-assistant", "event-signal", "nuit-blanche"];
+      const featured = ["job-apply-assistant", "event-signal", "nuit-blanche", "yeva-site"];
       const visible = data.filter((project) => project.published !== false);
       const ordered = [...visible].sort((a, b) => {
         const ai = featured.indexOf(a.slug);
         const bi = featured.indexOf(b.slug);
         return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
       });
-      setProjects(ordered.filter(project => featured.includes(project.slug)).slice(0, 3));
+      setProjects(ordered.filter(project => featured.includes(project.slug)).slice(0, 4));
       setCompanyProjects(visible.filter(project => ["sidel-reporting-commercial", "event-analytics-europe"].includes(project.slug)));
       setLoading(false);
     };
@@ -47,7 +47,7 @@ export default function Projects() {
           </p></Reveal>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {loading && <p role="status" className="text-muted-foreground">Chargement des projets…</p>}
           {!loading && projects.length === 0 && <p className="text-muted-foreground">Les projets arrivent bientôt. Parlons du tien ci-dessous.</p>}
           {!loading && projects.map((project, idx) => (

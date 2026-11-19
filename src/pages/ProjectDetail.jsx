@@ -11,6 +11,7 @@ import { productTours } from "../data/productTours";
 import ProductionEvidence from "../components/ProductionEvidence";
 import { fetchProjectBySlug } from "../services/projectService";
 import { isMission } from "../data/missions";
+import { TechChip } from "../components/ui/TechIcon";
 import { MissionReportPage } from "../components/MissionReport";
 
 const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
@@ -72,7 +73,7 @@ export default function ProjectDetail() {
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];
   const outcomes = project.results || [];
-  const hasVisual = [ "elevia", "skillmap-console", "csg-agent"].includes(project.slug);
+  const hasVisual = ["elevia"].includes(project.slug);
 
   return <>
     <Navbar/>
@@ -142,7 +143,7 @@ export default function ProjectDetail() {
               </div>
               {stack.length > 0 && <div className="rounded-[24px] bg-white/70 border border-[#dedfd6] p-6">
                 <div className="flex gap-2 items-center text-[#9b6a4c]"><ShieldCheck size={16}/><p className={label}>Environnement technique</p></div>
-                <div className="flex flex-wrap gap-2 mt-5">{stack.map(t => <span key={t} className="rounded-full bg-[#f0f2ec] border border-[#e2e5dc] px-3 py-2 text-xs text-[#43564a]">{t}</span>)}</div>
+                <div className="flex flex-wrap gap-2 mt-5">{stack.map(t => <TechChip key={t} name={t} className="text-xs px-3 py-1.5" />)}</div>
                 {project.data_sources && <p className="text-xs text-[#66736a] leading-6 mt-5">{project.data_sources}</p>}
               </div>}
               {lessons.length > 0 && <div className="rounded-[24px] bg-[#f5ede3] border border-[#e7d9c7] p-6">

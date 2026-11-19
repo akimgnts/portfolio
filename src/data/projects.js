@@ -73,8 +73,8 @@ export const projects = [
     learnings: ["Un bon indicateur doit être relié à une décision métier.", "La qualité des sources est indispensable avant la restitution.", "La compréhension du contexte commercial compte autant que le dashboard."],
     technologies: ["Power BI", "Power Query", "DAX", "Excel", "SQL"],
     accentColor: "hsl(355, 75%, 38%)",
-    year: 2023,
-    period: "2023 – 2025 · Sidel — Groupe Tetra Laval",
+    year: 2024,
+    period: "2024 – 2025 · Sidel — Groupe Tetra Laval",
   },
   {
     ...common,
@@ -104,8 +104,8 @@ export const projects = [
     learnings: ["Un funnel utile suit la progression après l'événement, pas seulement la fréquentation.", "Le rapprochement des sources est une étape de produit.", "La restitution doit rester compréhensible pour ses utilisateurs."],
     technologies: ["Power BI", "Power Query", "Excel"],
     accentColor: "hsl(210, 55%, 42%)",
-    year: 2023,
-    period: "2023 – 2025 · Sidel — Groupe Tetra Laval",
+    year: 2024,
+    period: "2024 – 2025 · Sidel — Groupe Tetra Laval",
   },
   {
     ...common,

@@ -2,11 +2,11 @@
 // Croisé depuis : CV KPMG Deal Analytics (sept. 2026), Master CV (juil.–août 2026), CV 2022.
 // Règle : aucun contenu inventé ; niveaux de compétences = calibration verrouillée du Master CV V2.
 
-export const profile = "Profil Business × Data, formé en Business Intelligence & Analytics. Deux ans chez Sidel à transformer des données clients, commerciales et opérationnelles en dashboards, KPI et recommandations métier. Je collecte, fiabilise, structure et restitue des données issues de sources multiples, et je conçois des produits Data/IA que je développe et déploie moi-même.";
+export const profile = "Profil Business × Data, formé en Business Intelligence & Analytics. Près de deux ans chez Sidel (alternance) à transformer des données clients, commerciales et opérationnelles en dashboards, KPI et recommandations métier. Je collecte, fiabilise, structure et restitue des données issues de sources multiples, et je conçois des produits Data/IA que je développe et déploie moi-même.";
 
 export const experience = [
   {
-    date: "2023 — 2025",
+    date: "janv. 2024 — sept. 2025",
     role: "Data & Business Analyst — Reporting commercial et opérationnel",
     org: "Sidel · Groupe Tetra Laval",
     place: "Alternance · Octeville-sur-Mer / international",
@@ -22,7 +22,7 @@ export const experience = [
     reports: ["sidel-reporting-commercial", "event-analytics-europe"],
   },
   {
-    date: "2024 — aujourd'hui",
+    date: "2026 — aujourd'hui",
     role: "AI Transformation Consultant & Product Builder",
     org: "MadeByAkim",
     place: "Micro-entreprise · Conseil Data & IA",
@@ -55,7 +55,7 @@ export const experience = [
     ],
   },
   {
-    date: "2020 — 2022",
+    date: "2021 — 2022",
     role: "Vendeur / Conseiller",
     org: "Comptoir Seigneurie Gauthier",
     place: "Alternance BTS",
@@ -64,7 +64,7 @@ export const experience = [
 ];
 
 export const education = [
-  { date: "2025", title: "MSc Business Intelligence & Analytics — Data Analyst for Marketing", school: "Eugenia School", note: "Mémoire : V.I.E Matcher — matching d'offres par IA, CV optimisés ATS et automatisation du pipeline de candidature V.I.E." },
+  { date: "2023 — 2025", title: "MSc Analytics for Business — Data Analysis & IA", school: "Eugenia School", note: "Mémoire : V.I.E Matcher — matching d'offres par IA, CV optimisés ATS et automatisation du pipeline de candidature V.I.E." },
   { date: "2022 — 2023", title: "Bachelor Responsable Commerce & Marketing", school: "EM Normandie" },
   { date: "2020 — 2022", title: "BTS Management Commercial Opérationnel", school: "Alternancia · en alternance" },
 ];
@@ -73,7 +73,7 @@ export const training = [
   { date: "2026", title: "Databricks pour Data Engineers", school: "ORSYS · Paris La Défense", note: "Spark SQL, Delta Lake, notebooks, pipelines, architecture lakehouse/medallion." },
 ];
 
-export const certifications = ["Dataiku ML Practitioner", "Python for Machine Learning", "Fine-Tuning Large Language Models"];
+export const certifications = ["Dataiku ML Practitioner · Dataiku · 2025", "Dataiku Core Designer · Dataiku · 2025", "Python pour le machine learning · LinkedIn · 2025", "Fine-Tuning for LLMs · LinkedIn Learning · 2025"];
 
 export const languages = ["Français — natif", "Anglais — professionnel", "Espagnol — intermédiaire"];
 

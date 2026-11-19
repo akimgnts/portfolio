@@ -1,3 +1,4 @@
+import BrandWordmark from "../components/BrandWordmark";
 import { Reveal } from "../components/ui/Reveal";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -79,8 +80,9 @@ export default function ProjectDetail() {
           <div className="grid md:grid-cols-[1fr_auto] items-end gap-5">
             <div>
               <p className={label}>{project.period || project.year || "Projet"}</p>
-              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4">{project.title}</h1>
+              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-[-.045em] text-[#29382f] mt-4"><BrandWordmark slug={project.slug} title={project.title} size="detail"/></h1>
               <p className="text-[17px] md:text-xl text-[#5a665e] leading-relaxed mt-5 max-w-3xl">{project.description}</p>
+              {project.slug === "event-signal" && <p className="text-sm text-[#66766b] mt-3">Anciennement Event Signal : les captures conservent le nom affiché dans l’application.</p>}
             </div>
             <div className="flex flex-wrap gap-2 items-center">{productTours[project.slug] && <a href="#interactive-demo" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 border border-[#8ea996] text-[#34533d] text-sm font-semibold hover:bg-[#edf5ec] transition-colors">Explorer le produit <ArrowRight size={16}/></a>}
             {(project.githubUrl || project.demoUrl) && <a href={project.demoUrl || project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-[#2e4036] text-white text-sm font-medium hover:bg-[#49634f] transition-colors">{project.demoUrl ? "Voir le site" : "Code & documentation"} <ArrowUpRight size={16}/></a>}</div>

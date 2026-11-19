@@ -208,3 +208,8 @@
 @media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;transform:none!important;filter:none!important}}
 @media(prefers-contrast:more){.scroll-reveal{filter:none!important}}
 @media print{.scroll-reveal{opacity:1!important;transform:none!important;filter:none!important}}
+
+/* Static, outlined wordmark: no downloadable typeface. */
+.brand-wordmark { display: block; width: 6.5em; max-width: 100%; height: auto; }
+.brand-wordmark--compact { width: 7.5rem; margin-block: .2rem; }
+.brand-wordmark--detail { width: min(100%, 28rem); margin-block: .5rem; }

@@ -75,3 +75,11 @@ A real Job Apply assistant query about SQL offers was made without executing pro
 - Accueil : titres, introduction, produits, cas Sidel, parcours, paragraphes, étapes de méthode et contact. Galerie : cartes. Études de cas : en-tête, visite et panneaux de l’étude complète.
 - Focus clavier : apparition immédiate du groupe ciblé. Mouvement réduit et impression : contenu intégralement visible, sans déplacement ni flou. Contraste renforcé : suppression du flou.
 - Contrôle navigateur : 4 groupes visibles / 21 en attente à l’arrivée ; 9 visibles après le premier défilement, 12 après le suivant ; textes du parcours et trois étapes de méthode révélés. Ancres et accès au parcours préservés. Volet de données et zoom testés après apparition. Aucun débordement desktop.
+
+## Typographic branding — 2026-11-19
+
+- Public project name: **Signal**. The `/projects/event-signal` route and original product screenshots are preserved; the guided tour explains the historical interface name.
+- Signal wordmark: **DX Brutalist Bold**, designed by Dirtyline Studio. Official source: https://dirtylinestudio.com/products/dx-brutalist-free-font . Obtained using the official email download form, newsletter unchecked.
+- Bundled `DX_Brutalist_Free_Desktop_Commercial_License.pdf`, sections 2, 3, 10 and 13, explicitly permits logos, wordmarks, SVG/PNG exports and outlined artwork for commercial projects. Font files are neither committed nor served. Only finished outlined artwork is published.
+- SVG glyphs shaped with HarfBuzz (kerning enabled), outlined from the original OTF with fontTools. Deep green and warm white variants; transparent PNG exports.
+- **Job Apply / DX Ruiga SemiBold remains pending**: official download includes `Read Me First.pdf.pdf` stating personal use only, in conflict with the product page's commercial label. No Ruiga artwork or font is published. Requires written clarification from the foundry or an appropriately licensed replacement. No paid license purchased.

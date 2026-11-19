@@ -90,7 +90,7 @@ export const siteContent = {
     work: {
       eyebrow: "Expériences et produits",
       heading: "Du besoin métier au produit qui tourne.",
-      intro: "Trois produits à explorer : Job Apply, Event Signal et Nuit Blanche · Content Engine. Puis mon expérience Power BI chez Sidel. Pour chaque projet : le besoin, les données, les choix et les limites.",
+      intro: "Trois produits à explorer : Job Apply, Signal et Nuit Blanche · Content Engine. Puis mon expérience Power BI chez Sidel. Pour chaque projet : le besoin, les données, les choix et les limites.",
     },
     approach: { eyebrow: "Ma méthode", heading: "Du besoin à l'usage." },
     behind: { eyebrow: "Mon environnement", heading: "Les outils au service du problème.", automationLabel: "Du besoin au livrable", stackLabel: "Compétences principales" },

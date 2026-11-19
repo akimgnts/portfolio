@@ -221,8 +221,8 @@ export const productTours = {
     ]
   },
   'event-signal': {
-    name:'Event Signal',
-    intro:"Je choisis un événement, je lis les ventes, puis je les rapproche de la communication et du budget. Chaque écran conserve son périmètre et permet de remonter à la source des chiffres.",
+    name:'Signal',
+    intro:"Signal est le nouveau nom du projet. Les captures conservent le nom Event Signal affiché dans l’application. Je choisis un événement, je lis les ventes, puis je les rapproche de la communication et du budget. Chaque écran conserve son périmètre et permet de remonter à la source des chiffres.",
     chapters:[
       {id:'overview',label:'Aujourd’hui',title:'Lire la situation en une minute.',image:shot('event-overview'),
        action:'Je sélectionne un événement et je consulte les billets payants, le prix facial vendu et la dépense publicitaire associée.',

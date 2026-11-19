@@ -13,6 +13,10 @@ import { fetchProjectBySlug } from "../services/projectService";
 const label = "text-[11px] font-semibold uppercase tracking-[.18em] text-[#946044]";
 const copy = "text-[15px] leading-[1.8] text-[#536059]";
 
+function CaseStudyBody({ collapsed, children }) {
+  return collapsed ? <details className="case-disclosure case-full-story"><summary>Le contexte, les choix et les résultats</summary><div>{children}</div></details> : children;
+}
+
 function Panel({ title, eyebrow, children, className = "" }) {
   return <section className={"rounded-[24px] border border-[#dedfd6] bg-white/75 p-6 md:p-8 " + className}>
     <p className={label}>{eyebrow}</p>
@@ -83,14 +87,14 @@ export default function ProjectDetail() {
         </div>
       </header>
 
-      {productTours[project.slug] && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/><ProductionEvidence slug={project.slug}/>{project.slug === "job-apply-assistant" && <section id="research" className="rounded-3xl border border-[#d6dccc] bg-[#f4efe5] p-7 md:p-10 mt-10"><p className={label}>De la recherche au produit</p><h2 className="font-serif text-3xl text-[#2d4535] mt-3 mb-4">Elevia → Job Apply</h2><p className={copy}>Avec Elevia, j’ai travaillé sur l’extraction des offres, la normalisation des compétences, le matching et les méthodes d’évaluation. Job Apply prolonge cette recherche par un produit utilisable : trouver une offre, préparer un dossier et garder le fil.</p><p className={copy + " mt-4"}>Je présente ici un même cheminement de conception. Le dépôt Job Apply contient des adaptateurs Elevia, mais leur présence ne prouve pas une intégration active en production. Le radar observé utilise son propre score par règles.</p></section>}</div>}
+      {productTours[project.slug] && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8"><ProjectDemo slug={project.slug}/><details className="case-disclosure"><summary>Architecture, sources et fiabilité</summary><ProductionEvidence slug={project.slug}/>{project.slug === "job-apply-assistant" && <section id="research" className="rounded-3xl border border-[#d6dccc] bg-[#f4efe5] p-7 md:p-10 mt-10"><p className={label}>De la recherche au produit</p><h2 className="font-serif text-3xl text-[#2d4535] mt-3 mb-4">Elevia → Job Apply</h2><p className={copy}>Avec Elevia, j’ai travaillé sur l’extraction des offres, la normalisation des compétences, le matching et les méthodes d’évaluation. Job Apply prolonge cette recherche par un produit utilisable : trouver une offre, préparer un dossier et garder le fil.</p><p className={copy + " mt-4"}>Je présente ici un même cheminement de conception. Le dépôt Job Apply contient des adaptateurs Elevia, mais leur présence ne prouve pas une intégration active en production. Le radar observé utilise son propre score par règles.</p></section>}</details></div>}
 
       {hasVisual && <div className="max-w-6xl mx-auto px-6 md:px-8 mb-8">
         <div className="rounded-[24px] overflow-hidden border border-white/75 shadow-[0_18px_65px_rgba(38,56,46,.10)]"><ProjectVisual slug={project.slug}/></div>
         <p className="text-xs text-[#81877f] mt-3">Représentation schématique du fonctionnement, pas une capture de données réelles.</p>
       </div>}
 
-      <section className="px-6 md:px-8 pb-20">
+      <CaseStudyBody collapsed={Boolean(productTours[project.slug])}><section className="px-6 md:px-8 pb-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-3 gap-3 mb-8">
             {[
@@ -146,7 +150,7 @@ export default function ProjectDetail() {
             <div className="flex flex-wrap gap-3"><Link to="/projects" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[#aab4a8] text-sm text-[#2e4036] hover:bg-white">Tous les projets <ArrowRight size={16}/></Link><Link to="/#contact" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#2e4036] text-sm text-white">Échanger <ArrowUpRight size={16}/></Link></div>
           </div>
         </div>
-      </section>
+      </section></CaseStudyBody>
     </main>
     <Footer/>
   </>;

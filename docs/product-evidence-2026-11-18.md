@@ -60,3 +60,11 @@ A real Job Apply assistant query about SQL offers was made without executing pro
 - Aucune donnée privée publiée : captures cadrées hors compte Google, adresses personnelles, URLs de fichiers et identifiants Drive. Les ID_LIEU visibles sont des clés métier publiques d’établissements, sans secret d’accès.
 - Sidel : suppression des graphiques illustratifs à barres arbitraires ; restitution de la démarche et des cas métier. Les volumes préexistants (six dashboards, portefeuille de 61 comptes) restent des éléments déclarés du bilan d’alternance, sans nouveau gain chiffré inventé.
 - Validation portfolio : lint sans erreur, build Vite et huit tests de service réussis ; huit boutons de visite testés dans le navigateur, explications de données et dialogue d’agrandissement ouverts/fermés ; aucun débordement horizontal en desktop.
+
+## Lecture progressive — 19 novembre
+
+- Installation demandée : `npx skills add https://github.com/emilkowalski/skills --skill apple-design`, version épinglée dans skills-lock.json et copie des instructions versionnée.
+- Visites des trois produits : navigation horizontale par écran, capture large, titre court ; usage, traitements et limites repliés par défaut. Suppression du panneau latéral dense et des annotations toujours visibles.
+- Architecture et étude complète accessibles via deux volets distincts, sans suppression des preuves ni des résultats.
+- Retours visuels immédiats au clic, transition brève sans attente imposée, prise en compte des préférences de mouvement réduit, de transparence réduite et de contraste.
+- Lint, build et huit tests réussis. Job Apply et Event Signal contrôlés dans le navigateur : volets fermés par défaut, ouverture des données et preuves, changement d’écran réinitialisant les volets, agrandissement et fermeture, absence de débordement desktop.

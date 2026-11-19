@@ -41,7 +41,7 @@ export default function InteractiveCV(){
     <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(270px,.7fr)] gap-5 mt-8 items-start">
      <article className="cv-paper bg-white/95 border border-[#e1e2dc] shadow-[0_20px_55px_rgba(47,70,55,.08)] rounded-[25px] p-6 sm:p-9 md:p-11">
       <div className="flex flex-wrap gap-6 justify-between border-b border-[#e2e5dd] pb-7">
-       <div><p className={eyebrow}>Akim Guentas / CV</p><h2 className="font-serif text-4xl tracking-tight text-[#273b30] mt-3">Akim Guentas</h2><p className="text-[15px] text-[#8f644c] mt-2 font-medium">{chosen.title}</p></div>
+       <div><p className={eyebrow}>Akim Guentas / CV</p><div className="flex items-center gap-3 mt-3"><img src="/avatar.webp" alt="" width="48" height="48" loading="lazy" decoding="async" className="size-12 rounded-full border border-[#e2ddd3] object-cover"/><h2 className="font-serif text-4xl tracking-tight text-[#273b30]">Akim Guentas</h2></div><p className="text-[15px] text-[#8f644c] mt-2 font-medium">{chosen.title}</p></div>
        <div className="text-xs leading-7 text-[#6d7a70]"><p className="inline-flex gap-2 items-center"><MapPin size={13}/> Le Havre · Mobilité Paris / IDF</p><br/><a className="inline-flex gap-2 items-center hover:underline" href="mailto:akimguentas13@gmail.com"><Mail size={13}/> akimguentas13@gmail.com</a><br/><a className="hover:underline" href="https://madebyakim.com">madebyakim.com</a></div>
       </div>
 

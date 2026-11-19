@@ -68,7 +68,7 @@ export default function ProjectDetail() {
   const stack = project.stack || project.technologies || [];
   const lessons = project.learnings || project.lessons || [];
   const outcomes = project.results || [];
-  const hasVisual = [ "elevia", "skillmap-console", "csg-agent", "yeva-site"].includes(project.slug);
+  const hasVisual = [ "elevia", "skillmap-console", "csg-agent"].includes(project.slug);
 
   return <>
     <Navbar/>

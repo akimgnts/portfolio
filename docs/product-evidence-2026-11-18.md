@@ -87,3 +87,12 @@ A real Job Apply assistant query about SQL offers was made without executing pro
 ## Thumbnail correction — 2026-11-19
 
 Supersedes the Brutalist proposal above after visual review. Job Apply uses Manrope at weight 750 on deep green (#244A3A); Signal uses Space Grotesk at weight 600 on warm clay (#D59979). Covers contain only the outlined name and one flat background. Both fonts were obtained from google/fonts, and their bundled SIL OFL 1.1 licenses were checked. No font files are served. Headings retain the portfolio typography. Real screenshots remain inside the guided case studies; original routes remain unchanged. PNG and SVG cover exports are available in public/brand.
+
+## Project identities and public YEVA visit — 2026-11-19
+
+- Nuit Blanche cover: horizontal branding artwork composed from the user-supplied midnight-blue monogram reference, with NUIT / BLANCHE aligned on two lines beside it. Image-generation artwork is a project cover, never a software screenshot. Source upload: image(4).png.
+- Job Apply: Syne ExtraBold (weight 800), original font outlines shaped with HarfBuzz, deep teal and pale ivory. Source: https://github.com/google/fonts/tree/main/ofl/syne . Bundled SIL OFL 1.1 notice copied to docs/licenses/Syne-OFL.txt. Supersedes the Manrope proposal. No font binary published.
+- YEVA: original visible SVG logo exported from the actual homepage, composed on a flat dark cover. No substitute lettering or illustrative dashboard.
+- Four genuine browser captures on https://yeva.club/ , /evenements/trap-session-2-back-to-back , /a-propos and /rejoindre. Stored as yeva-{home,event,about,join}-real.jpg. Public editorial content only; no typed personal data, submissions, tickets or external communication.
+- New four-screen guided visit: identity, event information and outbound links, collective and collaboration form. It distinguishes visible UTM parameters from purchase attribution, and a displayed form from a verified server workflow.
+- Existing screenshots of Job Apply, Signal and Nuit Blanche remain inside their guided visits.

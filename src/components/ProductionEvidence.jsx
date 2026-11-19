@@ -1,6 +1,18 @@
 import { Activity, Database, Server, ShieldCheck } from 'lucide-react';
 
 const evidence = {
+ 'yeva-site': {
+  checkedAt:'19 novembre 2026',
+  architecture:'Le site public relie une identité, une programmation, les fiches de soirée et des points de contact. Cette visite vérifie les pages accessibles ; elle ne constitue pas un audit du serveur.',
+  rows:[
+   ['Identité et contenus','Observés en ligne','Logo YEVA original, accueil, fiche Trap Session #2, présentation du collectif et formulaire pour proposer un projet.'],
+   ['Billetterie','Lien observé','Lien Shotgun avec paramètres UTM depuis la fiche événement. Aucun achat ; attribution des ventes non démontrée.'],
+   ['Parcours pratiques','Liens présents','Lien agenda au format .ics et itinéraire. Leur présence est vérifiée, sans ajout à un compte personnel.'],
+   ['Formulaires','Interface consultée seulement','Aucun envoi. Réception des messages, stockage, validation serveur et antispam non vérifiés.']
+  ],
+  note:'Quatre captures authentiques du 19 novembre, prises sur des pages publiques. Le logo provient du SVG visible sur l’accueil. Aucun chiffre de fréquentation ou de conversion n’est extrapolé.',
+  source:'https://yeva.club/'
+ },
  'nuit-blanche': {
   checkedAt:'18–19 novembre 2026',
   architecture:'Google Sheets et interface Apps Script pour la saisie et la sélection. Dans le dépôt : FastAPI / Pydantic → normalisation → tri et groupement → templates Jinja2 → Playwright → PNG, manifest et ZIP. Les exports existants ont été ouverts dans Drive.',
@@ -52,9 +64,9 @@ export default function ProductionEvidence({slug}){
   </header>
   <div className="p-5 md:p-8">
    <div className="flex items-center gap-2 text-[11px] text-[#546d56] mb-5"><Activity size={15} aria-hidden="true"/> État vérifié · {item.checkedAt || '18 novembre 2026'} · consultation seule</div>
-   <div className="overflow-x-auto"><table className="w-full min-w-[540px] text-left border-collapse text-xs"><caption className="sr-only">Éléments techniques, niveau de vérification et preuves de {slug === 'event-signal' ? 'Signal' : slug === 'nuit-blanche' ? 'Nuit Blanche' : 'Job Apply'}</caption><thead><tr className="text-[10px] uppercase tracking-wider text-[#6a705b] border-b border-[#cdd8c4]"><th scope="col" className="pb-3 pr-5">Élément</th><th scope="col" className="pb-3 pr-5">Vérification</th><th scope="col" className="pb-3">Preuve et périmètre</th></tr></thead><tbody>{item.rows.map(([name,status,detail])=><tr key={name} className="border-b border-[#d6dfd0]"><th scope="row" className="py-5 pr-5 align-top font-semibold text-[#34523c] w-[20%]">{name}</th><td className="py-5 pr-5 align-top text-[#856244] w-[24%]">{status}</td><td className="py-5 align-top leading-6 text-[#506451]">{detail}</td></tr>)}</tbody></table></div>
+   <div className="overflow-x-auto"><table className="w-full min-w-[540px] text-left border-collapse text-xs"><caption className="sr-only">Éléments techniques, niveau de vérification et preuves de {slug === 'event-signal' ? 'Signal' : slug === 'nuit-blanche' ? 'Nuit Blanche' : slug === 'yeva-site' ? 'YEVA' : 'Job Apply'}</caption><thead><tr className="text-[10px] uppercase tracking-wider text-[#6a705b] border-b border-[#cdd8c4]"><th scope="col" className="pb-3 pr-5">Élément</th><th scope="col" className="pb-3 pr-5">Vérification</th><th scope="col" className="pb-3">Preuve et périmètre</th></tr></thead><tbody>{item.rows.map(([name,status,detail])=><tr key={name} className="border-b border-[#d6dfd0]"><th scope="row" className="py-5 pr-5 align-top font-semibold text-[#34523c] w-[20%]">{name}</th><td className="py-5 pr-5 align-top text-[#856244] w-[24%]">{status}</td><td className="py-5 align-top leading-6 text-[#506451]">{detail}</td></tr>)}</tbody></table></div>
    <p className="flex gap-2 items-start mt-6 text-xs leading-6 text-[#5c715b]"><ShieldCheck size={16} className="shrink-0 mt-1" aria-hidden="true"/>{item.note}</p>
-   <a href={item.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-5 text-xs underline underline-offset-4 text-[#3d6144]"><Database size={14} aria-hidden="true"/> Dépôt source · accès selon permissions GitHub</a>
+   <a href={item.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-5 text-xs underline underline-offset-4 text-[#3d6144]"><Database size={14} aria-hidden="true"/> {slug === 'yeva-site' ? 'Site public consulté' : 'Dépôt source · accès selon permissions GitHub'}</a>
   </div>
  </section>;
 }

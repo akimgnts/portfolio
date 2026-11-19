@@ -38,9 +38,9 @@ export default function Hero() {
     <div className="space-y-3">{[
       {slug:'job-apply-assistant',name:'Job Apply',image:'/brand/job-apply-cover.svg',text:'Rechercher, analyser, préparer une candidature.'},
       {slug:'event-signal',name:'Signal',image:'/brand/signal-cover.svg',text:'Rapprocher les ventes, les contenus et les dépenses.'},
-      {slug:'nuit-blanche',name:'Nuit Blanche · Content Engine',image:'/proof/nuit-cover.jpg',text:'D’un agenda Google Sheets à un carrousel.'}
+      {slug:'nuit-blanche',name:'Nuit Blanche · Content Engine',image:'/brand/nuit-blanche-cover.webp',text:'D’un agenda Google Sheets à un carrousel.'}
     ].map(item=><Link key={item.slug} to={`/projects/${item.slug}`} className="grid grid-cols-[88px_1fr] sm:grid-cols-[108px_1fr] items-center gap-4 rounded-2xl border border-[#dce4d8] bg-[#f2f5ee] p-3 hover:border-[#89a18d] transition-colors">
-      <div className="h-24 overflow-hidden rounded-lg border border-[#c9d6c5] bg-[#17303b]"><img src={item.image} alt="" width="160" height="120" loading="lazy" className={`h-full w-full object-cover ${item.slug==='nuit-blanche'?'object-center':'object-center'}`}/></div>
+      <div className="aspect-[8/5] overflow-hidden rounded-lg border border-[#c9d6c5] bg-[#17303b]"><img src={item.image} alt="" width="160" height="120" loading="lazy" className="h-full w-full object-contain object-center"/></div>
       <div><h3 className="text-base font-semibold leading-6 text-[#314c3b]">{item.name}</h3><p className="text-sm leading-6 text-[#5d7261] mt-1">{item.text}</p></div>
     </Link>)}</div>
     <p className="text-sm leading-6 text-[#607460] mt-6 pt-5 border-t border-[#dce4d8]">À découvrir ensuite : <Link to="/projects/sidel-reporting-commercial" className="underline underline-offset-4">mon expérience Data & BI chez Sidel</Link>.</p>

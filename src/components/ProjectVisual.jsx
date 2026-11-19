@@ -52,20 +52,5 @@ function Csg(){
   </div>
  </div>;
 }
-function YevaSite(){
- return <div className="relative min-h-[270px] p-5 sm:p-7 bg-[#101011] text-[#f2ede5] overflow-hidden">
-  <div className="absolute -right-8 -top-24 w-72 h-72 rounded-full bg-[#ef492d]/15 blur-3xl" aria-hidden="true"/>
-  <div className="relative flex justify-between gap-2 text-[10px] uppercase tracking-[.17em] text-[#a9aaa1]"><span>Culture & digital</span><span>Site collectif</span></div>
-  <div className="relative mt-4 grid grid-cols-[1.1fr_.9fr] gap-3 items-stretch">
-   <div className="border border-white/10 rounded-xl p-4 sm:p-5 min-h-[165px] flex flex-col justify-between bg-[#1d1d1d]">
-    <div className="flex justify-between items-start"><span className="text-[9px] uppercase tracking-[.2em]">Musique · Création · Rencontres</span><span className="size-2 rounded-full bg-[#ef492d]"/></div>
-    <div><p className="text-[clamp(1.9rem,7vw,5rem)] font-black tracking-[-.07em] leading-[.9]">YEVA<span className="text-[#ef492d]">.</span></p><p className="text-[11px] mt-4 text-[#b2afa8]">Un lieu numérique pour un collectif vivant.</p></div>
-   </div>
-   <div className="flex flex-col gap-2"><div className="rounded-xl bg-[#ef492d] text-white p-3 sm:p-4 flex-1 flex flex-col justify-between"><span className="text-[9px] uppercase tracking-wider">Programmation</span><span className="font-semibold text-base sm:text-xl leading-tight">TRAP SESSION</span></div><div className="rounded-xl border border-white/15 bg-[#202021] p-3 sm:p-4 flex gap-2 items-center justify-between"><span className="text-[11px]">Billetterie</span><ArrowRight size={17} className="text-[#ef492d]"/></div></div>
-  </div>
-  <p className="relative mt-4 text-[11px] text-[#9a9b97]">Identité, agenda, communauté. Représentation éditoriale du site.</p>
- </div>;
-}
-function NuitProduct(){return <figure className="m-0 p-4 bg-[#e4ebe0]"><div className="grid grid-cols-[.8fr_1.2fr] h-[210px] sm:h-[240px] gap-3 overflow-hidden rounded-lg bg-[#112737]"><img src="/proof/nuit-cover.jpg" alt="Couverture du carrousel Nuit Blanche réellement généré" width="520" height="650" loading="lazy" className="h-full w-full object-cover object-center"/><img src="/proof/nuit-lieux.jpg" alt="Référentiel des lieux dans le Google Sheet Nuit Blanche" width="903" height="575" loading="lazy" className="h-full w-full object-cover object-left-top"/></div><figcaption className="text-xs text-[#48624d] mt-3">Google Sheets & PNG réel · Nuit Blanche</figcaption></figure>;}
-function ProductCover({slug,name}){return <img src={`/brand/${slug}-cover.svg`} alt={name} width="1440" height="900" loading="lazy" decoding="async" className="block w-full h-auto aspect-[8/5] object-cover"/>;}
-export default function ProjectVisual({slug}){if(slug==="event-signal")return <ProductCover slug="signal" name="Signal"/>;if(slug==="nuit-blanche")return <NuitProduct/>;if(slug==="job-apply-assistant")return <ProductCover slug="job-apply" name="Job Apply"/>;if(slug==="sidel-reporting-commercial")return <Sidel/>;if(slug==="event-analytics-europe")return <Europe/>;if(slug==="elevia")return <Elevia/>;if(slug==="skillmap-console")return <Skillmap/>;if(slug==="csg-agent")return <Csg/>;if(slug==="yeva-site")return <YevaSite/>;return null;}
+function ProductCover({slug,name,extension="svg"}){return <img src={`/brand/${slug}-cover.${extension}`} alt={name} width="1440" height="900" loading="lazy" decoding="async" className="block w-full h-auto aspect-[8/5] object-cover"/>;}
+export default function ProjectVisual({slug}){if(slug==="event-signal")return <ProductCover slug="signal" name="Signal"/>;if(slug==="nuit-blanche")return <ProductCover slug="nuit-blanche" name="Nuit Blanche" extension="webp"/>;if(slug==="job-apply-assistant")return <ProductCover slug="job-apply" name="Job Apply"/>;if(slug==="sidel-reporting-commercial")return <Sidel/>;if(slug==="event-analytics-europe")return <Europe/>;if(slug==="elevia")return <Elevia/>;if(slug==="skillmap-console")return <Skillmap/>;if(slug==="csg-agent")return <Csg/>;if(slug==="yeva-site")return <ProductCover slug="yeva" name="YEVA"/>;return null;}

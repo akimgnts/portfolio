@@ -1,4 +1,8 @@
 export const captureSizes = {
+ "/proof/yeva-home-real.jpg": [1348, 926],
+ "/proof/yeva-event-real.jpg": [1348, 926],
+ "/proof/yeva-about-real.jpg": [1348, 926],
+ "/proof/yeva-join-real.jpg": [1348, 926],
   "/proof/event-ads.jpg": [
     1142,
     1288
